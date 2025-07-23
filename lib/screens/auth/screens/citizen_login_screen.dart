@@ -17,30 +17,19 @@ class _CitizenLoginScreenState extends State<CitizenLoginScreen> {
   final _cardIdController = TextEditingController();
   final _passwordController = TextEditingController();
   final _phoneController = TextEditingController();
-  // 🌀 متغير لتحميل البيانات
+
 bool _loading = false;
 
 Future<void> _submit() async {
   if (!_formKey.currentState!.validate()) return;
-
   setState(() => _loading = true);
-
-  // simulate login delay
   await Future.delayed(const Duration(seconds: 1));
-
   final prefs = await SharedPreferences.getInstance();
-
-  // 🆔 توليد ID مميز للمواطن (مثلاً من timestamp)
   final userId = DateTime.now().millisecondsSinceEpoch.toString();
-
-  // 👨‍👩‍👧‍👦 عدد أفراد الأسرة (1 - 5)
   final familyMembers = Random().nextInt(5) + 1;
-
-  // 🍞 عدد أرغفة العيش = 5 * عدد الأفراد
   final breadCount = familyMembers * 5 * 30;
- 
   final max_bread =  familyMembers * 5;
-  // 💾 تخزين البيانات
+
   await prefs.setBool('is_logged_in', true);
   await prefs.setString('user_id', userId);
   await prefs.setString('user_type', 'citizen');
@@ -54,10 +43,8 @@ Future<void> _submit() async {
   await prefs.setInt('remaining_bread', breadCount);
   await prefs.setInt('max_bread', max_bread);
 
-  // ✅ عرض Snackbar بالترحيب
   WelcomeSnackbar.show(context, _nameController.text);
 
-  // 🚀 الانتقال إلى الصفحة الرئيسية
   Navigator.pushReplacementNamed(
     context,
     AppRoutes.main,
