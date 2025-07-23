@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:khubzy/app.dart';
 import 'package:khubzy/screens/auth/provider/auth_provider.dart';
 import 'package:khubzy/screens/main/provider/bottom_nav_provider.dart';
+import 'package:khubzy/screens/userTypeSelection/provider/user_type_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -11,6 +12,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
+        ChangeNotifierProvider(create: (_) => UserTypeProvider()),
       ],
       child: const KhobzyApp(),
     ),

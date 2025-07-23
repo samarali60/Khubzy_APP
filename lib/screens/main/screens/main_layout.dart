@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
 import 'package:khubzy/screens/balance/screens/balance_screen.dart';
 import 'package:khubzy/screens/main/provider/bottom_nav_provider.dart';
-import 'package:khubzy/screens/home/screens/home_screen.dart';
+import 'package:khubzy/screens/home/screens/citizen_home_screen.dart';
 import 'package:khubzy/screens/orders/screens/orders_screen.dart';
 import 'package:khubzy/screens/settings/screens/setting_screen.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MainLayout extends StatelessWidget {
     final navProvider = Provider.of<BottomNavProvider>(context);
 
     final pages = const [
-      HomeScreen(),
+      CitizenHomeScreen(),
       OrdersScreen(),
       BalanceScreen(),
       BakeriesScreen(),
