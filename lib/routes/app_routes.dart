@@ -2,7 +2,7 @@ import 'package:khubzy/screens/auth/screens/bakery_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_signup_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
-import 'package:khubzy/screens/balance/screens/balance_screen.dart';
+import 'package:khubzy/screens/balance/screens/citizen_balance_screen.dart';
 import 'package:khubzy/screens/home/screens/citizen_home_screen.dart';
 import 'package:khubzy/screens/main/screens/main_layout.dart';
 import 'package:khubzy/screens/reservation/provider/screens/reservation_screen.dart';
@@ -34,7 +34,7 @@ class AppRoutes {
     citizenHome: (context) => const CitizenHomeScreen(),
     reservation: (context) => const ReservationScreen(),
     bakeries: (context) => const BakeriesScreen(),
-    balance: (context) => const BalanceScreen(),
+    balance: (context) => const CitizenBalanceScreen(),
     settings: (context) => const SettingsScreen(), 
    
     // باقي الشاشات

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
+import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:khubzy/screens/main/screens/main_layout.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../routes/app_routes.dart';
 
@@ -26,6 +28,11 @@ class _CitizenLoginScreenState extends State<CitizenLoginScreen> {
     super.dispose();
   }
 
+@override
+void initState() {
+  super.initState();
+  Provider.of<CitizenProvider>(context, listen: false).loadCitizens();
+}
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -46,6 +53,9 @@ class _CitizenLoginScreenState extends State<CitizenLoginScreen> {
         MaterialPageRoute(builder: (context) => const MainLayout()),
         (route) => false,
       );
+      Provider.of<CitizenProvider>(context, listen: false)
+    .setCurrentCitizenByPhone(enteredPhone);
+
     } else {
       ErrorSnackBar.show(context, 'رقم الهاتف أو كلمة السر غير صحيحة');
     }

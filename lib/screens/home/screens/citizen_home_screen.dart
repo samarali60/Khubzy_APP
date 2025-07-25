@@ -28,9 +28,10 @@ class _HomePageState extends State<CitizenHomeScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return Directionality(
+     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(title: Text('مرحبًا $userName')),

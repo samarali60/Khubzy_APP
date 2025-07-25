@@ -9,6 +9,7 @@
       "card_id": "123456789012",
       "family_members": 4,
       "monthly_bread_quota": 600,
+      "available_bread_per_day": 20,
       "available_bread": 420
     },
     {
@@ -20,6 +21,7 @@
       "card_id": "987654321098",
       "family_members": 3,
       "monthly_bread_quota": 450,
+      "available_bread_per_day": 15,
       "available_bread": 120
     },
     {
@@ -31,6 +33,7 @@
       "card_id": "112233445566",
       "family_members": 5,
       "monthly_bread_quota": 750,
+      "available_bread_per_day": 25,
       "available_bread": 600
     },
     {
@@ -42,6 +45,7 @@
       "card_id": "667788990011",
       "family_members": 2,
       "monthly_bread_quota": 300,
+      "available_bread_per_day": 10,
       "available_bread": 180
     },
     {
@@ -53,6 +57,7 @@
       "card_id": "223344556677",
       "family_members": 6,
       "monthly_bread_quota": 900,
+      "available_bread_per_day": 30,
       "available_bread": 720
     },
     {
@@ -64,6 +69,7 @@
       "card_id": "998877665544",
       "family_members": 4,
       "monthly_bread_quota": 600,
+      "available_bread_per_day": 20,
       "available_bread": 300
     },
     {
@@ -75,6 +81,7 @@
       "card_id": "556677889900",
       "family_members": 3,
       "monthly_bread_quota": 450,
+      "available_bread_per_day": 15,
       "available_bread": 200
     },
     {
@@ -86,6 +93,7 @@
       "card_id": "334455667788",
       "family_members": 5,
       "monthly_bread_quota": 750,
+      "available_bread_per_day": 25,
       "available_bread": 500
     },
     {
@@ -97,6 +105,7 @@
       "card_id": "112233445577",
       "family_members": 2,
       "monthly_bread_quota": 300,
+      "available_bread_per_day": 10,
       "available_bread": 150
     },
     {

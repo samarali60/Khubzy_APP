@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/routes/app_routes.dart';
 import 'package:khubzy/screens/auth/provider/auth_provider.dart';
+import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,18 +19,28 @@ class _SplashScreenState extends State<SplashScreen> {
     _init();
   }
 
-  Future<void> _init() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    await authProvider.loadUserFromPrefs();
+Future<void> _init() async {
+  final authProvider = Provider.of<AuthProvider>(context, listen: false);
+  final citizenProvider = Provider.of<CitizenProvider>(context, listen: false);
 
-    await Future.delayed(const Duration(seconds: 1));
+  await authProvider.loadUserFromPrefs();
+  await citizenProvider.loadCitizens();
 
-    if (authProvider.isLoggedIn) {
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
-    }
+  final prefs = await SharedPreferences.getInstance();
+  final phone = prefs.getString('user_phone');
+
+  if (phone != null) {
+    citizenProvider.setCurrentCitizenByPhone(phone);
   }
+
+  await Future.delayed(const Duration(seconds: 3));
+
+  if (authProvider.isLoggedIn) {
+    Navigator.pushReplacementNamed(context, AppRoutes.main);
+  } else {
+    Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
+  }
+}
 
   @override
   Widget build(BuildContext context) {

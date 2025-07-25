@@ -81,23 +81,26 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       await prefs.setString('user_type', 'citizen');
       await prefs.setString('user_phone', phone);
       await prefs.setString('user_password', _passwordController.text);
+      await prefs.setString('user_mail', _emailController.text);
       await prefs.setString('user_village', _villageController.text);
       await prefs.setString('user_governorate', _selectedGovernorate ?? '');
       await prefs.setString('user_center', _selectedCenter ?? '');
       await prefs.setString('user_name', matchedCitizen.name);
       await prefs.setString('user_id', matchedCitizen.id);
 
+      citizenProvider.setCurrentCitizenByPhone(phone);
+
       WelcomeSnackbar.show(context, matchedCitizen.name);
 
       Navigator.pushAndRemoveUntil(
-        context, MaterialPageRoute(builder: (context) => const MainLayout()),
-         (route) => false,);
+        context,
+        MaterialPageRoute(builder: (context) => const MainLayout()),
+        (route) => false,
+      );
     } else {
       ErrorSnackBar.show(context, "بيانات المواطن غير صحيحة أو غير موجودة");
-    setState(() => _loading = false);
+      setState(() => _loading = false);
     }
-
-
   }
 
   @override

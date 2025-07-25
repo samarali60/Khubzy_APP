@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
-import 'package:khubzy/screens/balance/screens/balance_screen.dart';
+import 'package:khubzy/screens/balance/screens/citizen_balance_screen.dart';
 import 'package:khubzy/screens/main/provider/bottom_nav_provider.dart';
 import 'package:khubzy/screens/home/screens/citizen_home_screen.dart';
 import 'package:khubzy/screens/orders/screens/orders_screen.dart';
@@ -17,7 +17,7 @@ class MainLayout extends StatelessWidget {
     final pages = const [
       CitizenHomeScreen(),
       OrdersScreen(),
-      BalanceScreen(),
+      CitizenBalanceScreen(),
       BakeriesScreen(),
       SettingsScreen(),
     ];
