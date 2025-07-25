@@ -18,7 +18,7 @@ class CitizenBalanceScreen extends StatelessWidget {
     final monthlyBalance = citizenProvider.totalBalance;
     final remaining = citizenProvider.remainingBalance;
     final consumed = monthlyBalance - remaining;
-    final dailyBalance = citizenProvider.dailyBalance;
+    final dailyBalance = citizenProvider.dailyAvailableBalance;
 
     if (monthlyBalance <= 0 || remaining < 0) {
       return const Center(child: CircularProgressIndicator());
@@ -36,7 +36,7 @@ class CitizenBalanceScreen extends StatelessWidget {
             InfoCard(
               title: "الرصيد الشهري المتاح",
               value: "$monthlyBalance رغيف",
-              icon: Icons.breakfast_dining,
+              icon: Icons.local_offer_outlined,
             ),
 
             const SizedBox(height: 8),

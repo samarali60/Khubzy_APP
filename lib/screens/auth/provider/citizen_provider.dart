@@ -37,13 +37,12 @@ class CitizenProvider with ChangeNotifier {
  /// الرصيد الكلي للمواطن خلال الشهر
   int get totalBalance => _currentCitizen?.monthlyBreadQuota ?? 0;
 
-int get dailyBalance => _currentCitizen?.familyMembers ?? 0;
   /// الرصيد المتاح سحبه خلال اليوم الواحد
-  //int get dailyAvailableBalance => _currentCitizen?.availableBreadPerDay ?? 0;
+  int get dailyAvailableBalance => _currentCitizen?.availableBreadPerDay ?? 0;
 
-//  int get availableBreadFor2Days => dailyAvailableBalance * 2 ;
+ int get availableBreadFor2Days => dailyAvailableBalance * 2 ;
 
-//   int get availableBreadFor3Days => dailyAvailableBalance * 3 ;
+  int get availableBreadFor3Days => dailyAvailableBalance * 3 ;
 
   /// الرصيد المتبقي للمواطن خلال الشهر
   int get remainingBalance => _currentCitizen?.availableBread ?? 0;
