@@ -9,15 +9,14 @@ class UserTypeSelectionScreen extends StatelessWidget {
 
   Future<void> _selectUserType(BuildContext context, String type) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('user_type', type);
+    await prefs.setString('user_type', type);
 
-    // Update provider (optional if used globally)
     Provider.of<UserTypeProvider>(context, listen: false).setUserType(type);
 
     if (type == 'citizen') {
-      Navigator.pushReplacementNamed(context, AppRoutes.citizenLogin);
+      Navigator.pushNamed(context, AppRoutes.citizenLogin);
     } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.bakeryLogin);
+      Navigator.pushNamed(context, AppRoutes.bakerySignUp);
     }
   }
 
@@ -26,24 +25,39 @@ class UserTypeSelectionScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("اختر نوع المستخدم"), centerTitle: true),
+      // appBar: AppBar(title: const Text("اختر نوع المستخدم"), centerTitle: true),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildButton(
+            Text(
+              "يرجى تحديد نوع المستخدم",
+              style: theme.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 50),
+            // Text(
+            //   "يرجى تحديد نوع المستخدم",
+            //   style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.brown),
+            //   textAlign: TextAlign.center,
+            // ),
+            // const SizedBox(height: 24),
+
+            _buildUserCard(
               context,
-              label: "مواطن",
               icon: Icons.person,
+              label: "مواطن",
+              description: "الدخول كمواطن لحجز الخبز ومعرفة الرصيد.",
               color: theme.colorScheme.primary,
               type: "citizen",
             ),
-            const SizedBox(height: 20),
-            _buildButton(
+            const SizedBox(height: 24),
+            _buildUserCard(
               context,
-              label: "صاحب مخبز",
               icon: Icons.store,
+              label: "صاحب مخبز",
+              description: "الدخول لمتابعة الإنتاج والمخزون والتقييم.",
               color: theme.colorScheme.secondary,
               type: "bakery",
             ),
@@ -53,22 +67,50 @@ class UserTypeSelectionScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(
+  Widget _buildUserCard(
     BuildContext context, {
-    required String label,
     required IconData icon,
+    required String label,
+    required String description,
     required Color color,
     required String type,
   }) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        minimumSize: const Size(double.infinity, 60),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    return GestureDetector(
+      onTap: () => _selectUserType(context, type),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          border: Border.all(color: color, width: 1.5),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: color,
+              child: Icon(icon, color: Colors.white),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(description, style: const TextStyle(fontSize: 14)),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, size: 20),
+          ],
+        ),
       ),
-      label: Text(label, style: const TextStyle(fontSize: 18)),
-      icon: Icon(icon, size: 30),
-      onPressed: () => _selectUserType(context, type),
     );
   }
 }

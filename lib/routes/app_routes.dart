@@ -1,3 +1,4 @@
+import 'package:khubzy/screens/auth/screens/baker_signup_screen.dart';
 import 'package:khubzy/screens/auth/screens/bakery_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_signup_screen.dart';
@@ -14,6 +15,7 @@ import 'package:khubzy/screens/userTypeSelection/screens/user_type_selection.dar
 class AppRoutes {
   static const splash = '/splash';
   static const userTypeSelection = '/userTypeSelection';
+   static const bakerySignUp = '/bakerySignUp';
   static const bakeryLogin = '/bakeryLogin';
   static const citizenSignUp = '/citizenSignUp';
     static const citizenLogin = '/citizenLogin';
@@ -29,6 +31,7 @@ class AppRoutes {
   static final routes = {
     splash: (context) => const SplashScreen(),
     userTypeSelection: (context) => const UserTypeSelectionScreen(),
+    bakerySignUp: (context) => const BakerySignupScreen(),
     bakeryLogin: (context) => const BakeryLoginScreen(),
     citizenSignUp: (context) => const CitizenSignUpScreen(),
     citizenLogin: (context) => const CitizenLoginScreen(),

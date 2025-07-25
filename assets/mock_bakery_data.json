@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "bakery_name": "مخبز النور",
+      "location": "شارع الثورة، كفر الشيخ",
+      "owners_national_ids": ["29705061234567", "29501111234567", "28803031234567"],
+      "daily_quota": 1000,
+      "remaining_quota": 300,
+      "production_rate": 70,
+      "rating": 4.3
+    },
+    {
+      "id": 2,
+      "bakery_name": "مخبز البركة",
+      "location": "ميدان الزهراء، كفر الشيخ",
+      "owners_national_ids": ["29603231234567"],
+      "daily_quota": 850,
+      "remaining_quota": 500,
+      "production_rate": 60,
+      "rating": 4.1
+    },
+    {
+      "id": 3,
+      "bakery_name": "مخبز الأمل",
+      "location": "شارع النيل، كفر الشيخ",
+      "owners_national_ids": ["29409091234567", "29106061234567"],
+      "daily_quota": 900,
+      "remaining_quota": 250,
+      "production_rate": 72,
+      "rating": 4.4
+    },
+    {
+      "id": 4,
+      "bakery_name": "مخبز الفرح",
+      "location": "شارع السلام، كفر الشيخ",
+      "owners_national_ids": ["29308081234567", "28904041234567"],
+      "daily_quota": 1100,
+      "remaining_quota": 700,
+      "production_rate": 80,
+      "rating": 4.6
+    },
+    {
+      "id": 5,
+      "bakery_name": "مخبز السعادة",
+      "location": "شارع الهدى، كفر الشيخ",
+      "owners_national_ids": ["29207071234567", "29005051234567"],
+      "daily_quota": 950,
+      "remaining_quota": 300,
+      "production_rate": 65,
+      "rating": 4.2
+    }
+
+  ]
