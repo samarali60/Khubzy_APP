@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CitizenHomeScreen extends StatefulWidget {
   const CitizenHomeScreen({super.key});
-
   @override
   State<CitizenHomeScreen> createState() => _HomePageState();
 }

@@ -19,11 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _init() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    await authProvider.checkLoginStatus();
+    await authProvider.loadUserFromPrefs();
 
     await Future.delayed(const Duration(seconds: 1));
 
-    if (authProvider.isLoggedIn && authProvider.userType == 'citizen') {
+    if (authProvider.isLoggedIn) {
       Navigator.pushReplacementNamed(context, AppRoutes.main);
     } else {
       Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
@@ -32,8 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }

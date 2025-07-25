@@ -1,5 +1,6 @@
 import 'package:khubzy/screens/auth/screens/bakery_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_login_screen.dart';
+import 'package:khubzy/screens/auth/screens/citizen_signup_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
 import 'package:khubzy/screens/balance/screens/balance_screen.dart';
 import 'package:khubzy/screens/home/screens/citizen_home_screen.dart';
@@ -13,7 +14,8 @@ class AppRoutes {
   static const splash = '/splash';
   static const userTypeSelection = '/userTypeSelection';
   static const bakeryLogin = '/bakeryLogin';
-  static const citizenLogin = '/citizenLogin';
+  static const citizenSignUp = '/citizenSignUp';
+    static const citizenLogin = '/citizenLogin';
   static const main = '/mainLayout';
   static const citizenHome = '/citizenHome';
   static const reservation = '/reservation';
@@ -26,6 +28,7 @@ class AppRoutes {
     splash: (context) => const SplashScreen(),
     userTypeSelection: (context) => const UserTypeSelectionScreen(),
     bakeryLogin: (context) => const BakeryLoginScreen(),
+    citizenSignUp: (context) => const CitizenSignUpScreen(),
     citizenLogin: (context) => const CitizenLoginScreen(),
     main: (context) => const MainLayout(),
     citizenHome: (context) => const CitizenHomeScreen(),

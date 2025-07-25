@@ -1,0 +1,206 @@
+{
+  "citizens": [
+    {
+      "id": "1",
+      "role": "citizen",
+      "name": "أحمد محمد",
+      "national_id": "29807151234567",
+      "phone": "01012345678",
+      "card_id": "123456789012",
+      "family_members": 4,
+      "monthly_bread_quota": 600,
+      "available_bread": 420
+    },
+    {
+      "id": "2",
+      "role": "citizen",
+      "name": "سارة علي",
+      "national_id": "29901231234567",
+      "phone": "01087654321",
+      "card_id": "987654321098",
+      "family_members": 3,
+      "monthly_bread_quota": 450,
+      "available_bread": 120
+    },
+    {
+      "id": "3",
+      "role": "citizen",
+      "name": "محمد سعيد",
+      "national_id": "29705061234567",
+      "phone": "01055556666",
+      "card_id": "112233445566",
+      "family_members": 5,
+      "monthly_bread_quota": 750,
+      "available_bread": 600
+    },
+    {
+      "id": "4",
+      "role": "citizen",
+      "name": "ليلى يوسف",
+      "national_id": "29603231234567",
+      "phone": "01044445555",
+      "card_id": "667788990011",
+      "family_members": 2,
+      "monthly_bread_quota": 300,
+      "available_bread": 180
+    },
+    {
+      "id": "5",
+      "role": "citizen",
+      "name": "علي حسن",
+      "national_id": "29501111234567",
+      "phone": "01033334444",
+      "card_id": "223344556677",
+      "family_members": 6,
+      "monthly_bread_quota": 900,
+      "available_bread": 720
+    },
+    {
+      "id": "6",
+      "role": "citizen",
+      "name": "فاطمة محمود",
+      "national_id": "29409091234567",
+      "phone": "01022223333",
+      "card_id": "998877665544",
+      "family_members": 4,
+      "monthly_bread_quota": 600,
+      "available_bread": 300
+    },
+    {
+      "id": "7",
+      "role": "citizen",
+      "name": "يوسف إبراهيم",
+      "national_id": "29308081234567",
+      "phone": "01011112222",
+      "card_id": "556677889900",
+      "family_members": 3,
+      "monthly_bread_quota": 450,
+      "available_bread": 200
+    },
+    {
+      "id": "8",
+      "role": "citizen",
+      "name": "نجلاء عبد الله",
+      "national_id": "29207071234567",
+      "phone": "01099998888",
+      "card_id": "334455667788",
+      "family_members": 5,
+      "monthly_bread_quota": 750,
+      "available_bread": 500
+    },
+    {
+      "id": "9",
+      "role": "citizen",
+      "name": "أحمد سعيد",
+      "national_id": "29106061234567",
+      "phone": "01088887777",
+      "card_id": "112233445577",
+      "family_members": 2,
+      "monthly_bread_quota": 300,
+      "available_bread": 150
+    },
+    {
+      "id": "10",
+      "role": "citizen",
+      "name": "منى عبد الرحمن",
+      "national_id": "29005051234567",
+      "phone": "01077776666",
+      "card_id": "998877665533",
+      "family_members": 4,
+      "monthly_bread_quota": 600,
+      "available_bread": 400
+    }
+  ],
+  "bakers": [
+    {
+      "id": 1,
+      "role": "baker",
+      "name": "خالد عبد الرحمن",
+      "national_id": "29705061234567",
+      "phone": "01011112222",
+      "bakery_name": "مخبز النور",
+      "location": "شارع الثورة، كفر الشيخ"
+    },
+    {
+      "id": 2,
+      "role": "baker",
+      "name": "منى حسن",
+      "national_id": "29603231234567",
+      "phone": "01099998888",
+      "bakery_name": "مخبز البركة",
+      "location": "ميدان الزهراء، كفر الشيخ"
+    },
+    {
+      "id": 3,
+      "role": "baker",
+      "name": "احمد سعيد",
+      "national_id": "29501111234567",
+      "phone": "01088887777",
+      "bakery_name": "مخبز النور",
+      "location": "شارع الثورة، كفر الشيخ"
+    },
+    {
+      "id": 4,
+      "role": "baker",
+      "name": "سارة علي",
+      "national_id": "29409091234567",
+      "phone": "01077776666",
+      "bakery_name": "مخبز الأمل",
+      "location": "شارع النيل، كفر الشيخ"
+    },
+    {
+      "id": 5,
+      "role": "baker",
+      "name": "يوسف إبراهيم",
+      "national_id": "29308081234567",
+      "phone": "01066665555",
+      "bakery_name": "مخبز الفرح",
+      "location": "شارع السلام، كفر الشيخ"
+    },
+    {
+      "id": 6,
+      "role": "baker",
+      "name": "ليلى يوسف",
+      "national_id": "29207071234567",
+      "phone": "01055554444",
+      "bakery_name": "مخبز السعادة",
+      "location": "شارع الهدى، كفر الشيخ"
+    },
+    {
+      "id": 7,
+      "role": "baker",
+      "name": "أحمد محمد",
+      "national_id": "29106061234567",
+      "phone": "01044443333",
+      "bakery_name": "مخبز الأمل",
+      "location": "شارع النيل، كفر الشيخ"
+    },
+    {
+      "id": 8,
+      "role": "baker",
+      "name": "منى عبد الرحمن",
+      "national_id": "29005051234567",
+      "phone": "01033332222",
+      "bakery_name": "مخبز السعادة",
+      "location": "شارع الهدى، كفر الشيخ"
+    },
+    {
+      "id": 9,
+      "role": "baker",
+      "name": "فاطمة محمود",
+      "national_id": "28904041234567",
+      "phone": "01022221111",
+      "bakery_name": "مخبز الفرح",
+      "location": "شارع السلام، كفر الشيخ"
+    },
+    {
+      "id": 10,
+      "role": "baker",
+      "name": "علي حسن",
+      "national_id": "28803031234567",
+      "phone": "01011110000",
+      "bakery_name": "مخبز النور",
+      "location": "شارع الثورة، كفر الشيخ"
+    }
+  ]
+}
