@@ -33,4 +33,5 @@ class BakeryAuthProvider with ChangeNotifier {
     }
     return false;
   }
+
 }

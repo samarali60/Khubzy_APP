@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/app.dart';
-import 'package:khubzy/screens/auth/provider/auth_provider.dart';
-import 'package:khubzy/screens/auth/provider/bakery_auth_provider.dart';
+import 'package:khubzy/screens/auth/provider/citizen_auth_provider.dart';
+import 'package:khubzy/screens/auth/provider/baker_auth_provider.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:khubzy/screens/main/provider/bottom_nav_provider.dart';

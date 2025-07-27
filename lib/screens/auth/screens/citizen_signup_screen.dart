@@ -27,7 +27,7 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
 
   String? _selectedGovernorate;
   String? _selectedCenter;
-  List<String> centerOptions = [];
+  List<Map<String, dynamic>> centerOptions = [];
 
   bool _loading = false;
 
@@ -45,12 +45,10 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
     if (!_formKey.currentState!.validate()) return;
     if (_selectedGovernorate == null) {
       ErrorSnackBar.show(context, "اختر المحافظة");
-      setState(() => _loading = false);
       return;
     }
     if (_selectedCenter == null) {
       ErrorSnackBar.show(context, "اختر المركز");
-      setState(() => _loading = false);
       return;
     }
 
@@ -70,28 +68,42 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       matchedCitizen = citizenProvider.citizens.firstWhere(
         (citizen) => citizen.nationalId == nationalId && citizen.phone == phone,
       );
-    } catch (e) {
+    } catch (_) {
       matchedCitizen = null;
     }
 
     if (matchedCitizen != null) {
       final prefs = await SharedPreferences.getInstance();
 
+      final selectedCenterMap = centerOptions.firstWhere(
+        (center) => center['name'] == _selectedCenter,
+        orElse: () => {'lat': 30.0, 'lng': 31.0},
+      );
+      final lat = selectedCenterMap['lat'] ?? 30.0;
+      final lng = selectedCenterMap['lng'] ?? 31.0;
+
       await prefs.setBool('is_logged_in', true);
       await prefs.setString('user_type', 'citizen');
       await prefs.setString('user_phone', phone);
-      await prefs.setString('user_password', _passwordController.text);
-      await prefs.setString('user_mail', _emailController.text);
-      await prefs.setString('user_village', _villageController.text);
-      await prefs.setString('user_governorate', _selectedGovernorate ?? '');
-      await prefs.setString('user_center', _selectedCenter ?? '');
       await prefs.setString('user_name', matchedCitizen.name);
       await prefs.setString('user_id', matchedCitizen.id);
+      await prefs.setString('user_village', _villageController.text);
+      await prefs.setString('user_governorate', _selectedGovernorate!);
+      await prefs.setString('user_center', _selectedCenter!);
+      await prefs.setDouble('user_lat', lat);
+      await prefs.setDouble('user_lng', lng);
+      await prefs.setInt('family_members', matchedCitizen.familyMembers);
+      await prefs.setInt('available_bread_per_day', matchedCitizen.availableBreadPerDay);
+      await prefs.setInt(
+        'monthly_bread_quota',
+        matchedCitizen.monthlyBreadQuota,
+      );
+      await prefs.setInt('available_bread', matchedCitizen.availableBread );
+      print("تم التخزين: family_members = ${matchedCitizen.familyMembers}");
 
-      citizenProvider.setCurrentCitizenByPhone(phone);
+      print("المخزن فعليًا = ${prefs.getInt('family_members')}");
 
       WelcomeSnackbar.show(context, matchedCitizen.name);
-
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const MainLayout()),
@@ -99,8 +111,9 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       );
     } else {
       ErrorSnackBar.show(context, "بيانات المواطن غير صحيحة أو غير موجودة");
-      setState(() => _loading = false);
     }
+
+    setState(() => _loading = false);
   }
 
   @override
@@ -129,12 +142,10 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                 keyboardType: TextInputType.number,
                 maxLength: 14,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty)
                     return 'أدخل الرقم القومي';
-                  }
-                  if (!RegExp(r'^\d{14}$').hasMatch(value)) {
+                  if (!RegExp(r'^\d{14}$').hasMatch(value))
                     return 'الرقم القومي غير صحيح';
-                  }
                   return null;
                 },
               ),
@@ -144,11 +155,10 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                 label: 'البريد الإلكتروني',
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.isEmpty)
                     return 'أدخل البريد الإلكتروني';
-                  }
                   if (!RegExp(
-                    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                    r'^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$',
                   ).hasMatch(value)) {
                     return 'البريد الإلكتروني غير صحيح';
                   }
@@ -161,12 +171,8 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                 label: 'كلمة السر',
                 obscure: true,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'أدخل كلمة السر';
-                  }
-                  if (value.length < 8) {
-                    return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
-                  }
+                  if (value == null || value.isEmpty) return 'أدخل كلمة السر';
+                  if (value.length < 8) return 'كلمة السر قصيرة جداً';
                   return null;
                 },
               ),
@@ -201,11 +207,11 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                 onChanged: (value) {
                   setState(() {
                     _selectedGovernorate = value;
-                    centerOptions = locations[value]!;
+                    centerOptions = locations[value]!
+                        .cast<Map<String, dynamic>>();
                     _selectedCenter = null;
                   });
                 },
-                validator: (value) => value == null ? 'اختر المحافظة' : null,
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
@@ -217,19 +223,15 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                   ),
                 ),
                 items: centerOptions.map((center) {
-                  return DropdownMenuItem(value: center, child: Text(center));
+                  return DropdownMenuItem<String>(
+                    value: center['name'],
+                    child: Text(center['name']),
+                  );
                 }).toList(),
-                onChanged: (value) {
-                  setState(() => _selectedCenter = value);
-                },
-                validator: (value) => value == null ? 'اختر المركز' : null,
+                onChanged: (value) => setState(() => _selectedCenter = value),
               ),
               const SizedBox(height: 12),
-              _buildTextField(
-                controller: _villageController,
-                keyboardType: TextInputType.text,
-                label: 'القرية',
-              ),
+              _buildTextField(controller: _villageController, label: 'القرية'),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _loading ? null : _submit,
@@ -263,25 +265,26 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       ),
     );
   }
-}
 
-Widget _buildTextField({
-  required TextEditingController controller,
-  required String label,
-  TextInputType keyboardType = TextInputType.text,
-  String? Function(String?)? validator,
-  int? maxLength,
-  bool obscure = false,
-}) {
-  return TextFormField(
-    controller: controller,
-    keyboardType: keyboardType,
-    maxLength: maxLength,
-    textDirection: TextDirection.rtl,
-    decoration: InputDecoration(
-      labelText: label,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-    ),
-    validator: validator,
-  );
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator,
+    int? maxLength,
+    bool obscure = false,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      maxLength: maxLength,
+      obscureText: obscure,
+      textDirection: TextDirection.rtl,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+      validator: validator,
+    );
+  }
 }

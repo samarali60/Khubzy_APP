@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
 import 'package:khubzy/models/bakery_model.dart';
+import 'package:khubzy/routes/app_routes.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
+import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
 import 'package:khubzy/screens/main/screens/main_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,59 +42,48 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
+Future<void> _submit() async {
+  if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _loading = true);
+  setState(() => _loading = true);
 
-    final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
-    await bakeryProvider.loadBakeries();
+  final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+  await bakeryProvider.loadBakeries();
 
-    if (bakeryProvider.bakeries.isEmpty) {
-      ErrorSnackBar.show(context, "لا توجد مخابز مسجلة");
-      setState(() => _loading = false);
-      return;
-    }
+  final nationalId = _nationalIdController.text.trim();
+  final bakeryName = _selectedBakeryName;
+  final location = _selectedLocation;
 
-    final nationalId = _nationalIdController.text.trim();
-    final bakeryName = _selectedBakeryName;
-    final location = _selectedLocation;
+  final success = bakeryProvider.loginBakery(
+    nationalId: nationalId,
+    location: location!,
+    bakeryName: bakeryName!,
+  );
 
-    BakeryModel? matching;
-    try {
-      matching = bakeryProvider.bakeries.firstWhere(
-        (bakery) =>
-            bakery.ownersNationalIds.contains(nationalId) &&
-            bakery.bakeryName == bakeryName &&
-            bakery.location == location,
-      );
-    } catch (e) {
-      matching = null;
-    }
+  if (success) {
+    final matching = bakeryProvider.currentBakery!;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('is_logged_in', true);
+    await prefs.setString('user_type', 'bakery');
+    await prefs.setString('user_id', nationalId);
+    await prefs.setString('user_name', matching.bakeryName);
+    await prefs.setString('bakery_name', matching.bakeryName);
+    await prefs.setString('bakery_location', matching.location);
+    await prefs.setString('bakery_phone', _phoneController.text.trim());
+    await prefs.setString('bakery_password', _passwordController.text.trim());
 
-    if (matching != null) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('is_logged_in', true);
-      await prefs.setString('user_type', 'bakery');
-      await prefs.setString('user_id', _nationalIdController.text.trim());
-      await prefs.setString('user_name', matching.bakeryName);
-      await prefs.setString('bakery_name', matching.bakeryName);
-      await prefs.setString('bakery_location', matching.location);
-      await prefs.setString('bakery_phone', _phoneController.text.trim());
-      await prefs.setString('bakery_password', _passwordController.text.trim());
+    WelcomeSnackbar.show(context, matching.bakeryName);
 
-      WelcomeSnackbar.show(context, matching.bakeryName);
-
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const MainLayout()),
-        (route) => false,
-      );
-    } else {
-      ErrorSnackBar.show(context, "بيانات صاحب المخبز غير صحيحة");
-      setState(() => _loading = false);
-    }
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const BakeryDashboardScreen()),
+      (route) => false,
+    );
+  } else {
+    ErrorSnackBar.show(context, "بيانات صاحب المخبز غير صحيحة");
+    setState(() => _loading = false);
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +102,7 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
               const SizedBox(height: 24),
               Center(
                 child: Text(
-                  'تسجيل دخول صاحب مخبز',
+                  'إنشاء حساب مخبز',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -195,6 +186,27 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
                     ? const CircularProgressIndicator()
                     : const Text('تسجيل الدخول'),
               ),
+                 Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'هل لديك حساب بالفعل؟',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.bakeryLogin);
+                    },
+                    child: Text(
+                      'سجّل الدخول',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            
             ],
           ),
         ),

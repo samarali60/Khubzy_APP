@@ -31,4 +31,12 @@ class BakeryModel {
       rating: (json['rating'] as num).toDouble(),
     );
   }
+    Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'bakery_name': bakeryName,
+      'location': location,
+      'owners_national_ids': ownersNationalIds,
+    };
+  }
 }

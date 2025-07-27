@@ -1,8 +1,9 @@
-import 'package:khubzy/screens/auth/screens/baker_signup_screen.dart';
+import 'package:khubzy/screens/auth/screens/bakery_signup_screen.dart';
 import 'package:khubzy/screens/auth/screens/bakery_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_signup_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
+import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
 import 'package:khubzy/screens/balance/screens/citizen_balance_screen.dart';
 import 'package:khubzy/screens/home/screens/citizen_home_screen.dart';
 import 'package:khubzy/screens/main/screens/main_layout.dart';
@@ -26,6 +27,7 @@ class AppRoutes {
   static const balance = '/balance';
   static const settings = '/settings';
   static const profile = '/profile';
+  static const bakeryDashboard = '/bakeryDashboard';
 
 
   static final routes = {
@@ -42,6 +44,7 @@ class AppRoutes {
     balance: (context) => const CitizenBalanceScreen(),
     settings: (context) => const SettingsScreen(),
     profile: (context) => const ProfileScreen(), 
+    bakeryDashboard: (context) => const BakeryDashboardScreen(),
    
     // باقي الشاشات
   };

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/constants/colors.dart';
 import 'package:khubzy/routes/app_routes.dart';
-import 'package:khubzy/screens/auth/provider/auth_provider.dart';
+import 'package:khubzy/screens/auth/provider/citizen_auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 

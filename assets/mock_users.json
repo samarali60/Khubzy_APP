@@ -117,6 +117,7 @@
       "card_id": "998877665533",
       "family_members": 4,
       "monthly_bread_quota": 600,
+      "available_bread_per_day": 20,
       "available_bread": 400
     }
   ],
