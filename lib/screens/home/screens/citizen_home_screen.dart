@@ -1,18 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:khubzy/screens/reservation/provider/screens/reservation_screen.dart';
+import 'package:khubzy/core/services/egypt_locations.dart';
 
 class CitizenHomeScreen extends StatefulWidget {
   const CitizenHomeScreen({super.key});
 
   @override
-  State<CitizenHomeScreen> createState() => _HomePageState();
+  State<CitizenHomeScreen> createState() => _CitizenHomeScreenState();
 }
 
-class _HomePageState extends State<CitizenHomeScreen> {
+class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   String userName = '';
   int remainingBread = 0;
   int maxBread = 0;
+  int familyMembers = 0;
+  List<dynamic> nearbyBakeries = [];
 
   @override
   void initState() {
@@ -24,9 +30,49 @@ class _HomePageState extends State<CitizenHomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       userName = prefs.getString('user_name') ?? 'مستخدم';
-      remainingBread = prefs.getInt('remaining_bread') ?? 0;
-      maxBread = prefs.getInt('max_bread') ?? 0;
+      remainingBread = prefs.getInt('available_bread') ?? 0;
+      maxBread = prefs.getInt('monthly_bread_quota') ?? 0;
+      familyMembers = prefs.getInt('family_members') ?? 0;
     });
+
+    final userCenter = prefs.getString('user_center');
+    double? userLat;
+    double? userLng;
+
+    // استخراج lat/lng من center
+    if (userCenter != null) {
+      for (var centerList in locations.values) {
+        for (var center in centerList) {
+          if (center['name'] == userCenter) {
+            userLat = center['lat'];
+            userLng = center['lng'];
+            break;
+          }
+        }
+        if (userLat != null && userLng != null) break;
+      }
+    }
+
+    if (userLat != null && userLng != null) {
+      await _fetchNearbyBakeries(userLat, userLng);
+    }
+  }
+
+  Future<void> _fetchNearbyBakeries(double lat, double lng) async {
+    final url = Uri.parse(
+
+      'https://maps.com';
+    );    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          nearbyBakeries = data['results'] ?? [];
+        });
+      }
+    } catch (e) {
+      debugPrint('Error fetching bakeries: $e');
+    }
   }
 
   @override
@@ -34,20 +80,19 @@ class _HomePageState extends State<CitizenHomeScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(title: Text('مرحبًا $userName')),
+        appBar: AppBar(title: const Text('خبزي')),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: ListView(
             children: [
-              _buildTodayAlert(),
+              Text(
+                '👋 أهلاً يا $userName، نتمنى لك تجربة سعيدة!\nيمكنك حجز خبز من أقرب مخبز لك.',
+                style: const TextStyle(fontSize: 16),
+              ),
               const SizedBox(height: 16),
-              _buildReserveButton(),
+              buildReserveButton(),
               const SizedBox(height: 16),
-              _buildBreadBalance(),
-              const SizedBox(height: 16),
-              _buildNearestBakery(),
-              const SizedBox(height: 16),
-              _buildNextReservation(),
+              buildNearestBakeries(),
             ],
           ),
         ),
@@ -55,74 +100,49 @@ class _HomePageState extends State<CitizenHomeScreen> {
     );
   }
 
-  Widget _buildTodayAlert() {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.orange[100],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text("🍞 لديك $remainingBread رغيف متبقي اليوم"),
-    );
-  }
-
-  Widget _buildReserveButton() {
+  Widget buildReserveButton() {
     return ElevatedButton(
       onPressed: () {
-        // TODO: navigate to booking
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ReservationScreen()),
+        );
       },
       child: const Text("احجز الخبز الآن"),
     );
   }
 
-  Widget _buildBreadBalance() {
+  Widget buildNearestBakeries() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("📊 رصيدك الحالي:"),
+        const Text("📍 أقرب المخابز إليك:"),
         const SizedBox(height: 8),
-        LinearProgressIndicator(
-          value: maxBread == 0 ? 0 : remainingBread / maxBread,
-          minHeight: 12,
-          backgroundColor: Colors.grey[300],
-          valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
-        ),
-        const SizedBox(height: 4),
-        Text("$remainingBread من $maxBread رغيف"),
-      ],
-    );
-  }
-
-  Widget _buildNearestBakery() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("📍 أقرب مخبز إليك:"),
-        const SizedBox(height: 4),
-        const Text("🟢 مخبز الفتح - يبعد 500م"),
-        TextButton(
-          onPressed: () {
-            // TODO: show map
-          },
-          child: const Text("عرض على الخريطة"),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildNextReservation() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("📅 حجزك القادم:"),
-        const Text("5 أرغفة - الساعة 9 ص - مخبز النور"),
-        TextButton.icon(
-          onPressed: () {
-            // TODO: edit booking
-          },
-          icon: const Icon(Icons.edit),
-          label: const Text("تعديل الحجز"),
-        ),
+        if (nearbyBakeries.isEmpty)
+          const Text("لا توجد مخابز قريبة حالياً"),
+        ...nearbyBakeries.map((b) {
+          final name = b['name'] ?? 'مخبز';
+          final address = b['vicinity'] ?? '';
+          return Card(
+            child: ListTile(
+              leading: const Icon(Icons.store),
+              title: Text(name),
+              subtitle: Text(address),
+              trailing: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ReservationScreen(selectedBakery: name),
+                    ),
+                  );
+                },
+                child: const Text("احجز الآن"),
+              ),
+            ),
+          );
+        }).toList(),
       ],
     );
   }

@@ -1,188 +1,171 @@
 import 'package:flutter/material.dart';
- import 'dart:math';
+import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
-import 'package:khubzy/routes/app_routes.dart';
+import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
+import 'package:khubzy/screens/main/screens/main_layout.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../routes/app_routes.dart';
 
 class CitizenLoginScreen extends StatefulWidget {
   const CitizenLoginScreen({super.key});
+
   @override
   State<CitizenLoginScreen> createState() => _CitizenLoginScreenState();
 }
 
 class _CitizenLoginScreenState extends State<CitizenLoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _nationalIdController = TextEditingController();
-  final _cardIdController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _phoneController = TextEditingController();
-  // 🌀 متغير لتحميل البيانات
-bool _loading = false;
+  final _passwordController = TextEditingController();
 
-Future<void> _submit() async {
-  if (!_formKey.currentState!.validate()) return;
-
-  setState(() => _loading = true);
-
-  // simulate login delay
-  await Future.delayed(const Duration(seconds: 1));
-
-  final prefs = await SharedPreferences.getInstance();
-
-  // 🆔 توليد ID مميز للمواطن (مثلاً من timestamp)
-  final userId = DateTime.now().millisecondsSinceEpoch.toString();
-
-  // 👨‍👩‍👧‍👦 عدد أفراد الأسرة (1 - 5)
-  final familyMembers = Random().nextInt(5) + 1;
-
-  // 🍞 عدد أرغفة العيش = 5 * عدد الأفراد
-  final breadCount = familyMembers * 5 * 30;
- 
-  final max_bread =  familyMembers * 5;
-  // 💾 تخزين البيانات
-  await prefs.setBool('is_logged_in', true);
-  await prefs.setString('user_id', userId);
-  await prefs.setString('user_type', 'citizen');
-  await prefs.setString('user_name', _nameController.text);
-  await prefs.setString('user_national_id', _nationalIdController.text);
-  await prefs.setString('user_card_id', _cardIdController.text);
-  await prefs.setString('user_phone', _phoneController.text);
-  await prefs.setString('user_password', _passwordController.text);
-  await prefs.setInt('family_$userId', familyMembers);
-  await prefs.setInt('bread_$userId', breadCount);
-  await prefs.setInt('remaining_bread', breadCount);
-  await prefs.setInt('max_bread', max_bread);
-
-  // ✅ عرض Snackbar بالترحيب
-  WelcomeSnackbar.show(context, _nameController.text);
-
-  // 🚀 الانتقال إلى الصفحة الرئيسية
-  Navigator.pushReplacementNamed(
-    context,
-    AppRoutes.main,
-    arguments: {'user_type': 'citizen'},
-  );
-
-  setState(() => _loading = false);
-}
+  bool _loading = false;
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _nationalIdController.dispose();
-    _cardIdController.dispose();
-    _passwordController.dispose();
     _phoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+@override
+void initState() {
+  super.initState();
+  Provider.of<CitizenProvider>(context, listen: false).loadCitizens();
+}
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _loading = true);
+
+    final prefs = await SharedPreferences.getInstance();
+    final savedPhone = prefs.getString('user_phone');
+    final savedPassword = prefs.getString('user_password');
+    final savedName = prefs.getString('user_name');
+
+    final enteredPhone = _phoneController.text.trim();
+    final enteredPassword = _passwordController.text;
+
+    if (enteredPhone == savedPhone && enteredPassword == savedPassword) {
+      WelcomeSnackbar.show(context, savedName ?? 'المستخدم');
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const MainLayout()),
+        (route) => false,
+      );
+      Provider.of<CitizenProvider>(context, listen: false)
+    .setCurrentCitizenByPhone(enteredPhone);
+
+    } else {
+      ErrorSnackBar.show(context, 'رقم الهاتف أو كلمة السر غير صحيحة');
+    }
+
+    setState(() => _loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-   // final theme = Theme.of(context);
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("تسجيل الدخول (مواطن)"),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              _buildTextField(
-                controller: _nameController,
-                label: 'الاسم بالكامل',
-                validator: (val) => val!.isEmpty ? 'من فضلك أدخل الاسم' : null,
-              ),
-              const SizedBox(height: 12),
-              _buildTextField(
-                controller: _nationalIdController,
-                label: 'الرقم القومي',
-                keyboardType: TextInputType.number,
-                maxLength: 14,
-                validator: (val) =>
-                    val!.length != 14 ? 'يجب أن يكون 14 رقم' : null,
-              ),
-              const SizedBox(height: 12),
-              _buildTextField(
-                controller: _cardIdController,
-                label: 'رقم البطاقة',
-                keyboardType: TextInputType.number,
-                maxLength: 12,
-                validator: (val) {
-                  if (val == null || val.isEmpty) return 'أدخل رقم البطاقة';
-                  if (val.length != 12) {
-                    return 'رقم البطاقة يجب أن يكون  12 أرقام';
-                  }
-                  if (!RegExp(r'^[0-9]+$').hasMatch(val)) {
-                    return 'رقم البطاقة غير صالح';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 12),
-              _buildTextField(
-                controller: _passwordController,
-                label: 'الرقم السري',
-                keyboardType: TextInputType.number,
-                maxLength: 4,
-                validator: (val) =>
-                    val!.length != 4 ? 'يجب أن يكون 4 رقم' : null,
-              ),
-              const SizedBox(height: 12),
-              _buildTextField(
-                controller: _phoneController,
-                label: 'رقم التليفون',
-                keyboardType: TextInputType.phone,
-                validator: (val) {
-                  if (val == null || val.isEmpty) return 'أدخل رقم التليفون';
-                  if (!RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(val)) {
-                    return 'رقم التليفون غير صحيح';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _loading ? null : _submit,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 55),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                const SizedBox(height: 24),
+                Center(
+                  child: Text(
+                    'تسجيل دخول المواطن',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                child: _loading
-                    ? const CircularProgressIndicator()
-                    : const Text('تسجيل الدخول'),
-              ),
-            ],
+                const SizedBox(height: 24),
+                _buildTextField(
+                  controller: _phoneController,
+                  label: 'رقم التليفون',
+                  keyboardType: TextInputType.phone,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) return 'أدخل رقم التليفون';
+                    if (!RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(val)) {
+                      return 'رقم التليفون غير صحيح';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 12),
+                _buildTextField(
+                  controller: _passwordController,
+                  label: 'كلمة السر',
+                  obscure: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'أدخل كلمة السر';
+                    }
+                    if (value.length < 8) {
+                      return 'كلمة السر قصيرة جداً';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _loading ? null : _login,
+                  child: _loading
+                      ? const CircularProgressIndicator()
+                      : const Text('تسجيل الدخول'),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'ليس لديك حساب؟',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.citizenSignUp);
+                      },
+                      child: Text(
+                        'إنشاء حساب',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    TextInputType keyboardType = TextInputType.text,
-    String? Function(String?)? validator,
-    int? maxLength,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      maxLength: maxLength,
-      textDirection: TextDirection.rtl,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-      validator: validator,
-    );
-  }
+Widget _buildTextField({
+  required TextEditingController controller,
+  required String label,
+  TextInputType keyboardType = TextInputType.text,
+  String? Function(String?)? validator,
+  int? maxLength,
+  bool obscure = false,
+}) {
+  return TextFormField(
+    controller: controller,
+    keyboardType: keyboardType,
+    maxLength: maxLength,
+    obscureText: obscure,
+    textDirection: TextDirection.rtl,
+    decoration: InputDecoration(
+      labelText: label,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+    ),
+    validator: validator,
+  );
 }
