@@ -31,7 +31,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   String? _selectedTime;
   String? _selectedBakery;
 
-  int get totalBread =>  _breadPerDay * _selectedDays;
+  int get totalBread => _breadPerDay * _selectedDays;
 
   @override
   void initState() {
@@ -41,17 +41,18 @@ class _ReservationScreenState extends State<ReservationScreen> {
     _checkReservationRestriction();
   }
 
-
-
   Future<void> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    final citizenProvider = Provider.of<CitizenProvider>(context , listen: false);
+    final citizenProvider = Provider.of<CitizenProvider>(
+      context,
+      listen: false,
+    );
 
     setState(() {
       _familyMembers = citizenProvider.currentCitizen?.familyMembers ?? 1;
-      _breadPerDay  = citizenProvider.dailyAvailableBalance;
-     // _breadPerDay = prefs.getInt('available_bread_per_day') ?? _familyMembers * 5;
-      print ("Family Members: $_familyMembers, Bread Per Day: $_breadPerDay");
+      _breadPerDay = citizenProvider.dailyAvailableBalance;
+      // _breadPerDay = prefs.getInt('available_bread_per_day') ?? _familyMembers * 5;
+      print("Family Members: $_familyMembers, Bread Per Day: $_breadPerDay");
     });
   }
 
@@ -105,7 +106,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        
         title: const Text("✅ تم تأكيد الحجز"),
         content: Text(
           "عدد الأرغفة: $totalBread\nالوقت: $time\nالمخبز: $bakery",
@@ -129,80 +129,140 @@ class _ReservationScreenState extends State<ReservationScreen> {
         body: const Center(
           child: Text(
             "❌ لا يمكنك الحجز الآن. الرجاء الانتظار حتى انتهاء المدة.",
+            style: TextStyle(fontSize: 18),
           ),
         ),
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("حجز الخبز")),
+      appBar: AppBar(
+        title: const Text("حجز الخبز"),
+        centerTitle: true,
+        leading: const Icon(Icons.local_grocery_store),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("اختر عدد الأيام:"),
-            DropdownButton<int>(
-              value: _selectedDays,
-              items: const [
-                DropdownMenuItem(value: 1, child: Text("يوم واحد")),
-                DropdownMenuItem(value: 2, child: Text("يومان")),
-                DropdownMenuItem(value: 3, child: Text("ثلاثة أيام")),
-              ],
-              onChanged: (value) {
-                setState(() => _selectedDays = value!);
-              },
-            ),
-            const SizedBox(height: 12),
-            Text("عدد الأرغفة المحجوزة: $totalBread"),
-            const SizedBox(height: 16),
-            if (_selectedBakery == null) ...[
-              const Text("اختر المخبز:"),
-              FutureBuilder<String>(
-                future: _loadBakeryOptions(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.hasData) {
-                    final bakeries =
-                        json.decode(snapshot.data!)['bakers'] as List<dynamic>;
-                    return DropdownButton<String>(
-                      value: _selectedBakery,
-                      items: bakeries.map<DropdownMenuItem<String>>((b) {
-                        return DropdownMenuItem<String>(
-                          value: b['bakery_name'] as String,
-                          child: Text(b['bakery_name'] as String),
+        child: Card(
+          elevation: 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: ListView(
+              children: [
+                const Text(
+                  "تفاصيل الحجز",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const Divider(thickness: 1.5),
+                const SizedBox(height: 12),
+
+                Row(
+                  children: const [
+                    Icon(Icons.calendar_today),
+                    SizedBox(width: 8),
+                    Text("اختر عدد الأيام:"),
+                  ],
+                ),
+                DropdownButton<int>(
+                  value: _selectedDays,
+                  isExpanded: true,
+                  items: const [
+                    DropdownMenuItem(value: 1, child: Text("يوم واحد")),
+                    DropdownMenuItem(value: 2, child: Text("يومان")),
+                    DropdownMenuItem(value: 3, child: Text("ثلاثة أيام")),
+                  ],
+                  onChanged: (value) {
+                    setState(() => _selectedDays = value!);
+                  },
+                ),
+                const SizedBox(height: 16),
+
+                Text(
+                  "🥖 عدد الأرغفة المحجوزة: $totalBread",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                if (_selectedBakery == null) ...[
+                  Row(
+                    children: const [
+                      Icon(Icons.store),
+                      SizedBox(width: 8),
+                      Text("اختر المخبز:"),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  FutureBuilder<String>(
+                    future: _loadBakeryOptions(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done &&
+                          snapshot.hasData) {
+                        final bakeries =
+                            json.decode(snapshot.data!)['bakers']
+                                as List<dynamic>;
+                        return DropdownButton<String>(
+                          isExpanded: true,
+                          hint: const Text("اختر مخبزاً"),
+                          value: _selectedBakery,
+                          items: bakeries.map<DropdownMenuItem<String>>((b) {
+                            return DropdownMenuItem<String>(
+                              value: b['bakery_name'] as String,
+                              child: Text(b['bakery_name'] as String),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() => _selectedBakery = value);
+                          },
                         );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() => _selectedBakery = value);
-                      },
-                    );
-                  }
-                  return const CircularProgressIndicator();
-                },
-              ),
-            ] else
-              Text("المخبز المختار: $_selectedBakery"),
-            const SizedBox(height: 16),
-            const Text("اختر الوقت المناسب:"),
-            DropdownButton<String>(
-              value: _selectedTime,
-              hint: const Text("اختر وقتاً"),
-              items: _availableTimes
-                  .map((t) => DropdownMenuItem(value: t, child: Text(t)))
-                  .toList(),
-              onChanged: (value) => setState(() => _selectedTime = value),
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ] else
+                  Text("✅ المخبز المختار: $_selectedBakery"),
+                const SizedBox(height: 16),
+
+                Row(
+                  children: const [
+                    Icon(Icons.access_time),
+                    SizedBox(width: 8),
+                    Text("اختر الوقت المناسب:"),
+                  ],
+                ),
+                DropdownButton<String>(
+                  value: _selectedTime,
+                  isExpanded: true,
+                  hint: const Text("اختر وقتاً"),
+                  items: _availableTimes
+                      .map((t) => DropdownMenuItem(value: t, child: Text(t)))
+                      .toList(),
+                  onChanged: (value) => setState(() => _selectedTime = value),
+                ),
+
+                const SizedBox(height: 30),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.check_circle),
+                  label: const Text("تأكيد الحجز"),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: _selectedTime != null && _selectedBakery != null
+                      ? _confirmReservation
+                      : null,
+                ),
+              ],
             ),
-            const Spacer(),
-            Center(
-              child: ElevatedButton(
-                onPressed: _selectedTime != null && _selectedBakery != null
-                    ? _confirmReservation
-                    : null,
-                child: const Text("تأكيد الحجز"),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

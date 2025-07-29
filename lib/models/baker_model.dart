@@ -15,7 +15,7 @@ class BakerModel {
 
   factory BakerModel.fromJson(Map<String, dynamic> json) {
     return BakerModel(
-      id: json['id'],
+      id: json['id'] ,
       name: json['name'],
       nationalId: json['national_id'],
       location: json['location'],

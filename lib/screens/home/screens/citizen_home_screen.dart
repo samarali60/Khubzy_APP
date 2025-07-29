@@ -61,7 +61,7 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   Future<void> _fetchNearbyBakeries(double lat, double lng) async {
     final url = Uri.parse(
 
-      'https://maps.com';
+      'https://maps.com'
     );    try {
       final response = await http.get(url);
       if (response.statusCode == 200) {

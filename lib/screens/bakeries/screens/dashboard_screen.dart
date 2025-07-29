@@ -37,6 +37,7 @@ class BakeryDashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+         
             BakeryInfoCard(bakery: bakery),
             SizedBox(height: 16),
             Row(
@@ -61,6 +62,8 @@ class BakeryDashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 16),
+           
           ],
         ),
       ),

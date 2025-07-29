@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
         );
 
         await Future.delayed(const Duration(seconds: 3));
-        Navigator.pushReplacementNamed(context, AppRoutes.bakeryDashboard);
+        Navigator.pushReplacementNamed(context, AppRoutes.bakeryMainLayout);
         return;
       }
     }
