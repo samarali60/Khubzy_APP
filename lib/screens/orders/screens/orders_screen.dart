@@ -1,7 +1,7 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
@@ -11,64 +11,99 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  List<Map<String, dynamic>> _myOrders = [];
+  String? _userPhone;
+  late Future<void> _loadFuture;
 
   @override
   void initState() {
     super.initState();
-    _loadMyOrders();
+    _loadFuture = _loadUserPhone();
   }
 
-  Future<void> _loadMyOrders() async {
+  Future<void> _loadUserPhone() async {
     final prefs = await SharedPreferences.getInstance();
-    final phone = prefs.getString('user_phone') ?? '';
-    final ordersData = prefs.getString('reservations');
-    if (ordersData != null) {
-      final orders = List<Map<String, dynamic>>.from(json.decode(ordersData));
-      final now = DateTime.now();
-      final currentMonth = now.month;
-      final currentYear = now.year;
-
-      final filtered = orders.where((order) {
-        final isMine = order['phone'] == phone;
-        final orderDate = DateTime.parse(order['date']);
-        return isMine && orderDate.month == currentMonth && orderDate.year == currentYear;
-      }).toList();
-
-      setState(() {
-        _myOrders = filtered;
-      });
-    }
+    _userPhone = prefs.getString('user_phone');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("طلباتي")),
-      body: _myOrders.isEmpty
-          ? const Center(child: Text("لا يوجد طلبات هذا الشهر"))
-          : ListView.builder(
-              itemCount: _myOrders.length,
-              itemBuilder: (context, index) {
-                final order = _myOrders[index];
-                final status = order['status'] == 'confirmed' ? '✅ تم تأكيد الطلب' : '⏳ قيد المراجعة';
-                return Card(
-                  margin: const EdgeInsets.all(12),
-                  child: ListTile(
-                    title: Text("المخبز: ${order['bakery']}"),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("الكمية: ${order['quantity']} رغيف"),
-                        Text("التاريخ: ${order['date']}"),
-                        Text("الوقت: ${order['time']}"),
-                        Text("الحالة: $status"),
-                      ],
+      body: FutureBuilder(
+        future: _loadFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (_userPhone == null) {
+            return const Center(child: Text("لم يتم العثور على بيانات المستخدم."));
+          }
+
+          final currentMonth = DateTime.now().month;
+
+          return StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('reservations')
+                .where('phone', isEqualTo: _userPhone)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final docs = snapshot.data!.docs.where((doc) {
+                final dateStr = doc['date'] ?? '';
+                try {
+                  final date = DateFormat('yyyy-MM-dd').parse(dateStr);
+                  return date.month == currentMonth;
+                } catch (e) {
+                  return false;
+                }
+              }).toList();
+
+              if (docs.isEmpty) {
+                return const Center(child: Text("لا توجد طلبات حالياً."));
+              }
+
+              return ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final doc = docs[index];
+                  final bakery = doc['bakery'] ?? 'مخبز غير معروف';
+                  final date = doc['date'] ?? '';
+                  final time = doc['time'] ?? '';
+                  final quantity = doc['quantity'] ?? 0;
+                  final isConfirmed = doc['confirmed'] == true;
+
+                  return Card(
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      title: Text("المخبز: $bakery"),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("التاريخ: $date"),
+                          Text("الوقت: $time"),
+                          Text("الكمية: $quantity رغيف"),
+                          Text(
+                            isConfirmed
+                                ? "✅ تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
+                                : "⌛️ الطلب قيد المراجعة من المخبز.",
+                            style: TextStyle(
+                              color: isConfirmed ? Colors.green : Colors.orange,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
