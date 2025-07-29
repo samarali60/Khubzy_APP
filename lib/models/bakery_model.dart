@@ -21,7 +21,7 @@ class BakeryModel {
 
   factory BakeryModel.fromJson(Map<String, dynamic> json) {
     return BakeryModel(
-      id: json['id'],
+      id: int.parse(json['id'].toString()),
       bakeryName: json['bakery_name'],
       location: json['location'],
       ownersNationalIds: List<String>.from(json['owners_national_ids']),
