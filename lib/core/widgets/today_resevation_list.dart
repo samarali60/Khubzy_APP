@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:khubzy/models/reservations.dart';
+import 'package:khubzy/models/reservation_model.dart';
 
 class TodayReservationsList extends StatelessWidget {
   final List<Reservation> reservations;
@@ -41,7 +41,7 @@ class TodayReservationsList extends StatelessWidget {
             style: theme.textTheme.titleMedium,
           ),
           subtitle: Text(
-            "الكمية المطلوبة: ${reservation.quantity}",
+            "الكمية المطلوبة: ${reservation.breadAmount} رغيف\n",
             style: theme.textTheme.bodyMedium,
           ),
           trailing: Icon(Icons.arrow_forward_ios_rounded, size: 16),
