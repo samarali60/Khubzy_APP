@@ -23,7 +23,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
         ChangeNotifierProvider(create: (_) => UserTypeProvider()),
-        ChangeNotifierProvider(create: (_) => CitizenProvider()),
+       ChangeNotifierProvider(create: (_) => CitizenProvider()..loadCitizens()),
         ChangeNotifierProvider(create: (_) => BakeryAuthProvider()),
         ChangeNotifierProvider(create: (_) => BakeryProvider()),
         ChangeNotifierProvider(create: (_) => BakerProvider()),

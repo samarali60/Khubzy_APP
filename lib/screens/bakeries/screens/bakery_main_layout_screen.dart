@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:khubzy/screens/bakeries/screens/bakery_ordars_screen.dart';
+import 'package:khubzy/screens/bakeries/screens/bakery_orders_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakery_profile_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
 import 'package:khubzy/screens/main/provider/bottom_nav_provider.dart';

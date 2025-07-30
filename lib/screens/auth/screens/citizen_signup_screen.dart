@@ -72,44 +72,44 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       matchedCitizen = null;
     }
 
-    if (matchedCitizen != null) {
-      final prefs = await SharedPreferences.getInstance();
+   if (matchedCitizen != null) {
+  final prefs = await SharedPreferences.getInstance();
 
-      final selectedCenterMap = centerOptions.firstWhere(
-        (center) => center['name'] == _selectedCenter,
-        orElse: () => {'lat': 30.0, 'lng': 31.0},
-      );
-      final lat = selectedCenterMap['lat'] ?? 30.0;
-      final lng = selectedCenterMap['lng'] ?? 31.0;
+  // ✅ عشان البروفايل والرصيد يشتغلوا
+  citizenProvider.setCurrentCitizenByPhone(phone);
 
-      await prefs.setBool('is_logged_in', true);
-      await prefs.setString('user_type', 'citizen');
-      await prefs.setString('user_phone', phone);
-      await prefs.setString('user_name', matchedCitizen.name);
-      await prefs.setString('user_id', matchedCitizen.id);
-      await prefs.setString('user_village', _villageController.text);
-      await prefs.setString('user_governorate', _selectedGovernorate!);
-      await prefs.setString('user_center', _selectedCenter!);
-      await prefs.setDouble('user_lat', lat);
-      await prefs.setDouble('user_lng', lng);
-      await prefs.setInt('family_members', matchedCitizen.familyMembers);
-      await prefs.setInt('available_bread_per_day', matchedCitizen.availableBreadPerDay);
-      await prefs.setInt(
-        'monthly_bread_quota',
-        matchedCitizen.monthlyBreadQuota,
-      );
-      await prefs.setInt('available_bread', matchedCitizen.availableBread );
-      print("تم التخزين: family_members = ${matchedCitizen.familyMembers}");
+  final selectedCenterMap = centerOptions.firstWhere(
+    (center) => center['name'] == _selectedCenter,
+    orElse: () => {'lat': 30.0, 'lng': 31.0},
+  );
 
-      print("المخزن فعليًا = ${prefs.getInt('family_members')}");
+  final lat = selectedCenterMap['lat'] ?? 30.0;
+  final lng = selectedCenterMap['lng'] ?? 31.0;
 
-      WelcomeSnackbar.show(context, matchedCitizen.name);
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const MainLayout()),
-        (route) => false,
-      );
-    } else {
+  await prefs.setBool('is_logged_in', true);
+  await prefs.setString('user_type', 'citizen');
+  await prefs.setString('user_phone', phone);
+  await prefs.setString('user_name', matchedCitizen.name);
+  await prefs.setString('user_id', matchedCitizen.id);
+  await prefs.setString('user_village', _villageController.text);
+  await prefs.setString('user_governorate', _selectedGovernorate!);
+  await prefs.setString('user_center', _selectedCenter!);
+  await prefs.setDouble('user_lat', lat);
+  await prefs.setDouble('user_lng', lng);
+  await prefs.setInt('family_members', matchedCitizen.familyMembers);
+  await prefs.setInt('available_bread_per_day', matchedCitizen.availableBreadPerDay);
+  await prefs.setInt('monthly_bread_quota', matchedCitizen.monthlyBreadQuota);
+  await prefs.setInt('available_bread', matchedCitizen.availableBread);
+
+  WelcomeSnackbar.show(context, matchedCitizen.name);
+
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => const MainLayout()),
+    (route) => false,
+  );
+}
+ else {
       ErrorSnackBar.show(context, "بيانات المواطن غير صحيحة أو غير موجودة");
     }
 

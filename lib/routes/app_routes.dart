@@ -4,7 +4,7 @@ import 'package:khubzy/screens/auth/screens/citizen_login_screen.dart';
 import 'package:khubzy/screens/auth/screens/citizen_signup_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakeries_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakery_main_layout_screen.dart';
-import 'package:khubzy/screens/bakeries/screens/bakery_ordars_screen.dart';
+import 'package:khubzy/screens/bakeries/screens/bakery_orders_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/bakery_profile_screen.dart';
 import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
 import 'package:khubzy/screens/balance/screens/citizen_balance_screen.dart';
