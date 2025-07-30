@@ -1,31 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/models/bakery_model.dart';
+import 'package:khubzy/models/baker_model.dart';
+import 'package:khubzy/core/constants/colors.dart';
 
 class BakeryInfoCard extends StatelessWidget {
   final BakeryModel bakery;
+  final BakerModel baker;
 
-  const BakeryInfoCard({super.key, required this.bakery});
+  const BakeryInfoCard({
+    super.key,
+    required this.bakery,
+    required this.baker,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 4,
-      color: theme.colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(
+            colors: [
+              AppColors.darkText,
+              AppColors.primary,
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
+        child: Row(
           children: [
-            Text("اسم المخبز: ${bakery.bakeryName}", style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Text("المكان: ${bakery.location}", style: theme.textTheme.bodyMedium),
-            const SizedBox(height: 8),
-            Text("عدد المالكين: ${bakery.ownersNationalIds.length}", style: theme.textTheme.bodyMedium),
-            const SizedBox(height: 8),
-            // Text("رقم التليفون: ${bakery.location}", style: theme.textTheme.bodyMedium),
+            const CircleAvatar(
+              radius: 28,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.person,
+                size: 32,
+                color: AppColors.primary,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'أهلاً، ${baker.name}',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'أنت تدير  "${bakery.bakeryName}" الواقع في ${bakery.location}.',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

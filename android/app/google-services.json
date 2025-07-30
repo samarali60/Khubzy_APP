@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "502772812131",
+    "project_id": "khubzy-51aa8",
+    "storage_bucket": "khubzy-51aa8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502772812131:android:d390d5a390848db3a6ab56",
+        "android_client_info": {
+          "package_name": "AndroidManifest.xml"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNmMGXptveamc6rFwy0XtbNSimzs4K_kI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502772812131:android:6fb2ec67a4326790a6ab56",
+        "android_client_info": {
+          "package_name": "com.example.khubzy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNmMGXptveamc6rFwy0XtbNSimzs4K_kI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

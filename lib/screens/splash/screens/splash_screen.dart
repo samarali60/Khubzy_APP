@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:khubzy/routes/app_routes.dart';
+import 'package:khubzy/routes/app_routes.dart';
 import 'package:khubzy/screens/auth/provider/citizen_auth_provider.dart';
+import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
+import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:khubzy/routes/app_routes.dart';
-import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,74 +19,76 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _init();
+    _checkSession();
   }
 
-  Future<void> _init() async {
+  Future<void> _checkSession() async {
+    // Wait a brief moment for the splash screen to be visible
+    await Future.delayed(const Duration(milliseconds: 1500));
+
     final prefs = await SharedPreferences.getInstance();
+    final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+
+    // If not logged in, go to the selection screen
+    if (!isLoggedIn) {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
+      }
+      return;
+    }
+
+    // If logged in, check the user type and navigate accordingly
     final userType = prefs.getString('user_type');
 
     if (userType == 'citizen') {
-      await _handleCitizenFlow();
+      _navigateToCitizenHome();
     } else if (userType == 'bakery') {
-      await _handleBakeryFlow();
+      _navigateToBakeryDashboard();
     } else {
-      // أول مرة يدخل التطبيق أو حذف الداتا
-      await Future.delayed(const Duration(seconds: 1));
-      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
-    }
-  }
-
-  Future<void> _handleCitizenFlow() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final citizenProvider = Provider.of<CitizenProvider>(context, listen: false);
-
-    await citizenProvider.loadCitizens();
-    await authProvider.loadUserFromPrefs();
-
-    final prefs = await SharedPreferences.getInstance();
-    final phone = prefs.getString('user_phone');
-
-    if (phone != null) {
-      citizenProvider.setCurrentCitizenByPhone(phone);
-    }
-
-    await Future.delayed(const Duration(seconds: 3));
-
-    if (authProvider.isLoggedIn) {
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
-    }
-  }
-
-  Future<void> _handleBakeryFlow() async {
-    final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
-    await bakeryProvider.loadBakeries();
-
-    final prefs = await SharedPreferences.getInstance();
-    final nationalId = prefs.getString('user_id');
-
-    if (nationalId != null) {
-      final bakery = bakeryProvider.getBakeryByOwner(nationalId);
-      if (bakery != null) {
-        bakeryProvider.loginBakery(
-          nationalId: nationalId,
-          bakeryName: bakery.bakeryName,
-          location: bakery.location,
-        );
-
-        await Future.delayed(const Duration(seconds: 3));
-        Navigator.pushReplacementNamed(context, AppRoutes.bakeryDashboard);
-        return;
+      // Fallback in case user_type is somehow null
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
       }
     }
-
-    await Future.delayed(const Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
   }
 
-@override
+  void _navigateToCitizenHome() {
+    // Pre-load necessary data if needed, but for now, just navigate
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.main);
+    }
+  }
+
+  void _navigateToBakeryDashboard() {
+    // Pre-load necessary data for the bakery provider before navigating
+    final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+    final bakerProvider = Provider.of<BakerProvider>(context, listen: false);
+    final prefs = SharedPreferences.getInstance();
+
+    // This can happen in the background, but it's good practice to init
+    prefs.then((p) async {
+      final bakerId = p.getString('baker_id');
+      if (bakerId != null) {
+        await bakeryProvider.loadBakeries();
+        await bakerProvider.loadBakers();
+        final bakery = bakeryProvider.getBakeryByOwner(bakerId);
+        if (bakery != null) {
+          bakeryProvider.loginBakery(
+            nationalId: bakerId,
+            bakeryName: bakery.bakeryName,
+            location: bakery.location,
+          );
+        }
+      }
+    });
+
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.bakeryMainLayout);
+    }
+  }
+
+  @override
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
@@ -95,16 +98,13 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ✅ صورة الشعار
+            // ✅ Logo Image
             Image.asset(
-              'assets/images/Kubzy.png', // ضيفي صورة هنا
-              // width: 120,
-              // height: 120,
+              'assets/images/Kubzy.png',
             ),
-
             const SizedBox(height: 20),
 
-            // ✅ اسم التطبيق
+            // ✅ App Name
             Text(
               'خبزي',
               style: theme.textTheme.headlineLarge?.copyWith(
@@ -112,7 +112,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 32,
               ),
             ),
-
             const SizedBox(height: 10),
 
             Text(
@@ -122,10 +121,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-
             const SizedBox(height: 40),
-
-            // ✅ مؤشر التحميل
+            // ✅ Loading Indicator
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                 theme.colorScheme.secondary,
@@ -136,5 +133,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
 }

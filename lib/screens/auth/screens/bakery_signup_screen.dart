@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
-import 'package:khubzy/models/bakery_model.dart';
 import 'package:khubzy/routes/app_routes.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
-import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
-import 'package:khubzy/screens/main/screens/main_layout.dart';
+import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
+import 'package:khubzy/screens/bakeries/screens/bakery_main_layout_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,48 +41,71 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
     super.dispose();
   }
 
-Future<void> _submit() async {
-  if (!_formKey.currentState!.validate()) return;
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
 
-  setState(() => _loading = true);
+    setState(() => _loading = true);
 
-  final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
-  await bakeryProvider.loadBakeries();
+    final nationalId = _nationalIdController.text.trim();
+    final password = _passwordController.text.trim();
+    final phone = _phoneController.text.trim();
+    final bakeryName = _selectedBakeryName;
+    final location = _selectedLocation;
 
-  final nationalId = _nationalIdController.text.trim();
-  final bakeryName = _selectedBakeryName;
-  final location = _selectedLocation;
+    final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+    final bakerProvider = Provider.of<BakerProvider>(context, listen: false);
 
-  final success = bakeryProvider.loginBakery(
-    nationalId: nationalId,
-    location: location!,
-    bakeryName: bakeryName!,
-  );
+    // Ensure data is loaded before proceeding
+    await bakeryProvider.loadBakeries();
+    await bakerProvider.loadBakers();
 
-  if (success) {
-    final matching = bakeryProvider.currentBakery!;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('is_logged_in', true);
-    await prefs.setString('user_type', 'bakery');
-    await prefs.setString('user_id', nationalId);
-    await prefs.setString('user_name', matching.bakeryName);
-    await prefs.setString('bakery_name', matching.bakeryName);
-    await prefs.setString('bakery_location', matching.location);
-    await prefs.setString('bakery_phone', _phoneController.text.trim());
-    await prefs.setString('bakery_password', _passwordController.text.trim());
+    // Check if the provided details match a real bakery owner
+    final baker = bakerProvider.getBakerByNationalId(nationalId);
+    final bakery = bakeryProvider.getBakeryByOwner(nationalId);
 
-    WelcomeSnackbar.show(context, matching.bakeryName);
+    // The baker must exist and the selected bakery details must match
+    if (baker != null &&
+        bakery != null &&
+        bakery.bakeryName == bakeryName &&
+        bakery.location == location) {
+      final prefs = await SharedPreferences.getInstance();
 
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const BakeryDashboardScreen()),
-      (route) => false,
-    );
-  } else {
-    ErrorSnackBar.show(context, "بيانات صاحب المخبز غير صحيحة");
-    setState(() => _loading = false);
+      // --- THE FIX: Save the National ID for the login screen to use ---
+      await prefs.setString('bakery_national_id', nationalId);
+      await prefs.setString('bakery_password', password);
+      
+      // Also save other important info
+      await prefs.setBool('is_logged_in', true);
+      await prefs.setString('user_type', 'bakery');
+      await prefs.setString('baker_id', nationalId); // For profile screen
+      await prefs.setString('baker_name', baker.name);
+      await prefs.setString('bakery_name', bakery.bakeryName);
+      await prefs.setString('bakery_location', bakery.location);
+      await prefs.setString('bakery_phone', phone);
+
+
+      // Log in the user to set the provider state
+      bakeryProvider.loginBakery(
+        nationalId: nationalId,
+        location: bakery.location,
+        bakeryName: bakery.bakeryName,
+      );
+
+      WelcomeSnackbar.show(context, bakery.bakeryName);
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const BakaryMainLayout()),
+        (route) => false,
+      );
+    } else {
+      ErrorSnackBar.show(context, "بيانات التسجيل غير صحيحة أو غير متطابقة");
+    }
+
+    if (mounted) {
+      setState(() => _loading = false);
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +126,8 @@ Future<void> _submit() async {
                 child: Text(
                   'إنشاء حساب مخبز',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -140,8 +162,9 @@ Future<void> _submit() async {
                 obscure: true,
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل كلمة السر';
-                  if (val.length < 8)
+                  if (val.length < 8) {
                     return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
+                  }
                   return null;
                 },
               ),
@@ -184,9 +207,9 @@ Future<void> _submit() async {
                 onPressed: _loading ? null : _submit,
                 child: _loading
                     ? const CircularProgressIndicator()
-                    : const Text('تسجيل الدخول'),
+                    : const Text('إنشاء حساب'),
               ),
-                 Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -200,13 +223,12 @@ Future<void> _submit() async {
                     child: Text(
                       'سجّل الدخول',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                   ),
                 ],
               ),
-            
             ],
           ),
         ),
@@ -231,6 +253,7 @@ Future<void> _submit() async {
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        counterText: '', // Hide the counter
       ),
       validator: validator,
     );
