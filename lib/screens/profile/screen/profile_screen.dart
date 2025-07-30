@@ -11,19 +11,38 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final citizen = Provider.of<CitizenProvider>(context).currentCitizen;
+    final citizenProvider = Provider.of<CitizenProvider>(context);
+    final isLoading = citizenProvider.isLoading;
+    final citizen = citizenProvider.currentCitizen;
 
-    if (citizen == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    // ✅ حالة التحميل
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
+    // ❌ حالة عدم وجود مواطن
+    if (citizen == null) {
+      return Scaffold(
+        appBar: AppBar(title: const Text("الملف الشخصي")),
+        body: const Center(
+          child: Text(
+            "لا يوجد بيانات للمستخدم.",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      );
+    }
+
+    // ✅ الحالة العادية: مواطن موجود
     return Scaffold(
       appBar: AppBar(title: const Text("الملف الشخصي")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // رأس البطاقة
+            // 🟦 رأس البطاقة
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -31,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.secondary,
+                    color: AppColors.secondary.withOpacity(0.3),
                     blurRadius: 6,
                     offset: const Offset(0, 3),
                   ),
@@ -59,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // بيانات المواطن
+            // 📋 بيانات المواطن
             ProfileInfoCard(
               label: "الرقم القومي",
               value: citizen.nationalId,
@@ -84,9 +103,12 @@ class ProfileScreen extends StatelessWidget {
               icon: Icons.group,
               theme: theme,
             ),
+
             const SizedBox(height: 12),
             Divider(thickness: 1, color: Colors.brown.shade200),
             const SizedBox(height: 12),
+
+            // 🍞 بيانات الخبز
             ProfileInfoCard(
               label: "الحد الشهري للخبز",
               value: "${citizen.monthlyBreadQuota} رغيف",
@@ -95,21 +117,18 @@ class ProfileScreen extends StatelessWidget {
             ),
             ProfileInfoCard(
               label: "الحصة اليومية للفرد",
-              value: "5 رغيف", // أو خليها متغيرة لو عندك متغير للحصة اليومية
+              value: "${citizen.availableBreadPerDay} رغيف",
               icon: Icons.calendar_today,
               theme: theme,
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
+
+            // 🔓 زر تسجيل الخروج
             logoutButton(),
-          
           ],
         ),
       ),
     );
   }
-
-
-
 }
-

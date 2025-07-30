@@ -12,18 +12,40 @@ class CitizenBalanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final citizenProvider = Provider.of<CitizenProvider>(context);
     final theme = Theme.of(context);
-    if (citizenProvider.currentCitizen == null) {
-      return const Center(child: CircularProgressIndicator());
-    }
+
+    final currentCitizen = citizenProvider.currentCitizen;
     final monthlyBalance = citizenProvider.totalBalance;
     final remaining = citizenProvider.remainingBalance;
-    final consumed = monthlyBalance - remaining;
     final dailyBalance = citizenProvider.dailyAvailableBalance;
+    final consumed = monthlyBalance - remaining;
+    final isLoading = citizenProvider.isLoading;
 
-    if (monthlyBalance <= 0 || remaining < 0) {
-      return const Center(child: CircularProgressIndicator());
+if (isLoading) {
+  return const Scaffold(
+    body: Center(child: CircularProgressIndicator()),
+  );
+}
+    // 🟡 حالة تحميل البيانات
+    if (currentCitizen == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
     }
 
+    // 🔴 حالة عدم وجود بيانات صالحة
+    if (monthlyBalance <= 0 || remaining < 0) {
+      return Scaffold(
+        appBar: AppBar(title: const Text("تفاصيل الرصيد")),
+        body: const Center(
+          child: Text(
+            "لا توجد بيانات كافية لعرض الرصيد.",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      );
+    }
+
+    // ✅ الحالة العادية: البيانات موجودة
     return Scaffold(
       appBar: AppBar(
         title: const Text("تفاصيل الرصيد"),
@@ -38,14 +60,12 @@ class CitizenBalanceScreen extends StatelessWidget {
               value: "$monthlyBalance رغيف",
               icon: Icons.local_offer_outlined,
             ),
-
             const SizedBox(height: 8),
             InfoCard(
               title: "الرصيد اليومي المتاح",
               value: "$dailyBalance رغيف",
               icon: Icons.calendar_today,
             ),
-
             const SizedBox(height: 8),
             InfoCard(
               title: "الرصيد المستهلك خلال الشهر",
@@ -58,13 +78,16 @@ class CitizenBalanceScreen extends StatelessWidget {
               value: "$remaining رغيف",
               icon: Icons.account_balance_wallet,
             ),
+            const SizedBox(height: 16),
+
+            // ✅ الرسم البياني Pie Chart
             Expanded(
               child: PieChart(
                 PieChartData(
                   sections: [
                     PieChartSectionData(
                       color: AppColors.primary,
-                      value: remaining.toDouble(), // الرصيد المتبقي
+                      value: remaining.toDouble(),
                       title: 'المتبقي',
                       radius: 70,
                       titleStyle: theme.textTheme.bodySmall?.copyWith(
@@ -73,7 +96,7 @@ class CitizenBalanceScreen extends StatelessWidget {
                     ),
                     PieChartSectionData(
                       color: AppColors.secondary,
-                      value: consumed.toDouble(), // الرصيد المستهلك
+                      value: consumed.toDouble(),
                       title: 'المستهلك',
                       radius: 70,
                       titleStyle: theme.textTheme.bodySmall?.copyWith(
@@ -86,9 +109,9 @@ class CitizenBalanceScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 8),
 
+            // 🔵 المؤشرات تحت الدائرة
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

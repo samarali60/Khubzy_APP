@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/routes/app_routes.dart';
-import 'package:khubzy/screens/auth/provider/citizen_auth_provider.dart';
-import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -86,6 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -120,7 +119,6 @@ class _SplashScreenState extends State<SplashScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-
             // ✅ Loading Indicator
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(

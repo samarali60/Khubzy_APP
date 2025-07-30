@@ -59,10 +59,10 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   }
 
   Future<void> _fetchNearbyBakeries(double lat, double lng) async {
-    final url = Uri.parse(
-
-      'https://maps.com'
-    );    try {
+    
+   final url = Uri.parse(
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=10000&type=bakery&key=AIzaSyChQ0n-vud41n-_pz-nXBiDJTQrG7F0CJs');
+    try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
