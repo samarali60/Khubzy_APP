@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/bakary_info_card.dart';
 import 'package:khubzy/models/bakery_model.dart';
@@ -21,6 +23,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
   BakerModel? _baker;
   BakeryModel? _bakery;
   bool _isLoading = true;
+  int? reservationCount ;
 
   @override
   void initState() {
@@ -34,6 +37,8 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
     final prefs = await SharedPreferences.getInstance();
     final bakerId = prefs.getString('baker_id');
 
+    reservationCount = prefs.getInt('reservation_count') ;
+    print('عدد الحجوزات المحملة: $reservationCount');
     if (bakerId != null) {
       // Ensure data is loaded before using it
       await bakerProvider.loadBakers();
@@ -115,7 +120,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
           children: [
             BakeryInfoCard(bakery: _bakery!, baker: _baker!),
             const SizedBox(height: 24),
-            _buildTotalReservationsCard(context, todayReservations.length),
+            _buildTotalReservationsCard(context, reservationCount ?? 0),
             const SizedBox(height: 24),
             GridView.count(
               crossAxisCount: 2,
