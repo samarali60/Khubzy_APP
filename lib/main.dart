@@ -16,7 +16,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+  //await uploadUsersToFirebase(); //  مرة واحدة فقط
+  //await uploadBakeriesToFirebase(); // مرة واحدة فقط
   runApp(
     MultiProvider(
       providers: [
