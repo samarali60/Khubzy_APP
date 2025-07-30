@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/routes/app_routes.dart';
+import 'package:khubzy/screens/bakeries/screens/bakery_main_layout_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
-import 'package:khubzy/screens/bakeries/screens/dashboard_screen.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 
 class BakeryLoginScreen extends StatefulWidget {
@@ -34,13 +34,16 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
     setState(() => _loading = true);
 
     final prefs = await SharedPreferences.getInstance();
-    final savedPhone = prefs.getString('bakery_phone');
+    final savednationalId = prefs.getString('baker_id');
     final savedPassword = prefs.getString('bakery_password');
     final nationalId = _nationalIdController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (nationalId == savedPhone && password == savedPassword) {
-      final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+    if (nationalId == savednationalId && password == savedPassword) {
+      final bakeryProvider = Provider.of<BakeryProvider>(
+        context,
+        listen: false,
+      );
       await bakeryProvider.loadBakeries();
       final current = bakeryProvider.getBakeryByOwner(nationalId);
 
@@ -53,9 +56,10 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
 
         WelcomeSnackbar.show(context, current.bakeryName);
 
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const BakeryDashboardScreen()),
+          MaterialPageRoute(builder: (context) => const BakaryMainLayout()),
+          (route) => false,
         );
       } else {
         ErrorSnackBar.show(context, 'لم يتم العثور على بيانات المخبز');
@@ -78,10 +82,10 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                ' تسجيل الدخول المخبز',  
+                ' تسجيل الدخول المخبز',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               const SizedBox(height: 24),
               _buildTextField(
@@ -91,7 +95,6 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
                 maxLength: 14,
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل الرقم القومي';
-                  if (!RegExp(r'^[0-9]{14}\$').hasMatch(val)) return 'رقم غير صحيح';
                   return null;
                 },
               ),
@@ -102,7 +105,8 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
                 obscure: true,
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل كلمة السر';
-                  if (val.length < 8) return 'كلمة السر يجب أن تكون 8 أحرف على الأقل';
+                  if (val.length < 8)
+                    return 'كلمة السر يجب أن تكون 8 أحرف على الأقل';
                   return null;
                 },
               ),
@@ -114,26 +118,26 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
                     : const Text('تسجيل الدخول'),
               ),
               const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'ليس لديك حساب؟',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.bakerySignUp);
-                      },
-                      child: Text(
-                        'إنشاء حساب',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'ليس لديك حساب؟',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.bakerySignUp);
+                    },
+                    child: Text(
+                      'إنشاء حساب',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

@@ -13,7 +13,7 @@ class CitizenProvider with ChangeNotifier {
 
   Future<void> loadCitizens() async {
     _isLoading = true;
-    notifyListeners();
+ //   notifyListeners();
 
     try {
       final String response = await rootBundle.loadString('assets/mock_users.json');

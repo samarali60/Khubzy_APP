@@ -89,6 +89,7 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
   await prefs.setBool('is_logged_in', true);
   await prefs.setString('user_type', 'citizen');
   await prefs.setString('user_phone', phone);
+  await prefs.setString('user_password', _passwordController.text.trim());
   await prefs.setString('user_name', matchedCitizen.name);
   await prefs.setString('user_id', matchedCitizen.id);
   await prefs.setString('user_village', _villageController.text);

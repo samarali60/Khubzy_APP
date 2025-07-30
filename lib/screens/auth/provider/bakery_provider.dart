@@ -53,6 +53,7 @@ class BakeryProvider with ChangeNotifier {
 
   void logoutBakery() {
     _currentBakery = null;
+    
     notifyListeners();
   }
 }

@@ -47,6 +47,7 @@ void initState() {
     final enteredPassword = _passwordController.text;
 
     if (enteredPhone == savedPhone && enteredPassword == savedPassword) {
+       await prefs.setBool('is_logged_in', true);
       WelcomeSnackbar.show(context, savedName ?? 'المستخدم');
       Navigator.pushAndRemoveUntil(
         context,
