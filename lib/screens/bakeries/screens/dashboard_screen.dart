@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:khubzy/core/widgets/bakary_info_card.dart';
+import 'package:khubzy/core/widgets/daily_qouta_card.dart';
+import 'package:khubzy/core/widgets/production_rate_bar.dart';
+import 'package:khubzy/core/widgets/todat_resevation_list.dart';
+import 'package:khubzy/models/reservations.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class BakeryDashboardScreen extends StatelessWidget {
   const BakeryDashboardScreen({super.key});
@@ -44,55 +48,34 @@ class BakeryDashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+         
+            BakeryInfoCard(bakery: bakery),
+            SizedBox(height: 16),
+            Row(
+              children: [Expanded(child: DailyQuotaCard(bakery: bakery))],
+            ),
+            SizedBox(height: 16),
+            ProductionRateBar(
+              dailyQuota: bakery.dailyQuota,
+              remainingQuota: bakery.remainingQuota,
+            ),
+            SizedBox(height: 16),
             Text(
               "حجوزات اليوم",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
             Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('reservations')
-                    .where('bakery', isEqualTo: bakery.bakeryName)
-                    .where('date', isEqualTo: currentDate)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
-                  final docs = snapshot.data!.docs;
-
-                  if (docs.isEmpty) {
-                    return const Center(child: Text("لا توجد حجوزات اليوم."));
-                  }
-
-                  return ListView.builder(
-                    itemCount: docs.length,
-                    itemBuilder: (context, index) {
-                      final doc = docs[index];
-                      final citizenName = doc['user'] ?? 'مواطن';
-                      final quantity = doc['quantity'] ?? 0;
-                      final isConfirmed = doc['confirmed'] == true;
-
-                      return Card(
-                        margin: const EdgeInsets.all(8),
-                        child: ListTile(
-                          title: Text("$citizenName - $quantity رغيف"),
-                          subtitle: Text(isConfirmed ? "تم التأكيد" : "قيد المراجعة"),
-                          trailing: isConfirmed
-                              ? const Icon(Icons.check_circle, color: Colors.green)
-                              : ElevatedButton(
-                                  onPressed: () => confirmReservation(doc.id),
-                                  child: const Text("تأكيد"),
-                                ),
-                        ),
-                      );
-                    },
-                  );
-                },
+              child: TodayReservationsList(
+                reservations: [
+                  Reservation(citizenName: "أحمد محمود", quantity: 5),
+                  Reservation(citizenName: "سارة علي", quantity: 3),
+                  Reservation(citizenName: "محمد حسن", quantity: 4),
+                ],
               ),
             ),
+            SizedBox(height: 16),
+           
           ],
         ),
       ),
