@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/routes/app_routes.dart';
+import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
-
+import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,38 +18,49 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _checkSession();
+   // _loadusers();
   }
 
-  Future<void> _checkSession() async {
-    // Wait a brief moment for the splash screen to be visible
-    await Future.delayed(const Duration(milliseconds: 1500));
+Future<void> _checkSession() async {
+  await Future.delayed(const Duration(milliseconds: 1500));
 
-    final prefs = await SharedPreferences.getInstance();
-    final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+  final prefs = await SharedPreferences.getInstance();
+  final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
 
-    // If not logged in, go to the selection screen
-    if (!isLoggedIn) {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
-      }
-      return;
+  if (!isLoggedIn) {
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
     }
-
-    // If logged in, check the user type and navigate accordingly
-    final userType = prefs.getString('user_type');
-
-    if (userType == 'citizen') {
-      _navigateToCitizenHome();
-    } else if (userType == 'bakery') {
-      _navigateToBakeryDashboard();
-    } else {
-      // Fallback in case user_type is somehow null
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
-      }
-    }
+    return;
   }
 
+  final userType = prefs.getString('user_type');
+
+  if (userType == 'citizen') {
+    final phone = prefs.getString('user_phone');
+    final citizenProvider = Provider.of<CitizenProvider>(context, listen: false);
+    await citizenProvider.loadCitizens();
+    if (phone != null) {
+      citizenProvider.setCurrentCitizenByPhone(phone );
+    }
+    _navigateToCitizenHome();
+  } else if (userType == 'bakery') {
+    _navigateToBakeryDashboard();
+  } else {
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelection);
+    }
+  }
+}
+
+// Future<void> _loadusers() async {
+//       final citizenProvider = Provider.of<CitizenProvider>(context);
+//       await citizenProvider.loadCitizens();
+
+//       final bakeryProvider = Provider.of<BakeryProvider>(context);
+//       await bakeryProvider.loadBakeries();
+// }
+  
   void _navigateToCitizenHome() {
     // Pre-load necessary data if needed, but for now, just navigate
     if (mounted) {

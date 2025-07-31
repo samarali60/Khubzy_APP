@@ -36,3 +36,4 @@ flutter:
     - assets/mock_users.json
     - assets/mock_bakery_data.json
     - assets/images/Kubzy.png
+    - assets/images/waiting.png

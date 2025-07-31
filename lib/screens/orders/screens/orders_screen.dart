@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:khubzy/core/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -37,7 +38,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
           }
 
           if (_userPhone == null) {
-            return const Center(child: Text("لم يتم العثور على بيانات المستخدم."));
+            return const Center(
+              child: Text("لم يتم العثور على بيانات المستخدم."),
+            );
           }
 
           final currentMonth = DateTime.now().month;
@@ -74,26 +77,112 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   final date = doc['date'] ?? '';
                   final time = doc['time'] ?? '';
                   final quantity = doc['quantity'] ?? 0;
+                  final numberOfDays = doc['days'] ?? 0;
                   final isConfirmed = doc['confirmed'] == true;
 
                   return Card(
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text("المخبز: $bakery"),
-                      subtitle: Column(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 3,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("التاريخ: $date"),
-                          Text("الوقت: $time"),
-                          Text("الكمية: $quantity رغيف"),
-                          Text(
-                            isConfirmed
-                                ? "✅ تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
-                                : "⌛️ الطلب قيد المراجعة من المخبز.",
-                            style: TextStyle(
-                              color: isConfirmed ? Colors.green : Colors.orange,
+                          Row(
+                            children: [
+                              Icon(Icons.store, color: AppColors.primary),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  "المخبز: $bakery",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: AppColors.darkText,
+                                    
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Divider(height: 20),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today,
+                                size: 18,
+                                color: Colors.blueGrey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("تاريخ الحجز: $date"),
+                              const Spacer(),
+                              Icon(
+                                Icons.access_time,
+                                size: 18,
+                                color: Colors.blueGrey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("الوقت: $time"),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.bakery_dining,
+                                size: 18,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("الكمية: $quantity رغيف"),
+                              const Spacer(),
+                              Icon(Icons.today, size: 18, color: Colors.orange),
+                              const SizedBox(width: 6),
+                              Text("لـ $numberOfDays يوم"),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isConfirmed
+                                  ? Colors.green.shade100
+                                  : Colors.orange.shade100,
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                          )
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isConfirmed
+                                      ? Icons.check_circle
+                                      : Icons.hourglass_empty,
+                                  color: isConfirmed
+                                      ? Colors.green
+                                      : Colors.orange,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    isConfirmed
+                                        ? " تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
+                                        : " الطلب قيد المراجعة من المخبز.",
+                                    style: TextStyle(
+                                      color: isConfirmed
+                                          ? Colors.green.shade700
+                                          : Colors.orange.shade800,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

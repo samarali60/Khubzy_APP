@@ -51,7 +51,10 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final citizenProvider = Provider.of<CitizenProvider>(context, listen: false);
+    final citizenProvider = Provider.of<CitizenProvider>(
+      context,
+      listen: false,
+    );
     final citizen = citizenProvider.currentCitizen;
     setState(() {
       _familyMembers = citizen?.familyMembers ?? 1;
@@ -70,7 +73,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
         if (meta.containsKey(phone)) {
           String lastReservationDate = meta[phone]['date'];
           int reservedDays = meta[phone]['days'];
-          DateTime lastDate = DateFormat('yyyy-MM-dd').parse(lastReservationDate);
+          DateTime lastDate = DateFormat(
+            'yyyy-MM-dd',
+          ).parse(lastReservationDate);
           DateTime endDate = lastDate.add(Duration(days: reservedDays));
           if (_today.isBefore(endDate)) {
             setState(() {
@@ -90,6 +95,11 @@ class _ReservationScreenState extends State<ReservationScreen> {
     final time = _selectedTime ?? '';
     final bakery = _selectedBakery ?? 'مخبز غير معروف';
 
+    final citizenProvider = Provider.of<CitizenProvider>(
+      context,
+      listen: false,
+    );
+    final cardId = citizenProvider.currentCitizen?.cardId ?? 'غير مسجل';
     await FirebaseFirestore.instance.collection('reservations').add({
       'user': userName,
       'phone': userPhone,
@@ -99,6 +109,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
       'time': time,
       'quantity': totalBread,
       'confirmed': false,
+      'created_at': FieldValue.serverTimestamp(),
+      'card_id': cardId,
     });
 
     final phone = prefs.getString('user_phone');
@@ -108,204 +120,244 @@ class _ReservationScreenState extends State<ReservationScreen> {
       if (userData != null) {
         meta = json.decode(userData);
       }
-      meta[phone] = {
-        'date': reservationDate,
-        'days': _selectedDays,
-      };
+      meta[phone] = {'date': reservationDate, 'days': _selectedDays};
       await prefs.setString('reservations_meta', json.encode(meta));
     }
 
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text("✅ تم تأكيد الحجز"),
-        content: Text(
-          "عدد الأرغفة: $totalBread\nالوقت: $time\nالمخبز: $bakery",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-            child: const Text("حسناً"),
-          ),
-        ],
-      ),
-    );
+    showConfirmedDialog(bakery, reservationDate, time);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
-
-    if (!_canReserve) {
-      return Scaffold(
-        appBar: AppBar(title: const Text("الحجز غير متاح")),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/images/bread.png", height: 150),
-              const SizedBox(height: 16),
-              const Text(
-                "❌ لا يمكنك الحجز الآن.\nيرجى المحاولة بعد انتهاء المدة أو غداً.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            child: Stack(
-              children: [
-                Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFD5A253),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(60),
-                      bottomRight: Radius.circular(60),
-                    ),
-                  ),
-                ),
-                Positioned.fill(
-                  child: Image.network(
-                    "https://i.pinimg.com/736x/e1/fe/b4/e1feb42f72cc526b521cbb91bc77514a.jpg",
+      body: !_canReserve
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/waiting.png',
                     height: 400,
-                    width: 600,
+                    width: 400,
                     fit: BoxFit.cover,
                   ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFFBF2),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(32),
-                  topRight: Radius.circular(32),
-                ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "لا يمكنك الحجز الآن",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "❌ تم استهلاك حصتك الحالية.\nيرجى المحاولة بعد انتهاء المدة أو غداً.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                  ),
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                  child: Column(
+            )
+          : Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  child: Stack(
                     children: [
-                      _buildCard(
-                        icon: Icons.calendar_today,
-                        title: "اختر عدد الأيام:",
-                        child: DropdownButton<int>(
-                          value: _selectedDays,
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          items: const [
-                            DropdownMenuItem(value: 1, child: Text("يوم واحد")),
-                            DropdownMenuItem(value: 2, child: Text("يومان")),
-                            DropdownMenuItem(value: 3, child: Text("ثلاثة أيام")),
-                          ],
-                          onChanged: (value) => setState(() => _selectedDays = value!),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      _buildCard(
-                        icon: Icons.local_grocery_store,
-                        title: "عدد الأرغفة المحجوزة:",
-                        child: Text("$totalBread", style: const TextStyle(fontSize: 16)),
-                      ),
-                      const SizedBox(height: 12),
-                      if (_selectedBakery == null)
-                        _buildCard(
-                          icon: Icons.store,
-                          title: "اختر المخبز:",
-                          child: FutureBuilder<String>(
-                            future: _loadBakeryOptions(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-                                final bakeries = json.decode(snapshot.data!)['bakers'] as List<dynamic>;
-                                final uniqueBakeries = bakeries.map((b) => b['bakery_name'] as String).toSet().toList();
-                                return DropdownButton<String>(
-                                  value: _selectedBakery,
-                                  isExpanded: true,
-                                  underline: const SizedBox(),
-                                  items: uniqueBakeries.map((name) {
-                                    return DropdownMenuItem<String>(
-                                      value: name,
-                                      child: Text(name),
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) => setState(() => _selectedBakery = value),
-                                );
-                              }
-                              return const CircularProgressIndicator();
-                            },
+                      Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFD5A253),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(60),
+                            bottomRight: Radius.circular(60),
                           ),
-                        )
-                      else
-                        _buildCard(
-                          icon: Icons.store,
-                          title: "المخبز المختار:",
-                          child: Text("$_selectedBakery", style: const TextStyle(fontSize: 16)),
-                        ),
-                      const SizedBox(height: 12),
-                      _buildCard(
-                        icon: Icons.access_time,
-                        title: "اختر الوقت المناسب:",
-                        child: DropdownButton<String>(
-                          value: _selectedTime,
-                          hint: const Text("اختر وقتاً"),
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          items: _availableTimes.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
-                          onChanged: (value) => setState(() => _selectedTime = value),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: _selectedTime != null && _selectedBakery != null ? _confirmReservation : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedTime != null && _selectedBakery != null ? const Color(0xFFD5A253) : const Color(0xFFEAD8B0),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      Positioned.fill(
+                        child: Image.network(
+                          "https://i.pinimg.com/736x/e1/fe/b4/e1feb42f72cc526b521cbb91bc77514a.jpg",
+                          height: 400,
+                          width: 600,
+                          fit: BoxFit.cover,
                         ),
-                        child: const Text("تأكيد الحجز"),
                       ),
                     ],
                   ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFFFBF2),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(32),
+                        topRight: Radius.circular(32),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            _buildCard(
+                              icon: Icons.calendar_today,
+                              title: "اختر عدد الأيام:",
+                              child: DropdownButton<int>(
+                                value: _selectedDays,
+                                isExpanded: true,
+                                underline: const SizedBox(),
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 1,
+                                    child: Text("يوم واحد"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 2,
+                                    child: Text("يومان"),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 3,
+                                    child: Text("ثلاثة أيام"),
+                                  ),
+                                ],
+                                onChanged: (value) =>
+                                    setState(() => _selectedDays = value!),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            _buildCard(
+                              icon: Icons.local_grocery_store,
+                              title: "عدد الأرغفة المحجوزة:",
+                              child: Text(
+                                "$totalBread",
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            if (_selectedBakery == null)
+                              _buildCard(
+                                icon: Icons.store,
+                                title: "اختر المخبز:",
+                                child: FutureBuilder<String>(
+                                  future: _loadBakeryOptions(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                            ConnectionState.done &&
+                                        snapshot.hasData) {
+                                      final bakeries =
+                                          json.decode(snapshot.data!)['bakers']
+                                              as List<dynamic>;
+                                      final uniqueBakeries = bakeries
+                                          .map(
+                                            (b) => b['bakery_name'] as String,
+                                          )
+                                          .toSet()
+                                          .toList();
+                                      return DropdownButton<String>(
+                                        value: _selectedBakery,
+                                        isExpanded: true,
+                                        underline: const SizedBox(),
+                                        items: uniqueBakeries.map((name) {
+                                          return DropdownMenuItem<String>(
+                                            value: name,
+                                            child: Text(name),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) => setState(
+                                          () => _selectedBakery = value,
+                                        ),
+                                      );
+                                    }
+                                    return const CircularProgressIndicator();
+                                  },
+                                ),
+                              )
+                            else
+                              _buildCard(
+                                icon: Icons.store,
+                                title: "المخبز المختار:",
+                                child: Text(
+                                  "$_selectedBakery",
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                            _buildCard(
+                              icon: Icons.access_time,
+                              title: "اختر الوقت المناسب:",
+                              child: DropdownButton<String>(
+                                value: _selectedTime,
+                                hint: const Text("اختر وقتاً"),
+                                isExpanded: true,
+                                underline: const SizedBox(),
+                                items: _availableTimes
+                                    .map(
+                                      (t) => DropdownMenuItem(
+                                        value: t,
+                                        child: Text(t),
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (value) =>
+                                    setState(() => _selectedTime = value),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            ElevatedButton(
+                              onPressed:
+                                  _selectedTime != null &&
+                                      _selectedBakery != null
+                                  ? _confirmReservation
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    _selectedTime != null &&
+                                        _selectedBakery != null
+                                    ? const Color(0xFFD5A253)
+                                    : const Color(0xFFEAD8B0),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 32,
+                                  vertical: 14,
+                                ),
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              ),
+                              child: const Text("تأكيد الحجز"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 
-  Widget _buildCard({required IconData icon, required String title, required Widget child}) {
+  Widget _buildCard({
+    required IconData icon,
+    required String title,
+    required Widget child,
+  }) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          ),
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
       ),
       child: Column(
@@ -326,6 +378,86 @@ class _ReservationScreenState extends State<ReservationScreen> {
   }
 
   Future<String> _loadBakeryOptions() async {
-    return await DefaultAssetBundle.of(context).loadString('assets/mock_users.json');
+    return await DefaultAssetBundle.of(
+      context,
+    ).loadString('assets/mock_users.json');
+  }
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Icon(icon, color: Color(0xFFD5A253), size: 20),
+        SizedBox(width: 8),
+        Text(
+          "$label: ",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: TextStyle(fontSize: 16),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<dynamic> showConfirmedDialog(
+    String bakery,
+    String reservationDate,
+    String time,
+  ) {
+    return showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        backgroundColor: Color(0xFFF9F9F9),
+        title: Row(
+          children: [
+            Icon(Icons.check_circle, color: Color(0xFFD5A253), size: 30),
+            SizedBox(width: 10),
+            Text(
+              "تم تأكيد الحجز",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFD5A253),
+              ),
+            ),
+          ],
+        ),
+        content: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildDetailRow(Icons.bakery_dining, "المخبز", bakery),
+              SizedBox(height: 8),
+              _buildDetailRow(
+                Icons.calendar_today,
+                "تاريخ الحجز",
+                reservationDate,
+              ),
+              SizedBox(height: 8),
+              _buildDetailRow(Icons.access_time, "الوقت", time),
+              SizedBox(height: 8),
+              _buildDetailRow(Icons.shopping_bag, "عدد الأرغفة", "$totalBread"),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
+            child: Text(
+              "حسناً",
+              style: TextStyle(fontSize: 18, color: Color(0xFFD5A253)),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
