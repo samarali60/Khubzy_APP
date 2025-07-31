@@ -66,7 +66,19 @@ class _OrdersScreenState extends State<OrdersScreen> {
               }).toList();
 
               if (docs.isEmpty) {
-                return const Center(child: Text("لا توجد طلبات حالياً."));
+                return Center(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20),
+                    Image.asset(
+                      'assets/images/no-data_ig65.png',
+                      height: 300,
+                      width: double.infinity,                
+                    ),
+                    const SizedBox(height: 20),
+                    const Text("لا توجد طلبات حالياً.", style: TextStyle(fontSize: 20),),
+                  ],
+                ));
               }
 
               return ListView.builder(

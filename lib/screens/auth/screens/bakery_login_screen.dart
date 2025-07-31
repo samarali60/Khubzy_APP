@@ -16,14 +16,14 @@ class BakeryLoginScreen extends StatefulWidget {
 
 class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nationalIdController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _loading = false;
 
   @override
   void dispose() {
-    _nationalIdController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -34,18 +34,19 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
     setState(() => _loading = true);
 
     final prefs = await SharedPreferences.getInstance();
-    final savednationalId = prefs.getString('baker_id');
+     final savedPhone = prefs.getString('bakery_phone');
+    final nationalId = prefs.getString('baker_id');
     final savedPassword = prefs.getString('bakery_password');
-    final nationalId = _nationalIdController.text.trim();
+    final phone = _phoneController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (nationalId == savednationalId && password == savedPassword) {
+    if (phone == savedPhone && password == savedPassword) {
       final bakeryProvider = Provider.of<BakeryProvider>(
         context,
         listen: false,
       );
       await bakeryProvider.loadBakeries();
-      final current = bakeryProvider.getBakeryByOwner(nationalId);
+      final current = bakeryProvider.getBakeryByOwner(nationalId!);
 
       if (current != null) {
         bakeryProvider.loginBakery(
@@ -82,17 +83,17 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                ' تسجيل الدخول المخبز',
+                ' تسجيل الدخول للمخبز',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               const SizedBox(height: 24),
               _buildTextField(
-                controller: _nationalIdController,
-                label: 'الرقم القومي',
+                controller: _phoneController,
+                label: 'رقم التليفون',
                 keyboardType: TextInputType.number,
-                maxLength: 14,
+              
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل الرقم القومي';
                   return null;

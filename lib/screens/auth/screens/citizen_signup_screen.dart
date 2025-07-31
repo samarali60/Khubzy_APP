@@ -22,6 +22,7 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
   final _nationalIdController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
   final _villageController = TextEditingController();
 
@@ -36,6 +37,7 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
     _nationalIdController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     _phoneController.dispose();
     _villageController.dispose();
     super.dispose();
@@ -49,6 +51,10 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
     }
     if (_selectedCenter == null) {
       ErrorSnackBar.show(context, "اختر المركز");
+      return;
+    }
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ErrorSnackBar.show(context, "كلمة السر وتأكيد كلمة السر غير متطابقين");
       return;
     }
 
@@ -170,10 +176,23 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
               _buildTextField(
                 controller: _passwordController,
                 label: 'كلمة السر',
-                obscure: true,
+               // obscure: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) return 'أدخل كلمة السر';
-                  if (value.length < 8) return 'كلمة السر قصيرة جداً';
+                  if (value.length < 8) return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
+                  return null;
+                },
+              ),
+                     const SizedBox(height: 12),
+               _buildTextField(
+                controller: _confirmPasswordController,
+                label: 'تأكيد كلمة السر',
+               // obscure: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) return 'أدخل كلمة السر';
+                  if (val.length < 8) {
+                    return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
+                  }
                   return null;
                 },
               ),

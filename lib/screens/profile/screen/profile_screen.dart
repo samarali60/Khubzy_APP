@@ -14,31 +14,22 @@ class ProfileScreen extends StatelessWidget {
     final citizenProvider = Provider.of<CitizenProvider>(context);
     final isLoading = citizenProvider.isLoading;
     final citizen = citizenProvider.currentCitizen;
-
-    // ✅ حالة التحميل
-    if (isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
-
-    // ❌ حالة عدم وجود مواطن
-    if (citizen == null) {
-      return Scaffold(
-        appBar: AppBar(title: const Text("الملف الشخصي")),
-        body: const Center(
-          child: Text(
-            "لا يوجد بيانات للمستخدم.",
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-      );
-    }
-
-    // ✅ الحالة العادية: مواطن موجود
     return Scaffold(
       appBar: AppBar(title: const Text("الملف الشخصي")),
-      body: SingleChildScrollView(
+      body:isLoading ? const Center(child: CircularProgressIndicator()) :
+      // ignore: unnecessary_null_comparison
+      citizen == null
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              const Icon(Icons.error, size: 50, color: Colors.red),
+              const SizedBox(height: 16),
+              const Center(child: Text("لا يوجد بيانات للمستخدم.")),
+            ],
+          )
+      : SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [

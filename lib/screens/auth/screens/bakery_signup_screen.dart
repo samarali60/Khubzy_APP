@@ -19,6 +19,7 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nationalIdController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
 
   String? _selectedBakeryName;
@@ -38,12 +39,30 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
     _nationalIdController.dispose();
     _passwordController.dispose();
     _phoneController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+    if (_passwordController.text.isEmpty ||
+        _confirmPasswordController.text.isEmpty) {
+      ErrorSnackBar.show(context, "الرجاء ملء جميع الحقول");
+      return;
+    }
+    if (_passwordController.text.length != 8) {
+      ErrorSnackBar.show(context, "كلمة السر يجب أن تكون 8 أحرف");
+      return;
+    }
+    if (_selectedBakeryName == null || _selectedLocation == null) {
+      ErrorSnackBar.show(context, "الرجاء اختيار اسم المخبز والمكان");
+      return;
+    }
 
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ErrorSnackBar.show(context, "كلمة السر وتأكيد كلمة السر غير متطابقين");
+      return;
+    }
     setState(() => _loading = true);
 
     final nationalId = _nationalIdController.text.trim();
@@ -70,7 +89,6 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
         bakery.location == location) {
       final prefs = await SharedPreferences.getInstance();
 
-      // --- THE FIX: Save the National ID for the login screen to use ---
       await prefs.setString('bakery_national_id', nationalId);
       await prefs.setString('bakery_password', password);
       
@@ -159,7 +177,20 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
               _buildTextField(
                 controller: _passwordController,
                 label: 'كلمة السر',
-                obscure: true,
+               // obscure: true,
+                validator: (val) {
+                  if (val == null || val.isEmpty) return 'أدخل كلمة السر';
+                  if (val.length < 8) {
+                    return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
+                  }
+                  return null;
+                },
+              ),
+               const SizedBox(height: 12),
+               _buildTextField(
+                controller: _confirmPasswordController,
+                label: 'تأكيد كلمة السر',
+               // obscure: true,
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل كلمة السر';
                   if (val.length < 8) {
