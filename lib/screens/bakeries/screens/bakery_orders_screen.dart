@@ -25,7 +25,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
 
   Future<void> _loadBakeryNameAndReservations() async {
     final prefs = await SharedPreferences.getInstance();
-    final bakeryName = prefs.getString('baker_name');
+    final bakeryName = prefs.getString('bakery_name');
 
     if (bakeryName == null) {
       print("اسم المخبز مش موجود في SharedPreferences");
