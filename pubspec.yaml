@@ -24,6 +24,13 @@ dependencies:
   firebase_auth: ^4.0.0
   cupertino_icons: ^1.0.8
   percent_indicator: ^4.2.3
+  flutter_launcher_icons: ^0.13.1
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/bread_icon.png"
 
 dev_dependencies:
   flutter_test:
