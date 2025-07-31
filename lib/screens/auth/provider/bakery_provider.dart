@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:khubzy/models/bakery_model.dart';
@@ -10,14 +11,21 @@ class BakeryProvider with ChangeNotifier {
   BakeryModel? get currentBakery => _currentBakery;
   List<BakeryModel> get bakeries => _bakeries;
 
-  Future<void> loadBakeries() async {
-    final String response = await rootBundle.loadString(
-      'assets/mock_bakery_data.json',
-    );
-    final List<dynamic> data = jsonDecode(response);
-    _bakeries = data.map((item) => BakeryModel.fromJson(item)).toList();
+Future<void> loadBakeries() async {
+  try {
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('bakeries').get();
+
+    _bakeries = snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      return BakeryModel.fromJson(data);
+    }).toList();
+    debugPrint('✅ Loaded ${_bakeries.length} bakeries from Firestore');
     notifyListeners();
+  } catch (e) {
+    debugPrint('❌ Error loading bakeries: $e');
   }
+}
 
   BakeryModel? getBakeryByOwner(String nationalId) {
     try {

@@ -1,14 +1,14 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:khubzy/core/widgets/bakary_info_card.dart';
+import 'package:khubzy/core/widgets/stateCard.dart';
+import 'package:khubzy/core/widgets/total_reservation_card.dart';
 import 'package:khubzy/models/bakery_model.dart';
 import 'package:khubzy/models/baker_model.dart';
 import 'package:khubzy/models/reservation_model.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:khubzy/core/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +23,8 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
   BakerModel? _baker;
   BakeryModel? _bakery;
   bool _isLoading = true;
-  int? reservationCount ;
+  int? reservationCount;
+  List<Reservation> todayReservations = [];
 
   @override
   void initState() {
@@ -37,54 +38,58 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
     final prefs = await SharedPreferences.getInstance();
     final bakerId = prefs.getString('baker_id');
 
-    reservationCount = prefs.getInt('reservation_count') ;
-    print('عدد الحجوزات المحملة: $reservationCount');
     if (bakerId != null) {
-      // Ensure data is loaded before using it
       await bakerProvider.loadBakers();
-      // Use the existing bakery model from the provider
       final bakery = bakeryProvider.getBakeryByOwner(bakerId);
       final baker = bakerProvider.getBakerByNationalId(bakerId);
+
+      if (bakery != null) {
+        await _loadReservationsForBakery(bakery.bakeryName);
+      }
+
       if (mounted) {
         setState(() {
           _bakery = bakery;
           _baker = baker;
+          reservationCount = todayReservations.length;
           _isLoading = false;
         });
       }
     } else {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      setState(() {
+        _isLoading = false;
+      });
     }
+  }
+
+  Future<void> _loadReservationsForBakery(String bakeryName) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('reservations')
+        .where('bakery', isEqualTo: bakeryName)
+        .get();
+
+    final List<Reservation> allReservations = snapshot.docs.map((doc) {
+      final data = doc.data();
+      return Reservation(
+        citizenName: data['user'] ?? 'غير معروف',
+        breadAmount: data['quantity'] ?? 0,
+        numberOfDays: data['days'] ?? 0,
+        isDelivered: data['confirmed'] ?? false,
+        reservationDateTime:
+            DateTime.tryParse(data['date'] ?? '') ?? DateTime.now(),
+      );
+    }).toList();
+
+    todayReservations = allReservations.where((res) {
+      final now = DateTime.now();
+      return res.reservationDateTime.year == now.year &&
+          res.reservationDateTime.month == now.month &&
+          res.reservationDateTime.day == now.day;
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Mock data for reservations
-    final List<Reservation> todayReservations = [
-      Reservation(
-          citizenName: "أحمد محمود",
-          breadAmount: 5,
-          numberOfDays: 3,
-          isDelivered: true,
-          reservationDateTime: DateTime.now()),
-      Reservation(
-          citizenName: "سارة علي",
-          breadAmount: 3,
-          numberOfDays: 2,
-          isDelivered: false,
-          reservationDateTime: DateTime.now()),
-      Reservation(
-          citizenName: "John Doe",
-          breadAmount: 10,
-          numberOfDays: 5,
-          isDelivered: true,
-          reservationDateTime: DateTime.now()),
-    ];
-
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text('لوحة التحكم')),
@@ -99,14 +104,16 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
       );
     }
 
-    // Calculations for the stat cards
     final soldQuota = _bakery!.dailyQuota - _bakery!.remainingQuota;
     final soldPercentage = soldQuota / _bakery!.dailyQuota;
     final remainingPercentage = _bakery!.remainingQuota / _bakery!.dailyQuota;
-    final deliveredReservations =
-        todayReservations.where((res) => res.isDelivered).length;
-    final deliveredPercentage =
-        todayReservations.isNotEmpty ? deliveredReservations / todayReservations.length : 0.0;
+
+    final deliveredReservations = todayReservations
+        .where((res) => res.isDelivered)
+        .length;
+    final deliveredPercentage = todayReservations.isNotEmpty
+        ? deliveredReservations / todayReservations.length
+        : 0.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +127,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
           children: [
             BakeryInfoCard(bakery: _bakery!, baker: _baker!),
             const SizedBox(height: 24),
-            _buildTotalReservationsCard(context, reservationCount ?? 0),
+            buildTotalReservationsCard(context, reservationCount ?? 0),
             const SizedBox(height: 24),
             GridView.count(
               crossAxisCount: 2,
@@ -129,7 +136,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               children: [
-                _buildStatCard(
+                buildStatCard(
                   context: context,
                   title: 'الخبز المباع',
                   value: soldQuota,
@@ -138,7 +145,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
                   color: AppColors.primary,
                   icon: Icons.bakery_dining_outlined,
                 ),
-                _buildStatCard(
+                buildStatCard(
                   context: context,
                   title: 'الحصة المتبقية',
                   value: _bakery!.remainingQuota,
@@ -147,7 +154,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
                   color: Colors.orange,
                   icon: Icons.inventory_2_outlined,
                 ),
-                _buildStatCard(
+                buildStatCard(
                   context: context,
                   title: 'الطلبات المسلمة',
                   value: deliveredReservations,
@@ -156,7 +163,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
                   color: Colors.green,
                   icon: Icons.check_circle_outline,
                 ),
-                _buildStatCard(
+                buildStatCard(
                   context: context,
                   title: 'تقييم المخبز',
                   value: _bakery!.rating.toInt(),
@@ -167,112 +174,6 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTotalReservationsCard(BuildContext context, int reservationCount) {
-    final theme = Theme.of(context);
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: Colors.blue[50],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'إجمالي حجوزات اليوم',
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[800],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  reservationCount.toString(),
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[900],
-                  ),
-                ),
-              ],
-            ),
-            Icon(
-              Icons.list_alt_outlined,
-              size: 50,
-              color: Colors.blue[700],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatCard({
-    required BuildContext context,
-    required String title,
-    required int value,
-    int? total,
-    double? percentage,
-    required Color color,
-    required IconData icon,
-  }) {
-    final theme = Theme.of(context);
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: theme.textTheme.titleMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                Icon(icon, color: color),
-              ],
-            ),
-            Expanded(
-              child: Center(
-                child: (percentage != null && total != null)
-                    ? CircularPercentIndicator(
-                        radius: 40.0,
-                        lineWidth: 8.0,
-                        percent: percentage.clamp(0.0, 1.0),
-                        center: Text(
-                          '${(percentage * 100).toStringAsFixed(0)}%',
-                          style: theme.textTheme.titleLarge
-                              ?.copyWith(fontWeight: FontWeight.bold, color: color),
-                        ),
-                        progressColor: color,
-                        backgroundColor: color.withOpacity(0.2),
-                        circularStrokeCap: CircularStrokeCap.round,
-                      )
-                    : Text(
-                        value.toString(),
-                        style: theme.textTheme.displaySmall?.copyWith(
-                            fontWeight: FontWeight.bold, color: color),
-                      ),
-              ),
-            ),
-            if (total != null)
-              Text(
-                '$value / $total',
-                style: theme.textTheme.bodyMedium
-                    ?.copyWith(color: Colors.grey[600]),
-              )
           ],
         ),
       ),
