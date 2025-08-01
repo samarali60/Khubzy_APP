@@ -8,6 +8,7 @@ class Reservation {
   final String bekaryNationalId;
   final DateTime reservationDateTime;
   final bool isDelivered;
+  final bool isConfirmed ; // Assuming this is a default value
   final String cardId;
 
   Reservation({
@@ -17,7 +18,8 @@ class Reservation {
     required this.numberOfDays,
     required this.reservationDateTime,
     required this.bekaryNationalId,
-    required this.isDelivered,
+  required this.isDelivered,
+  required this.isConfirmed,
     required this.cardId,
   });
 

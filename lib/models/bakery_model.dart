@@ -4,7 +4,7 @@ class BakeryModel {
   final String location;
   final List<String> ownersNationalIds;
   final int dailyQuota;
-  final int remainingQuota;
+ int remainingQuota;
   final int productionRate;
   final double rating;
 
