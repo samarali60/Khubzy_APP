@@ -23,6 +23,7 @@ Future<void> loadBakeries() async {
   } catch (e) {
     debugPrint('❌ Error loading bakeries: $e');
   }
+  notifyListeners();
 }
 
   BakeryModel? getBakeryByOwner(String nationalId) {

@@ -56,7 +56,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
           _isLoading = false;
         });
       }
-    saveUserToken(bakerId);
+      saveUserToken(bakerId);
     } else {
       setState(() {
         _isLoading = false;
@@ -79,8 +79,9 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
         isDelivered: data['confirmed'] ?? false,
         reservationDateTime:
             DateTime.tryParse(data['date'] ?? '') ?? DateTime.now(),
-             userNationalId: '',
-              bekaryNationalId: '',
+        userNationalId: data['userNationalId'] ?? '',
+        bekaryNationalId: data['bakeryNationalId'] ?? '',
+        cardId: data['cardId'] ?? '',
       );
     }).toList();
 

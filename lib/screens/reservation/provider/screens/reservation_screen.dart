@@ -114,6 +114,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       'time': time,
       'quantity': totalBread,
       'confirmed': false,
+      'delivered': false,
       'created_at': FieldValue.serverTimestamp(),
       'card_id': cardId,
     });

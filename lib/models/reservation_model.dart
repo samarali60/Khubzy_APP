@@ -8,6 +8,7 @@ class Reservation {
   final String bekaryNationalId;
   final DateTime reservationDateTime;
   final bool isDelivered;
+  final String cardId;
 
   Reservation({
     required this.citizenName,
@@ -17,6 +18,7 @@ class Reservation {
     required this.reservationDateTime,
     required this.bekaryNationalId,
     required this.isDelivered,
+    required this.cardId,
   });
 
   // Helper to format the date string
