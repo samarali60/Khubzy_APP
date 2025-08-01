@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:khubzy/core/widgets/bakary_info_card.dart';
 import 'package:khubzy/core/widgets/stateCard.dart';
 import 'package:khubzy/core/widgets/total_reservation_card.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:khubzy/models/bakery_model.dart';
 import 'package:khubzy/models/baker_model.dart';
 import 'package:khubzy/models/reservation_model.dart';
@@ -55,6 +56,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
           _isLoading = false;
         });
       }
+    saveUserToken(bakerId);
     } else {
       setState(() {
         _isLoading = false;
@@ -77,6 +79,8 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
         isDelivered: data['confirmed'] ?? false,
         reservationDateTime:
             DateTime.tryParse(data['date'] ?? '') ?? DateTime.now(),
+             userNationalId: '',
+              bekaryNationalId: '',
       );
     }).toList();
 
