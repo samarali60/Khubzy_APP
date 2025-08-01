@@ -300,6 +300,13 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
                                   'هل أنت متأكد من أنك تريد قبول طلب ${order.citizenName}؟',
                               onConfirm: () async {
                                 try {
+                                  sendNotificationToUser(
+                                    nationalId: order.userNationalId,
+                                    title: 'تم قبول طلبك',
+                                    body:
+                                        'لقد تم قبول طلبك ${order.citizenName} بنجاح',
+                                  
+                                  );
                                   final querySnapshot = await FirebaseFirestore
                                       .instance
                                       .collection('reservations')

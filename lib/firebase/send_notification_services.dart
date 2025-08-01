@@ -47,7 +47,7 @@ Future<void> saveUserToken(String nationalId) async {
 
 Future<String> getAccessToken() async {
   final jsonString = await rootBundle.loadString(
-    'assets/fcm/khubzy-51aa8-582a9380e0e5.json',
+    'assets/fcm/khubzy-51aa8-243570844cc5.json',
   );
 
   final accountCredentials =

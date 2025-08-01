@@ -263,7 +263,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                             ConnectionState.done &&
                                         snapshot.hasData) {
                                       final bakeries =
-                                          json.decode(snapshot.data!)['bakers']
+                                          json.decode(snapshot.data!)['bakeries']
                                               as List<dynamic>;
                                       final uniqueBakeries = bakeries.map((b) {
                                         final name = b['bakery_name'] as String;
