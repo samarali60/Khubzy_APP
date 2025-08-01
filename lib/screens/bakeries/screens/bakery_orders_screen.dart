@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:khubzy/models/reservation_model.dart';
 import 'package:khubzy/core/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,9 +51,11 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
       final List<Reservation> loadedReservations = snapshot.docs.map((doc) {
         final data = doc.data();
         return Reservation(
+          userNationalId: data['user_national_id'] ?? '',
           citizenName: data['user'] ?? '',
           breadAmount: data['quantity'] ?? 0,
           numberOfDays: data['days'] ?? 0,
+          bekaryNationalId: data['bakery_owner_national_id'] ?? '',
           reservationDateTime: DateTime.parse(data['date']),
           isDelivered: data['confirmed'] ?? false,
         );
@@ -231,6 +234,12 @@ Widget _buildOrderCard(Reservation order, BuildContext context) {
                       content:
                           'هل أنت متأكد من أنك تريد قبول طلب ${order.citizenName}؟',
                       onConfirm: () {
+                        
+                        sendNotificationToUser(
+                          nationalId: order.userNationalId,
+                          title: 'تم قبول طلبك',
+                          body: 'تم قبول طلبك من المخبز ${order.citizenName}',
+                        );
                         print('Order from ${order.citizenName} ACCEPTED.');
                       },
                     );

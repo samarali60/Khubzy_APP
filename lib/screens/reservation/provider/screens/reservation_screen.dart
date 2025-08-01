@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:khubzy/firebase/messaging_config.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:khubzy/screens/auth/provider/citizen_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +33,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   ];
   String? _selectedTime;
   String? _selectedBakery;
+  String? _selectedNationalId;
 
   int get totalBread {
     int bread = _breadPerDay;
@@ -90,6 +93,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   Future<void> _confirmReservation() async {
     final prefs = await SharedPreferences.getInstance();
     final userName = prefs.getString('user_name') ?? 'مستخدم';
+    final userNationalId = prefs.getString('user_national_id') ?? '';
     final userPhone = prefs.getString('user_phone') ?? '';
     final reservationDate = DateFormat('yyyy-MM-dd').format(_today);
     final time = _selectedTime ?? '';
@@ -102,8 +106,10 @@ class _ReservationScreenState extends State<ReservationScreen> {
     final cardId = citizenProvider.currentCitizen?.cardId ?? 'غير مسجل';
     await FirebaseFirestore.instance.collection('reservations').add({
       'user': userName,
+      'user_national_id': userNationalId,
       'phone': userPhone,
       'bakery': bakery,
+      'bakery_owner_national_id': _selectedNationalId,
       'date': reservationDate,
       'days': _selectedDays,
       'time': time,
@@ -112,6 +118,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
       'created_at': FieldValue.serverTimestamp(),
       'card_id': cardId,
     });
+
+    sendNotificationToUser(
+      nationalId: _selectedNationalId ?? '',
+      title: 'حجز جديد من $userName',
+      body:
+          'تم حجز $totalBread رغيفاً في $bakery بتاريخ $reservationDate الساعة $time',
+    );
 
     final phone = prefs.getString('user_phone');
     if (phone != null) {
@@ -252,25 +265,44 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                       final bakeries =
                                           json.decode(snapshot.data!)['bakers']
                                               as List<dynamic>;
-                                      final uniqueBakeries = bakeries
-                                          .map(
-                                            (b) => b['bakery_name'] as String,
-                                          )
-                                          .toSet()
-                                          .toList();
+                                      final uniqueBakeries = bakeries.map((b) {
+                                        final name = b['bakery_name'] as String;
+
+                                        // لو كل مخبز ليه صاحب واحد بس (national_id)
+                                        final id =
+                                            b['national_id']?.toString() ?? '';
+
+                                        return {
+                                          'name': name,
+                                          'ids': [
+                                            id,
+                                          ], // نحطه في List علشان الكود اللي بعده ما يتكسرش
+                                        };
+                                      }).toList();
                                       return DropdownButton<String>(
                                         value: _selectedBakery,
                                         isExpanded: true,
                                         underline: const SizedBox(),
-                                        items: uniqueBakeries.map((name) {
+                                        items: uniqueBakeries.map((list) {
                                           return DropdownMenuItem<String>(
-                                            value: name,
-                                            child: Text(name),
+                                            value: list['name'] as String,
+                                            child: Text(list['name'] as String),
                                           );
                                         }).toList(),
-                                        onChanged: (value) => setState(
-                                          () => _selectedBakery = value,
-                                        ),
+                                        onChanged: (value) => setState(() {
+                                          _selectedBakery = value;
+                                          _selectedNationalId =
+                                              (uniqueBakeries.firstWhere(
+                                                        (b) =>
+                                                            b['name'] == value,
+                                                        orElse: () => {
+                                                          'ids': [],
+                                                        },
+                                                      )['ids']
+                                                      as List<String>)
+                                                  .first;
+                                          final x = 6;
+                                        }),
                                       );
                                     }
                                     return const CircularProgressIndicator();

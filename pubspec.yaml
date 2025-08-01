@@ -24,6 +24,9 @@ dependencies:
   firebase_auth: ^4.0.0
   cupertino_icons: ^1.0.8
   percent_indicator: ^4.2.3
+  firebase_messaging: ^14.7.10
+  googleapis_auth: ^1.4.0
+  flutter_local_notifications: ^18.0.1
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +40,4 @@ flutter:
     - assets/mock_bakery_data.json
     - assets/images/Kubzy.png
     - assets/images/waiting.png
+    - assets/fcm/khubzy-51aa8-582a9380e0e5.json

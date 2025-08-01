@@ -91,6 +91,7 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
   await prefs.setString('user_phone', phone);
   await prefs.setString('user_password', _passwordController.text.trim());
   await prefs.setString('user_name', matchedCitizen.name);
+  await prefs.setString('user_national_id', matchedCitizen.nationalId);
   await prefs.setString('user_id', matchedCitizen.id);
   await prefs.setString('user_village', _villageController.text);
   await prefs.setString('user_governorate', _selectedGovernorate!);

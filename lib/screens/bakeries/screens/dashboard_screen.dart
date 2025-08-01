@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/bakary_info_card.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:khubzy/models/bakery_model.dart';
 import 'package:khubzy/models/baker_model.dart';
 import 'package:khubzy/models/reservation_model.dart';
@@ -52,6 +54,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
           _isLoading = false;
         });
       }
+    saveUserToken(bakerId);
     } else {
       if (mounted) {
         setState(() {
@@ -67,6 +70,8 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
     final List<Reservation> todayReservations = [
       Reservation(
           citizenName: "أحمد محمود",
+          userNationalId: "123456789",
+          bekaryNationalId: "987654321",
           breadAmount: 5,
           numberOfDays: 3,
           isDelivered: true,
@@ -74,12 +79,16 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
       Reservation(
           citizenName: "سارة علي",
           breadAmount: 3,
+          userNationalId: "123456789",
+          bekaryNationalId: "987654321",
           numberOfDays: 2,
           isDelivered: false,
           reservationDateTime: DateTime.now()),
       Reservation(
           citizenName: "John Doe",
           breadAmount: 10,
+          userNationalId: "123456789",
+          bekaryNationalId: "987654321",
           numberOfDays: 5,
           isDelivered: true,
           reservationDateTime: DateTime.now()),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -15,6 +16,7 @@ class CitizenHomeScreen extends StatefulWidget {
 
 class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   String userName = '';
+  String nationalId = '';
   int remainingBread = 0;
   int maxBread = 0;
   int familyMembers = 0;
@@ -30,11 +32,12 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       userName = prefs.getString('user_name') ?? 'مستخدم';
+      nationalId = prefs.getString('user_national_id') ?? '';
       remainingBread = prefs.getInt('available_bread') ?? 0;
       maxBread = prefs.getInt('monthly_bread_quota') ?? 0;
       familyMembers = prefs.getInt('family_members') ?? 0;
     });
-
+    saveUserToken(nationalId);
     final userCenter = prefs.getString('user_center');
     double? userLat;
     double? userLng;
