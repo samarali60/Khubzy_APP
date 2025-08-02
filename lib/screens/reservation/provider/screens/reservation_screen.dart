@@ -147,7 +147,7 @@ Future<void> _confirmReservation() async {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
-      body: !true
+      body: !_canReserve
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

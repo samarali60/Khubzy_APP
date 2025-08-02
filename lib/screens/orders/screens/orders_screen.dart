@@ -95,8 +95,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   final time = doc['time'] ?? '';
                   final quantity = doc['quantity'] ?? 0;
                   final numberOfDays = doc['days'] ?? 0;
-                 // final isConfirmed = doc['confirmed'] == true;
-                  final isDelivered = doc['delivered'] == true;
+                 final isConfirmed = doc['confirmed'];
+                  final isDelivered = doc['delivered'] ;
 
                   return Card(
                     shape: RoundedRectangleBorder(
@@ -169,31 +169,31 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: isDelivered
+                              color: isDelivered == true && isConfirmed == true
                                   ? Colors.green.shade100
-                                  : Colors.orange.shade100,
+                                  :  isDelivered == false && isConfirmed == true ?  Colors.red[100] : Colors.orange.shade100 ,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
                               children: [
                                 Icon(
-                                  isDelivered
+                                  isDelivered == true && isConfirmed == true
                                       ? Icons.check_circle
-                                      : Icons.hourglass_empty,
-                                  color: isDelivered
+                                      : isDelivered == false && isConfirmed == true ?  Icons.cancel_outlined : Icons.hourglass_empty ,
+                                  color:  isDelivered == true && isConfirmed == true
                                       ? Colors.green
-                                      : Colors.orange,
+                                      : isDelivered == false && isConfirmed == true ? Colors.red : Colors.orange ,
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    isDelivered
-                                        ? " تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
-                                        : " الطلب قيد المراجعة من المخبز.",
+                                   isDelivered == true && isConfirmed == true ?
+                                         " تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
+                                        :  isDelivered == false && isConfirmed == true ?  "تم إلغاء الطلب يمكنك التواصل مع المخبز." : " الطلب قيد المراجعة من المخبز." ,
                                     style: TextStyle(
-                                      color: isDelivered
+                                      color: isDelivered == true && isConfirmed == true 
                                           ? Colors.green.shade700
-                                          : Colors.orange.shade800,
+                                          : isDelivered == false && isConfirmed == true ? Colors.red.shade700 : Colors.orange.shade800 ,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
