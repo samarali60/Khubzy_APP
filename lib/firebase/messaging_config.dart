@@ -5,6 +5,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:khubzy/main.dart';
 import 'package:khubzy/screens/splash/screens/splash_screen.dart';
 
+// Ensure navigatorKey is imported from main.dart or defined here
+// If navigatorKey is defined in main.dart as a global variable, this import is
 class MessagingConfig {
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -155,6 +157,7 @@ class MessagingConfig {
   }
 
   static void handleNotificationClick() {
+   
     // Navigate to home screen when notification is clicked
     navigatorKey.currentState?.pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const SplashScreen()), // Replace with your actual home screen widget

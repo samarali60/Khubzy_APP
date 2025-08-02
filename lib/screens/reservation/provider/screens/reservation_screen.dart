@@ -262,47 +262,59 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                     if (snapshot.connectionState ==
                                             ConnectionState.done &&
                                         snapshot.hasData) {
+                                      final jsonData = json.decode(
+                                        snapshot.data!,
+                                      );
                                       final bakeries =
-                                          json.decode(snapshot.data!)['bakeries']
+                                          (jsonData['bakeries'] ?? [])
                                               as List<dynamic>;
-                                      final uniqueBakeries = bakeries.map((b) {
-                                        final name = b['bakery_name'] as String;
 
-                                        // لو كل مخبز ليه صاحب واحد بس (national_id)
-                                        final id =
-                                            b['national_id']?.toString() ?? '';
+                                      // نستخدم Map لتجميع المخابز بدون تكرار، وناخد أول مالك فقط
+                                      final Map<String, String> uniqueBakeries =
+                                          {};
 
-                                        return {
-                                          'name': name,
-                                          'ids': [
-                                            id,
-                                          ], // نحطه في List علشان الكود اللي بعده ما يتكسرش
-                                        };
-                                      }).toList();
+                                      for (var b in bakeries) {
+                                        final name =
+                                            b['bakery_name'] ??
+                                            'مخبز غير معروف';
+                                        final owners = b['owners_national_ids'];
+                                        if (owners is List &&
+                                            owners.isNotEmpty) {
+                                          final firstOwnerId = owners[0]
+                                              .toString();
+                                          uniqueBakeries[name] = firstOwnerId;
+                                        }
+                                      }
+
+                                      // تحويلهم لقائمة
+                                      final bakeryList = uniqueBakeries.entries
+                                          .map(
+                                            (e) => {
+                                              'name': e.key,
+                                              'ownerId': e.value,
+                                            },
+                                          )
+                                          .toList();
                                       return DropdownButton<String>(
                                         value: _selectedBakery,
                                         isExpanded: true,
                                         underline: const SizedBox(),
-                                        items: uniqueBakeries.map((list) {
+                                        items: bakeryList.map((b) {
                                           return DropdownMenuItem<String>(
-                                            value: list['name'] as String,
-                                            child: Text(list['name'] as String),
+                                            value: b['name'] as String,
+                                            child: Text(b['name'] as String),
                                           );
                                         }).toList(),
-                                        onChanged: (value) => setState(() {
-                                          _selectedBakery = value;
-                                          _selectedNationalId =
-                                              (uniqueBakeries.firstWhere(
-                                                        (b) =>
-                                                            b['name'] == value,
-                                                        orElse: () => {
-                                                          'ids': [],
-                                                        },
-                                                      )['ids']
-                                                      as List<String>)
-                                                  .first;
-                                          final x = 6;
-                                        }),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedBakery = value;
+                                            _selectedNationalId = bakeryList
+                                                .firstWhere(
+                                                  (b) => b['name'] == value,
+                                                  orElse: () => {'ownerId': ''},
+                                                )['ownerId'];
+                                          });
+                                        },
                                       );
                                     }
                                     return const CircularProgressIndicator();
