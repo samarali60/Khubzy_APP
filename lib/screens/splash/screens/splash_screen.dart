@@ -82,7 +82,7 @@ Future<void> _checkSession() async {
         await bakerProvider.loadBakers();
         final bakery = bakeryProvider.getBakeryByOwner(bakerId);
         if (bakery != null) {
-          bakeryProvider.loginBakery(
+          await bakeryProvider.loginBakery(
             nationalId: bakerId,
             bakeryName: bakery.bakeryName,
             location: bakery.location,

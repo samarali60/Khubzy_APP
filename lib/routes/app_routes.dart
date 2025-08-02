@@ -45,7 +45,7 @@ class AppRoutes {
     citizenLogin: (context) => const CitizenLoginScreen(),
     main: (context) => const MainLayout(),
     citizenHome: (context) => const CitizenHomeScreen(),
-    reservation: (context) => const ReservationScreen(),
+    reservation: (context) =>  ReservationScreen(selectedNationalId: ''),
     bakeries: (context) => const BakeriesScreen(),
     balance: (context) => const CitizenBalanceScreen(),
     settings: (context) => const SettingsScreen(),

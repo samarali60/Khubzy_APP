@@ -1,53 +1,143 @@
-[
+{"bakeries": [
     {
-      "id": "1",
-      "bakery_name": "مخبز النور",
-      "location": "شارع الثورة، كفر الشيخ",
-      "owners_national_ids": ["29705061234567", "29501111234567", "28803031234567"],
-      "daily_quota": 1000,
-      "remaining_quota": 300,
-      "production_rate": 70,
-      "rating": 4.3
-    },
-    {
-      "id": "2",
-      "bakery_name": "مخبز البركة",
-      "location": "ميدان الزهراء، كفر الشيخ",
-      "owners_national_ids": ["29603231234567"],
-      "daily_quota": 850,
-      "remaining_quota": 500,
-      "production_rate": 60,
-      "rating": 4.1
-    },
-    {
-      "id": "3",
-      "bakery_name": "مخبز الأمل",
-      "location": "شارع النيل، كفر الشيخ",
-      "owners_national_ids": ["29409091234567", "29106061234567"],
+      "id": 1,
+      "bakery_name": "مخبز التوفيق",
+      "location": "شارع الثورة، طنطا، الغربية",
       "daily_quota": 900,
-      "remaining_quota": 250,
-      "production_rate": 72,
-      "rating": 4.4
+      "remaining_quota": 500,
+      "production_rate": 70,
+      "rating": 4.3,
+      "owners_national_id": "29701010123456"
     },
     {
-      "id": "4",
-      "bakery_name": "مخبز الفرح",
-      "location": "شارع السلام، كفر الشيخ",
-      "owners_national_ids": ["29308081234567", "28904041234567"],
-      "daily_quota": 1100,
-      "remaining_quota": 700,
-      "production_rate": 80,
-      "rating": 4.6
+      "id": 2,
+      "bakery_name": "مخبز الأمل",
+      "location": "حي الزهور، المحلة الكبرى، الغربية",
+      "daily_quota": 870,
+      "remaining_quota": 620,
+      "production_rate": 68,
+      "rating": 3.9,
+      "owners_national_id": "29802020234567"
     },
     {
-      "id": "5",
-      "bakery_name": "مخبز السعادة",
-      "location": "شارع الهدى، كفر الشيخ",
-      "owners_national_ids": ["29207071234567", "29005051234567"],
-      "daily_quota": 950,
-      "remaining_quota": 300,
+      "id": 3,
+      "bakery_name": "مخبز البركة",
+      "location": "شارع الجلاء، كفر الزيات، الغربية",
+      "daily_quota": 940,
+      "remaining_quota": 710,
+      "production_rate": 73,
+      "rating": 4.5,
+      "owners_national_id": "29903030345678"
+    },
+    {
+      "id": 4,
+      "bakery_name": "مخبز الفجر",
+      "location": "شارع الجيش، زفتى، الغربية",
+      "daily_quota": 890,
+      "remaining_quota": 580,
+      "production_rate": 69,
+      "rating": 4.1,
+      "owners_national_id": "30004040456789"
+    },
+    {
+      "id": 5,
+      "bakery_name": "مخبز الصفوة",
+      "location": "ميدان النصر، بسيون، الغربية",
+      "daily_quota": 850,
+      "remaining_quota": 490,
       "production_rate": 65,
-      "rating": 4.2
+      "rating": 3.8,
+      "owners_national_id": "30105050567890"
+    },
+    {
+      "id": 6,
+      "bakery_name": "مخبز السلام",
+      "location": "حي الزهور، طنطا، الغربية",
+      "daily_quota": 910,
+      "remaining_quota": 640,
+      "production_rate": 72,
+      "rating": 4.4,
+      "owners_national_id": "30206060678901"
+    },
+    {
+      "id": 7,
+      "bakery_name": "مخبز الريان",
+      "location": "شارع النيل، المحلة الكبرى، الغربية",
+      "daily_quota": 920,
+      "remaining_quota": 600,
+      "production_rate": 67,
+      "rating": 4.0,
+      "owners_national_id": "30307070789012"
+    },
+    {
+      "id": 8,
+      "bakery_name": "مخبز النور",
+      "location": "شارع الثورة، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 870,
+      "remaining_quota": 568,
+      "production_rate": 64,
+      "rating": 4.0,
+      "owners_national_id": "30408080890123"
+    },
+    {
+      "id": 9,
+      "bakery_name": "مخبز الشروق",
+      "location": "حي المنتزه، دسوق، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 500,
+      "production_rate": 65,
+      "rating": 3.9,
+      "owners_national_id": "30509090901234"
+    },
+    {
+      "id": 10,
+      "bakery_name": "مخبز الصفاء",
+      "location": "شارع البحر، بلطيم، كفر الشيخ",
+      "daily_quota": 860,
+      "remaining_quota": 600,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": "30610101012345"
+    },
+    {
+      "id": 11,
+      "bakery_name": "مخبز الإيمان",
+      "location": "طريق المحور، سيدي سالم، كفر الشيخ",
+      "daily_quota": 890,
+      "remaining_quota": 550,
+      "production_rate": 69,
+      "rating": 4.1,
+      "owners_national_id": "30711111123456"
+    },
+    {
+      "id": 12,
+      "bakery_name": "مخبز مكة",
+      "location": "ميدان التحرير، الحامول، كفر الشيخ",
+      "daily_quota": 850,
+      "remaining_quota": 490,
+      "production_rate": 64,
+      "rating": 3.7,
+      "owners_national_id": "30812121234567"
+    },
+    {
+      "id": 13,
+      "bakery_name": "مخبز المدينة",
+      "location": "شارع عبد السلام، فوه، كفر الشيخ",
+      "daily_quota": 910,
+      "remaining_quota": 630,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": "30913131345678"
+    },
+    {
+      "id": 14,
+      "bakery_name": "مخبز الهدى",
+      "location": "شارع بورسعيد، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 940,
+      "remaining_quota": 710,
+      "production_rate": 74,
+      "rating": 4.5,
+      "owners_national_id": "31014141456789"
     }
-
   ]
+}

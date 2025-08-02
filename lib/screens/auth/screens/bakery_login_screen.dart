@@ -49,11 +49,13 @@ class _BakeryLoginScreenState extends State<BakeryLoginScreen> {
       final current = bakeryProvider.getBakeryByOwner(nationalId!);
 
       if (current != null) {
-        bakeryProvider.loginBakery(
+        await bakeryProvider.loginBakery(
           nationalId: nationalId,
           location: current.location,
           bakeryName: current.bakeryName,
         );
+
+      
 
         WelcomeSnackbar.show(context, current.bakeryName);
 

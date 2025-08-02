@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:khubzy/models/bakery_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BakeryProvider with ChangeNotifier {
   List<BakeryModel> _bakeries = [];
@@ -29,30 +30,32 @@ Future<void> loadBakeries() async {
   BakeryModel? getBakeryByOwner(String nationalId) {
     try {
       return _bakeries.firstWhere(
-        (b) => b.ownersNationalIds.contains(nationalId),
+        (b) => b.ownersNationalId == nationalId,
       );
     } catch (e) {
       return null;
     }
   }
 
-  bool loginBakery({
+  Future<bool> loginBakery({
     required String nationalId,
     required String location,
     required String bakeryName,
-  }) {
+  }) async {
     try {
       final bakery = _bakeries.firstWhere(
         (b) =>
-            b.ownersNationalIds.contains(nationalId) &&
+            b.ownersNationalId == nationalId &&
             b.location == location &&
             b.bakeryName == bakeryName,
       );
 
       _currentBakery = bakery;
-     
+       final prefs =  await SharedPreferences.getInstance();
+        final bakerId = prefs.setString('baker_id',nationalId);
       notifyListeners();
       return true;
+      
     } catch (e) {
       return false;
     }

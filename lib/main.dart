@@ -22,7 +22,6 @@ void main() async {
   );
    MessagingConfig.initFirebaseMessaging();
   FirebaseMessaging.onBackgroundMessage(MessagingConfig.messageHandler);
-
   //await uploadUsersToFirebase(); //  مرة واحدة فقط
   //await uploadBakeriesToFirebase(); // مرة واحدة فقط
   runApp(
@@ -39,5 +38,4 @@ void main() async {
       child: const KhobzyApp(),
     ),
   );
-  
 }

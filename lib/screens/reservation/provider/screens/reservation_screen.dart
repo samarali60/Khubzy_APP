@@ -9,7 +9,8 @@ import 'dart:convert';
 
 class ReservationScreen extends StatefulWidget {
   final String? selectedBakery;
-  const ReservationScreen({super.key, this.selectedBakery});
+  String? selectedNationalId;
+  ReservationScreen({super.key, this.selectedBakery, required this.selectedNationalId});
 
   @override
   State<ReservationScreen> createState() => _ReservationScreenState();
@@ -32,7 +33,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
   ];
   String? _selectedTime;
   String? _selectedBakery;
-  String? _selectedNationalId;
 
   int get totalBread {
     int bread = _breadPerDay;
@@ -89,14 +89,15 @@ class _ReservationScreenState extends State<ReservationScreen> {
     }
   }
 
-  Future<void> _confirmReservation() async {
+Future<void> _confirmReservation() async {
     final prefs = await SharedPreferences.getInstance();
     final userName = prefs.getString('user_name') ?? 'مستخدم';
     final userNationalId = prefs.getString('user_national_id') ?? '';
     final userPhone = prefs.getString('user_phone') ?? '';
     final reservationDate = DateFormat('yyyy-MM-dd').format(_today);
     final time = _selectedTime ?? '';
-    final bakery = _selectedBakery ?? 'مخبز غير معروف';
+    final bakery = widget.selectedBakery;
+    final bakeryOwner = widget.selectedNationalId;
 
     final citizenProvider = Provider.of<CitizenProvider>(
       context,
@@ -108,7 +109,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       'user_national_id': userNationalId,
       'phone': userPhone,
       'bakery': bakery,
-      'bakery_owner_national_id': _selectedNationalId,
+      'bakery_owner_national_id': bakeryOwner,
       'date': reservationDate,
       'days': _selectedDays,
       'time': time,
@@ -120,7 +121,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     });
 
     sendNotificationToUser(
-      nationalId: _selectedNationalId ?? '',
+      nationalId: bakeryOwner ?? '',
       title: 'حجز جديد من $userName',
       body:
           'تم حجز $totalBread رغيفاً في $bakery بتاريخ $reservationDate الساعة $time',
@@ -137,7 +138,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       await prefs.setString('reservations_meta', json.encode(meta));
     }
 
-    showConfirmedDialog(bakery, reservationDate, time);
+    showConfirmedDialog(bakery ?? 'null', reservationDate, time);
   }
 
   @override
@@ -146,7 +147,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
-      body: !_canReserve
+      body: !true
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -277,13 +278,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                         final name =
                                             b['bakery_name'] ??
                                             'مخبز غير معروف';
-                                        final owners = b['owners_national_ids'];
-                                        if (owners is List &&
-                                            owners.isNotEmpty) {
-                                          final firstOwnerId = owners[0]
-                                              .toString();
-                                          uniqueBakeries[name] = firstOwnerId;
-                                        }
+                                        final ownersId = b['owners_national_id'];
+                                        uniqueBakeries[name] = ownersId;
+                                  
                                       }
 
                                       // تحويلهم لقائمة
@@ -308,7 +305,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                         onChanged: (value) {
                                           setState(() {
                                             _selectedBakery = value;
-                                            _selectedNationalId = bakeryList
+                                            widget.selectedNationalId = bakeryList
                                                 .firstWhere(
                                                   (b) => b['name'] == value,
                                                   orElse: () => {'ownerId': ''},

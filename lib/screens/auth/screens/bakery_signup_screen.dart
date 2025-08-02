@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khubzy/core/widgets/error_snackbar.dart';
 import 'package:khubzy/core/widgets/welcome_snackbar.dart';
-import 'package:khubzy/routes/app_routes.dart';
 import 'package:khubzy/screens/auth/provider/bakery_provider.dart';
 import 'package:khubzy/screens/bakeries/providers/baker_provider.dart';
 import 'package:khubzy/screens/bakeries/screens/bakery_main_layout_screen.dart';
@@ -12,25 +11,26 @@ class BakerySignupScreen extends StatefulWidget {
   const BakerySignupScreen({super.key});
 
   @override
-  State<BakerySignupScreen> createState() => _BakeryLoginScreenState();
+  State<BakerySignupScreen> createState() => _BakerySignupScreenState();
 }
 
-class _BakeryLoginScreenState extends State<BakerySignupScreen> {
+class _BakerySignupScreenState extends State<BakerySignupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nationalIdController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  String? _selectedBakeryName;
-  String? _selectedLocation;
   bool _loading = false;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       Provider.of<BakeryProvider>(context, listen: false).loadBakeries();
+      Provider.of<BakerProvider>(context, listen: false).loadBakers();
     });
   }
 
@@ -38,71 +38,45 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
   void dispose() {
     _nationalIdController.dispose();
     _passwordController.dispose();
-    _phoneController.dispose();
     _confirmPasswordController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-    if (_passwordController.text.isEmpty ||
-        _confirmPasswordController.text.isEmpty) {
-      ErrorSnackBar.show(context, "الرجاء ملء جميع الحقول");
-      return;
-    }
-    if (_passwordController.text.length != 8) {
-      ErrorSnackBar.show(context, "كلمة السر يجب أن تكون 8 أحرف");
-      return;
-    }
-    if (_selectedBakeryName == null || _selectedLocation == null) {
-      ErrorSnackBar.show(context, "الرجاء اختيار اسم المخبز والمكان");
-      return;
-    }
-
-    if (_passwordController.text != _confirmPasswordController.text) {
-      ErrorSnackBar.show(context, "كلمة السر وتأكيد كلمة السر غير متطابقين");
-      return;
-    }
-    setState(() => _loading = true);
 
     final nationalId = _nationalIdController.text.trim();
     final password = _passwordController.text.trim();
+    final confirmPassword = _confirmPasswordController.text.trim();
     final phone = _phoneController.text.trim();
-    final bakeryName = _selectedBakeryName;
-    final location = _selectedLocation;
+
+    if (password != confirmPassword) {
+      ErrorSnackBar.show(context, 'كلمة السر وتأكيدها غير متطابقين');
+      return;
+    }
+
+    setState(() => _loading = true);
 
     final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
     final bakerProvider = Provider.of<BakerProvider>(context, listen: false);
 
-    // Ensure data is loaded before proceeding
-    await bakeryProvider.loadBakeries();
-    await bakerProvider.loadBakers();
-
-    // Check if the provided details match a real bakery owner
     final baker = bakerProvider.getBakerByNationalId(nationalId);
     final bakery = bakeryProvider.getBakeryByOwner(nationalId);
 
-    // The baker must exist and the selected bakery details must match
-    if (baker != null &&
-        bakery != null &&
-        bakery.bakeryName == bakeryName &&
-        bakery.location == location) {
+    if (baker != null && bakery != null) {
       final prefs = await SharedPreferences.getInstance();
 
       await prefs.setString('bakery_national_id', nationalId);
       await prefs.setString('bakery_password', password);
-      
-      // Also save other important info
+      await prefs.setString('bakery_phone', phone);
       await prefs.setBool('is_logged_in', true);
       await prefs.setString('user_type', 'bakery');
-      await prefs.setString('baker_id', nationalId); // For profile screen
+      await prefs.setString('baker_id', nationalId);
       await prefs.setString('baker_name', baker.name);
       await prefs.setString('bakery_name', bakery.bakeryName);
       await prefs.setString('bakery_location', bakery.location);
-      await prefs.setString('bakery_phone', phone);
 
-
-      // Log in the user to set the provider state
       bakeryProvider.loginBakery(
         nationalId: nationalId,
         location: bakery.location,
@@ -117,21 +91,15 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
         (route) => false,
       );
     } else {
-      ErrorSnackBar.show(context, "بيانات التسجيل غير صحيحة أو غير متطابقة");
+      ErrorSnackBar.show(
+          context, 'بيانات التسجيل غير صحيحة أو المخبز غير موجود');
     }
 
-    if (mounted) {
-      setState(() => _loading = false);
-    }
+    if (mounted) setState(() => _loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final bakeries = Provider.of<BakeryProvider>(context).bakeries;
-
-    final bakeryNames = bakeries.map((e) => e.bakeryName).toSet().toList();
-    final locations = bakeries.map((e) => e.location).toSet().toList();
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -156,7 +124,9 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
                 maxLength: 14,
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل الرقم القومي';
-                  if (!RegExp(r'^\d{14}$').hasMatch(val)) return 'رقم غير صحيح';
+                  if (!RegExp(r'^\d{14}$').hasMatch(val)) {
+                    return 'رقم غير صحيح';
+                  }
                   return null;
                 },
               ),
@@ -177,61 +147,47 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
               _buildTextField(
                 controller: _passwordController,
                 label: 'كلمة السر',
-               // obscure: true,
+                obscure: _obscurePassword,
+                maxLength: 8,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  onPressed: () => setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  }),
+                ),
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل كلمة السر';
-                  if (val.length < 8) {
-                    return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
-                  }
+                  if (val.length != 8) return 'كلمة السر يجب أن تكون 8 أحرف بالضبط';
                   return null;
                 },
               ),
-               const SizedBox(height: 12),
-               _buildTextField(
+              const SizedBox(height: 12),
+              _buildTextField(
                 controller: _confirmPasswordController,
                 label: 'تأكيد كلمة السر',
-               // obscure: true,
+                obscure: _obscureConfirmPassword,
+                maxLength: 8,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureConfirmPassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  onPressed: () => setState(() {
+                    _obscureConfirmPassword = !_obscureConfirmPassword;
+                  }),
+                ),
                 validator: (val) {
-                  if (val == null || val.isEmpty) return 'أدخل كلمة السر';
-                  if (val.length < 8) {
-                    return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
-                  }
+                  if (val == null || val.isEmpty) return 'أدخل تأكيد كلمة السر';
+                  if (val.length != 8) return 'كلمة السر يجب أن تكون 8 أحرف بالضبط';
+                  if (val != _passwordController.text)
+                    return 'كلمة السر غير متطابقة';
                   return null;
                 },
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<String>(
-                value: _selectedBakeryName,
-                decoration: InputDecoration(
-                  labelText: 'اسم المخبز',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                items: bakeryNames.map((name) {
-                  return DropdownMenuItem(value: name, child: Text(name));
-                }).toList(),
-                onChanged: _loading
-                    ? null
-                    : (val) => setState(() => _selectedBakeryName = val),
-                validator: (val) => val == null ? 'اختر اسم المخبز' : null,
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<String>(
-                value: _selectedLocation,
-                decoration: InputDecoration(
-                  labelText: 'مكان المخبز',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                items: locations.map((loc) {
-                  return DropdownMenuItem(value: loc, child: Text(loc));
-                }).toList(),
-                onChanged: _loading
-                    ? null
-                    : (val) => setState(() => _selectedLocation = val),
-                validator: (val) => val == null ? 'اختر المكان' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -239,26 +195,6 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
                 child: _loading
                     ? const CircularProgressIndicator()
                     : const Text('إنشاء حساب'),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'هل لديك حساب بالفعل؟',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.bakeryLogin);
-                    },
-                    child: Text(
-                      'سجّل الدخول',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
@@ -274,17 +210,19 @@ class _BakeryLoginScreenState extends State<BakerySignupScreen> {
     String? Function(String?)? validator,
     int? maxLength,
     bool obscure = false,
+    Widget? suffixIcon,
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      maxLength: maxLength,
       obscureText: obscure,
+      maxLength: maxLength,
       textDirection: TextDirection.rtl,
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        counterText: '', // Hide the counter
+        counterText: '',
+        suffixIcon: suffixIcon,
       ),
       validator: validator,
     );

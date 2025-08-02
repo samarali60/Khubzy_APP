@@ -1,0 +1,4735 @@
+
+{
+  "bakeries": [
+    {
+      "id": 1,
+      "bakery_name": "مخبز النور",
+      "location": "شارع رئيسي، المعادي، القاهرة",
+      "daily_quota": 847,
+      "remaining_quota": 568,
+      "production_rate": 64,
+      "rating": 4.0,
+      "owners_national_id": 29705061234567
+    },
+    {
+      "id": 2,
+      "bakery_name": "مخبز المدينة",
+      "location": "شارع الجمهورية، المعادي، القاهرة",
+      "daily_quota": 920,
+      "remaining_quota": 312,
+      "production_rate": 72,
+      "rating": 4.2,
+      "owners_national_id": 29806071234568
+    },
+    {
+      "id": 3,
+      "bakery_name": "مخبز السلام",
+      "location": "شارع النصر، المعادي، القاهرة",
+      "daily_quota": 750,
+      "remaining_quota": 420,
+      "production_rate": 58,
+      "rating": 3.8,
+      "owners_national_id": 29907081234569
+    },
+    {
+      "id": 4,
+      "bakery_name": "مخبز الفرسان",
+      "location": "شارع البحر، المعادي، القاهرة",
+      "daily_quota": 680,
+      "remaining_quota": 195,
+      "production_rate": 65,
+      "rating": 4.1,
+      "owners_national_id": 30008091234570
+    },
+    {
+      "id": 5,
+      "bakery_name": "مخبز الهدى",
+      "location": "شارع السوق، المعادي، القاهرة",
+      "daily_quota": 890,
+      "remaining_quota": 540,
+      "production_rate": 70,
+      "rating": 4.3,
+      "owners_national_id": 30109101234571
+    },
+    {
+      "id": 6,
+      "bakery_name": "مخبز الكرمة",
+      "location": "شارع المدارس، المعادي، القاهرة",
+      "daily_quota": 720,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 3.9,
+      "owners_national_id": 30210111234572
+    },
+    {
+      "id": 7,
+      "bakery_name": "مخبز العروبة",
+      "location": "شارع الصناعة، المعادي، القاهرة",
+      "daily_quota": 810,
+      "remaining_quota": 410,
+      "production_rate": 68,
+      "rating": 4.0,
+      "owners_national_id": 30311121234573
+    },
+
+    {
+      "id": 8,
+      "bakery_name": "مخبز المدينة المنورة",
+      "location": "شارع مصطفى النحاس، مدينة نصر، القاهرة",
+      "daily_quota": 850,
+      "remaining_quota": 480,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 30412131234574
+    },
+    {
+      "id": 9,
+      "bakery_name": "مخبز النخيل",
+      "location": "شارع يوسف عباس، مدينة نصر، القاهرة",
+      "daily_quota": 780,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.1,
+      "owners_national_id": 30513141234575
+    },
+    {
+      "id": 10,
+      "bakery_name": "مخبز الاهرام",
+      "location": "شارع الفريق أحمد بدوي، مدينة نصر، القاهرة",
+      "daily_quota": 910,
+      "remaining_quota": 510,
+      "production_rate": 75,
+      "rating": 4.4,
+      "owners_national_id": 30614151234576
+    },
+    {
+      "id": 11,
+      "bakery_name": "مخبز الدقي",
+      "location": "شارع حسن المأمون، مدينة نصر، القاهرة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 30715161234577
+    },
+    {
+      "id": 12,
+      "bakery_name": "مخبز البدرشين",
+      "location": "شارع الطيران، مدينة نصر، القاهرة",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 30816171234578
+    },
+    {
+      "id": 13,
+      "bakery_name": "مخبز أوسيم",
+      "location": "شارع المعاهد، مدينة نصر، القاهرة",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 30917181234579
+    },
+    {
+      "id": 14,
+      "bakery_name": "مخبز العجوزة الجديد",
+      "location": "شارع النزهة، مدينة نصر، القاهرة",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 31018191234580
+    },
+
+ 
+    {
+      "id": 15,
+      "bakery_name": "مخبز حلوان",
+      "location": "شارع الجامعة، حلوان، القاهرة",
+      "daily_quota": 820,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 31119201234581
+    },
+    {
+      "id": 16,
+      "bakery_name": "مخبز العجمي",
+      "location": "شارع المعرض، حلوان، القاهرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 31220211234582
+    },
+    {
+      "id": 17,
+      "bakery_name": "مخبز المنتزه",
+      "location": "شارع الحدائق، حلوان، القاهرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 31321221234583
+    },
+    {
+      "id": 18,
+      "bakery_name": "مخبز الجمرك",
+      "location": "شارع الميناء، حلوان، القاهرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 31422231234584
+    },
+    {
+      "id": 19,
+      "bakery_name": "مخبز برج العرب",
+      "location": "شارع الصناعات، حلوان، القاهرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 31523241234585
+    },
+    {
+      "id": 20,
+      "bakery_name": "مخبز حلوان الجديد",
+      "location": "شارع الجامعة، حلوان، القاهرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 31624251234586
+    },
+    {
+      "id": 21,
+      "bakery_name": "مخبز حلوان الغربي",
+      "location": "شارع المسجد، حلوان، القاهرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 31725261234587
+    },
+
+    {
+      "id": 22,
+      "bakery_name": "مخبز الزيتون",
+      "location": "شارع الجلاء، الزيتون، القاهرة",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 31826271234588
+    },
+    {
+      "id": 23,
+      "bakery_name": "مخبز الزيتون الجديد",
+      "location": "شارع السوق، الزيتون، القاهرة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 31927281234589
+    },
+    {
+      "id": 24,
+      "bakery_name": "مخبز الزيتون المركزي",
+      "location": "شارع المركز، الزيتون، القاهرة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 32028291234590
+    },
+    {
+      "id": 25,
+      "bakery_name": "مخبز الزيتون الشرقية",
+      "location": "شارع المدارس، الزيتون، القاهرة",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 32129301234591
+    },
+    {
+      "id": 26,
+      "bakery_name": "مخبز الزيتون الغربية",
+      "location": "شارع المحطة، الزيتون، القاهرة",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 32230311234592
+    },
+    {
+      "id": 27,
+      "bakery_name": "مخبز الزيتون الشمالي",
+      "location": "شارع النيل، الزيتون، القاهرة",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 32331321234593
+    },
+    {
+      "id": 28,
+      "bakery_name": "مخبز الزيتون الجنوبي",
+      "location": "شارع الشركة، الزيتون، القاهرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 32432331234594
+    },
+
+   
+    {
+      "id": 29,
+      "bakery_name": "مخبز شبرا",
+      "location": "شارع الجمهورية، شبرا، القاهرة",
+      "daily_quota": 830,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 32533341234595
+    },
+    {
+      "id": 30,
+      "bakery_name": "مخبز شبرا الجديد",
+      "location": "شارع المصنع، شبرا، القاهرة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 32634351234596
+    },
+    {
+      "id": 31,
+      "bakery_name": "مخبز شبرا المركزي",
+      "location": "شارع البحر، شبرا، القاهرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 32735361234597
+    },
+    {
+      "id": 32,
+      "bakery_name": "مخبز شبرا الشرقي",
+      "location": "شارع الميناء، شبرا، القاهرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 32836371234598
+    },
+    {
+      "id": 33,
+      "bakery_name": "مخبز شبرا الغربي",
+      "location": "شارع الصناعات، شبرا، القاهرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 32937381234599
+    },
+    {
+      "id": 34,
+      "bakery_name": "مخبز شبرا الشمالي",
+      "location": "شارع الجامعة، شبرا، القاهرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 33038391234600
+    },
+    {
+      "id": 35,
+      "bakery_name": "مخبز شبرا الجنوبي",
+      "location": "شارع المسجد، شبرا، القاهرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 33139401234601
+    },
+
+    {
+      "id": 36,
+      "bakery_name": "مخبز المرج",
+      "location": "شارع الكورنيش، المرج، القاهرة",
+      "daily_quota": 820,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 33240411234602
+    },
+    {
+      "id": 37,
+      "bakery_name": "مخبز المرج الجديد",
+      "location": "شارع البحر، المرج، القاهرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 33341421234603
+    },
+    {
+      "id": 38,
+      "bakery_name": "مخبز المرج المركزي",
+      "location": "شارع الحدائق، المرج، القاهرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 33442431234604
+    },
+    {
+      "id": 39,
+      "bakery_name": "مخبز المرج الشرقي",
+      "location": "شارع الميناء، المرج، القاهرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 33543441234605
+    },
+    {
+      "id": 40,
+      "bakery_name": "مخبز المرج الغربي",
+      "location": "شارع الصناعات، المرج، القاهرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 33644451234606
+    },
+    {
+      "id": 41,
+      "bakery_name": "مخبز المرج الشمالي",
+      "location": "شارع الجامعة، المرج، القاهرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 33745461234607
+    },
+    {
+      "id": 42,
+      "bakery_name": "مخبز المرج الجنوبي",
+      "location": "شارع المسجد، المرج، القاهرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 33846471234608
+    },
+
+   
+    {
+      "id": 43,
+      "bakery_name": "مخبز العجوزة",
+      "location": "شارع الهرم، العجوزة، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.1,
+      "owners_national_id": 33947481234609
+    },
+    {
+      "id": 44,
+      "bakery_name": "مخبز العجوزة الجديد",
+      "location": "شارع النزهة، العجوزة، الجيزة",
+      "daily_quota": 790,
+      "remaining_quota": 420,
+      "production_rate": 65,
+      "rating": 4.1,
+      "owners_national_id": 34048491234610
+    },
+    {
+      "id": 45,
+      "bakery_name": "مخبز العجوزة المركزي",
+      "location": "شارع الجامعة، العجوزة، الجيزة",
+      "daily_quota": 850,
+      "remaining_quota": 480,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 34149501234611
+    },
+    {
+      "id": 46,
+      "bakery_name": "مخبز العجوزة الشرقي",
+      "location": "شارع الفيوم، العجوزة، الجيزة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 34250511234612
+    },
+    {
+      "id": 47,
+      "bakery_name": "مخبز العجوزة الغربي",
+      "location": "شارع التحرير، العجوزة، الجيزة",
+      "daily_quota": 910,
+      "remaining_quota": 510,
+      "production_rate": 75,
+      "rating": 4.4,
+      "owners_national_id": 34351521234613
+    },
+    {
+      "id": 48,
+      "bakery_name": "مخبز العجوزة الشمالي",
+      "location": "شارع المركز، العجوزة، الجيزة",
+      "daily_quota": 680,
+      "remaining_quota": 240,
+      "production_rate": 55,
+      "rating": 3.7,
+      "owners_national_id": 34452531234614
+    },
+    {
+      "id": 49,
+      "bakery_name": "مخبز العجوزة الجنوبي",
+      "location": "شارع الزراعة، العجوزة، الجيزة",
+      "daily_quota": 740,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 34553541234615
+    },
+
+   
+    {
+      "id": 50,
+      "bakery_name": "مخبز إمبابة",
+      "location": "شارع الجمهورية، إمبابة، الجيزة",
+      "daily_quota": 830,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 34654551234616
+    },
+    {
+      "id": 51,
+      "bakery_name": "مخبز إمبابة الجديد",
+      "location": "شارع المصنع، إمبابة، الجيزة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 34755561234617
+    },
+    {
+      "id": 52,
+      "bakery_name": "مخبز إمبابة المركزي",
+      "location": "شارع البحر، إمبابة، الجيزة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 34856571234618
+    },
+    {
+      "id": 53,
+      "bakery_name": "مخبز إمبابة الشرقي",
+      "location": "شارع الميناء، إمبابة، الجيزة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 34957581234619
+    },
+    {
+      "id": 54,
+      "bakery_name": "مخبز إمبابة الغربي",
+      "location": "شارع الصناعات، إمبابة، الجيزة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 35058591234620
+    },
+    {
+      "id": 55,
+      "bakery_name": "مخبز إمبابة الشمالي",
+      "location": "شارع الجامعة، إمبابة، الجيزة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 35159601234621
+    },
+    {
+      "id": 56,
+      "bakery_name": "مخبز إمبابة الجنوبي",
+      "location": "شارع المسجد، إمبابة، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 35260611234622
+    },
+
+   
+    {
+      "id": 57,
+      "bakery_name": "مخبز الهرم",
+      "location": "شارع الفيوم، الهرم، الجيزة",
+      "daily_quota": 820,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 35361621234623
+    },
+    {
+      "id": 58,
+      "bakery_name": "مخبز الهرم الجديد",
+      "location": "شارع البحر، الهرم، الجيزة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 35462631234624
+    },
+    {
+      "id": 59,
+      "bakery_name": "مخبز الهرم المركزي",
+      "location": "شارع الحدائق، الهرم، الجيزة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 35563641234625
+    },
+    {
+      "id": 60,
+      "bakery_name": "مخبز الهرم الشرقي",
+      "location": "شارع الميناء، الهرم، الجيزة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 35664651234626
+    },
+    {
+      "id": 61,
+      "bakery_name": "مخبز الهرم الغربي",
+      "location": "شارع الصناعات، الهرم، الجيزة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 35765661234627
+    },
+    {
+      "id": 62,
+      "bakery_name": "مخبز الهرم الشمالي",
+      "location": "شارع الجامعة، الهرم، الجيزة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 35866671234628
+    },
+    {
+      "id": 63,
+      "bakery_name": "مخبز الهرم الجنوبي",
+      "location": "شارع المسجد، الهرم، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 35967681234629
+    },
+
+    {
+      "id": 64,
+      "bakery_name": "مخبز الدقي",
+      "location": "شارع التحرير، الدقي، الجيزة",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 36068691234630
+    },
+    {
+      "id": 65,
+      "bakery_name": "مخبز الدقي الجديد",
+      "location": "شارع السوق، الدقي، الجيزة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 36169701234631
+    },
+    {
+      "id": 66,
+      "bakery_name": "مخبز الدقي المركزي",
+      "location": "شارع المركز، الدقي، الجيزة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 36270711234632
+    },
+    {
+      "id": 67,
+      "bakery_name": "مخبز الدقي الشرقي",
+      "location": "شارع المدارس، الدقي، الجيزة",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 36371721234633
+    },
+    {
+      "id": 68,
+      "bakery_name": "مخبز الدقي الغربي",
+      "location": "شارع المحطة، الدقي، الجيزة",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 36472731234634
+    },
+    {
+      "id": 69,
+      "bakery_name": "مخبز الدقي الشمالي",
+      "location": "شارع النيل، الدقي، الجيزة",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 36573741234635
+    },
+    {
+      "id": 70,
+      "bakery_name": "مخبز الدقي الجنوبي",
+      "location": "شارع الشركة، الدقي، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 36674751234636
+    },
+
+    {
+      "id": 71,
+      "bakery_name": "مخبز البدرشين",
+      "location": "شارع المركز، البدرشين، الجيزة",
+      "daily_quota": 830,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 36775761234637
+    },
+    {
+      "id": 72,
+      "bakery_name": "مخبز البدرشين الجديد",
+      "location": "شارع المصنع، البدرشين، الجيزة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 36876771234638
+    },
+    {
+      "id": 73,
+      "bakery_name": "مخبز البدرشين المركزي",
+      "location": "شارع البحر، البدرشين، الجيزة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 36977781234639
+    },
+    {
+      "id": 74,
+      "bakery_name": "مخبز البدرشين الشرقي",
+      "location": "شارع الميناء، البدرشين، الجيزة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 37078791234640
+    },
+    {
+      "id": 75,
+      "bakery_name": "مخبز البدرشين الغربي",
+      "location": "شارع الصناعات، البدرشين، الجيزة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 37179801234641
+    },
+    {
+      "id": 76,
+      "bakery_name": "مخبز البدرشين الشمالي",
+      "location": "شارع الجامعة، البدرشين، الجيزة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 37280811234642
+    },
+    {
+      "id": 77,
+      "bakery_name": "مخبز البدرشين الجنوبي",
+      "location": "شارع المسجد، البدرشين، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 37381821234643
+    },
+
+   
+    {
+      "id": 78,
+      "bakery_name": "مخبز أوسيم",
+      "location": "شارع الزراعة، أوسيم، الجيزة",
+      "daily_quota": 820,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 37482831234644
+    },
+    {
+      "id": 79,
+      "bakery_name": "مخبز أوسيم الجديد",
+      "location": "شارع البحر، أوسيم، الجيزة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 37583841234645
+    },
+    {
+      "id": 80,
+      "bakery_name": "مخبز أوسيم المركزي",
+      "location": "شارع الحدائق، أوسيم، الجيزة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 37684851234646
+    },
+    {
+      "id": 81,
+      "bakery_name": "مخبز أوسيم الشرقي",
+      "location": "شارع الميناء، أوسيم، الجيزة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 37785861234647
+    },
+    {
+      "id": 82,
+      "bakery_name": "مخبز أوسيم الغربي",
+      "location": "شارع الصناعات، أوسيم، الجيزة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 37886871234648
+    },
+    {
+      "id": 83,
+      "bakery_name": "مخبز أوسيم الشمالي",
+      "location": "شارع الجامعة، أوسيم، الجيزة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 37987881234649
+    },
+    {
+      "id": 84,
+      "bakery_name": "مخبز أوسيم الجنوبي",
+      "location": "شارع المسجد، أوسيم، الجيزة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 38088891234650
+    },
+
+   
+    {
+      "id": 85,
+      "bakery_name": "مخبز سيدي بشر",
+      "location": "شارع الكورنيش، سيدي بشر، الإسكندرية",
+      "daily_quota": 820,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 38189901234651
+    },
+    {
+      "id": 86,
+      "bakery_name": "مخبز سيدي بشر الجديد",
+      "location": "شارع الجامعة، سيدي بشر، الإسكندرية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 38290911234652
+    },
+    {
+      "id": 87,
+      "bakery_name": "مخبز سيدي بشر المركزي",
+      "location": "شارع المسجد، سيدي بشر، الإسكندرية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 38391921234653
+    },
+    {
+      "id": 88,
+      "bakery_name": "مخبز سيدي بشر الشرقي",
+      "location": "شارع الميناء، سيدي بشر، الإسكندرية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 38492931234654
+    },
+    {
+      "id": 89,
+      "bakery_name": "مخبز سيدي بشر الغربي",
+      "location": "شارع الصناعات، سيدي بشر، الإسكندرية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 38593941234655
+    },
+    {
+      "id": 90,
+      "bakery_name": "مخبز سيدي بشر الشمالي",
+      "location": "شارع الحدائق، سيدي بشر، الإسكندرية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 38694951234656
+    },
+    {
+      "id": 91,
+      "bakery_name": "مخبز سيدي بشر الجنوبي",
+      "location": "شارع السوق، سيدي بشر، الإسكندرية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 38795961234657
+    },
+
+  
+    {
+      "id": 92,
+      "bakery_name": "مخبز العجمي",
+      "location": "شارع البحر، العجمي، الإسكندرية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 38896971234658
+    },
+    {
+      "id": 93,
+      "bakery_name": "مخبز العجمي الجديد",
+      "location": "شارع الجامعة، العجمي، الإسكندرية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 38997981234659
+    },
+    {
+      "id": 94,
+      "bakery_name": "مخبز العجمي المركزي",
+      "location": "شارع المسجد، العجمي، الإسكندرية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 39098991234660
+    },
+    {
+      "id": 95,
+      "bakery_name": "مخبز العجمي الشرقي",
+      "location": "شارع الميناء، العجمي، الإسكندرية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 39100001234661
+    },
+    {
+      "id": 96,
+      "bakery_name": "مخبز العجمي الغربي",
+      "location": "شارع الصناعات، العجمي، الإسكندرية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 39201011234662
+    },
+    {
+      "id": 97,
+      "bakery_name": "مخبز العجمي الشمالي",
+      "location": "شارع الحدائق، العجمي، الإسكندرية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 39302021234663
+    },
+    {
+      "id": 98,
+      "bakery_name": "مخبز العجمي الجنوبي",
+      "location": "شارع السوق، العجمي، الإسكندرية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 39403031234664
+    },
+
+   
+    {
+      "id": 99,
+      "bakery_name": "مخبز المنتزه",
+      "location": "شارع الحدائق، المنتزه، الإسكندرية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 39504041234665
+    },
+    {
+      "id": 100,
+      "bakery_name": "مخبز المنتزه الجديد",
+      "location": "شارع الجامعة، المنتزه، الإسكندرية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 39605051234666
+    },
+    {
+      "id": 101,
+      "bakery_name": "مخبز المنتزه المركزي",
+      "location": "شارع المسجد، المنتزه، الإسكندرية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 39706061234667
+    },
+    {
+      "id": 102,
+      "bakery_name": "مخبز المنتزه الشرقي",
+      "location": "شارع الميناء، المنتزه، الإسكندرية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 39807071234668
+    },
+    {
+      "id": 103,
+      "bakery_name": "مخبز المنتزه الغربي",
+      "location": "شارع الصناعات، المنتزه، الإسكندرية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 39908081234669
+    },
+    {
+      "id": 104,
+      "bakery_name": "مخبز المنتزه الشمالي",
+      "location": "شارع البحر، المنتزه، الإسكندرية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 40009091234670
+    },
+    {
+      "id": 105,
+      "bakery_name": "مخبز المنتزه الجنوبي",
+      "location": "شارع السوق، المنتزه، الإسكندرية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 40110101234671
+    },
+
+  
+    {
+      "id": 106,
+      "bakery_name": "مخبز الجمرك",
+      "location": "شارع الميناء، الجمرك، الإسكندرية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 40211111234672
+    },
+    {
+      "id": 107,
+      "bakery_name": "مخبز الجمرك الجديد",
+      "location": "شارع الجامعة، الجمرك، الإسكندرية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 40312121234673
+    },
+    {
+      "id": 108,
+      "bakery_name": "مخبز الجمرك المركزي",
+      "location": "شارع المسجد، الجمرك، الإسكندرية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 40413131234674
+    },
+    {
+      "id": 109,
+      "bakery_name": "مخبز الجمرك الشرقي",
+      "location": "شارع الصناعات، الجمرك، الإسكندرية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 40514141234675
+    },
+    {
+      "id": 110,
+      "bakery_name": "مخبز الجمرك الغربي",
+      "location": "شارع الحدائق، الجمرك، الإسكندرية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 40615151234676
+    },
+    {
+      "id": 111,
+      "bakery_name": "مخبز الجمرك الشمالي",
+      "location": "شارع البحر، الجمرك، الإسكندرية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 40716161234677
+    },
+    {
+      "id": 112,
+      "bakery_name": "مخبز الجمرك الجنوبي",
+      "location": "شارع السوق، الجمرك، الإسكندرية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 40817171234678
+    },
+
+  
+    {
+      "id": 113,
+      "bakery_name": "مخبز برج العرب",
+      "location": "شارع الصناعات، برج العرب، الإسكندرية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 40918181234679
+    },
+    {
+      "id": 114,
+      "bakery_name": "مخبز برج العرب الجديد",
+      "location": "شارع الجامعة، برج العرب، الإسكندرية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 41019191234680
+    },
+    {
+      "id": 115,
+      "bakery_name": "مخبز برج العرب المركزي",
+      "location": "شارع المسجد، برج العرب، الإسكندرية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 41120201234681
+    },
+    {
+      "id": 116,
+      "bakery_name": "مخبز برج العرب الشرقي",
+      "location": "شارع الميناء، برج العرب، الإسكندرية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 41221211234682
+    },
+    {
+      "id": 117,
+      "bakery_name": "مخبز برج العرب الغربي",
+      "location": "شارع الحدائق، برج العرب، الإسكندرية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 41322221234683
+    },
+    {
+      "id": 118,
+      "bakery_name": "مخبز برج العرب الشمالي",
+      "location": "شارع البحر، برج العرب، الإسكندرية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 41423231234684
+    },
+    {
+      "id": 119,
+      "bakery_name": "مخبز برج العرب الجنوبي",
+      "location": "شارع السوق، برج العرب، الإسكندرية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 41524241234685
+    },
+
+    {
+      "id": 120,
+      "bakery_name": "مخبز المنصورة",
+      "location": "شارع الجلاء، المنصورة، الدقهلية",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 41625251234686
+    },
+    {
+      "id": 121,
+      "bakery_name": "مخبز المنصورة الجديد",
+      "location": "شارع السوق، المنصورة، الدقهلية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 41726261234687
+    },
+    {
+      "id": 122,
+      "bakery_name": "مخبز المنصورة المركزي",
+      "location": "شارع المركز، المنصورة، الدقهلية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 41827271234688
+    },
+    {
+      "id": 123,
+      "bakery_name": "مخبز المنصورة الشرقي",
+      "location": "شارع المدارس، المنصورة، الدقهلية",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 41928281234689
+    },
+    {
+      "id": 124,
+      "bakery_name": "مخبز المنصورة الغربي",
+      "location": "شارع المحطة، المنصورة، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 42029291234690
+    },
+    {
+      "id": 125,
+      "bakery_name": "مخبز المنصورة الشمالي",
+      "location": "شارع النيل، المنصورة، الدقهلية",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 42130301234691
+    },
+    {
+      "id": 126,
+      "bakery_name": "مخبز المنصورة الجنوبي",
+      "location": "شارع الشركة، المنصورة، الدقهلية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 42231311234692
+    },
+
+  
+    {
+      "id": 127,
+      "bakery_name": "مخبز ميت غمر",
+      "location": "شارع السوق، ميت غمر، الدقهلية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 42332321234693
+    },
+    {
+      "id": 128,
+      "bakery_name": "مخبز ميت غمر الجديد",
+      "location": "شارع الجامعة، ميت غمر، الدقهلية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 42433331234694
+    },
+    {
+      "id": 129,
+      "bakery_name": "مخبز ميت غمر المركزي",
+      "location": "شارع المسجد، ميت غمر، الدقهلية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 42534341234695
+    },
+    {
+      "id": 130,
+      "bakery_name": "مخبز ميت غمر الشرقي",
+      "location": "شارع الميناء، ميت غمر، الدقهلية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 42635351234696
+    },
+    {
+      "id": 131,
+      "bakery_name": "مخبز ميت غمر الغربي",
+      "location": "شارع الصناعات، ميت غمر، الدقهلية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 42736361234697
+    },
+    {
+      "id": 132,
+      "bakery_name": "مخبز ميت غمر الشمالي",
+      "location": "شارع الحدائق، ميت غمر، الدقهلية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 42837371234698
+    },
+    {
+      "id": 133,
+      "bakery_name": "مخبز ميت غمر الجنوبي",
+      "location": "شارع البحر، ميت غمر، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 42938381234699
+    },
+
+   
+    {
+      "id": 134,
+      "bakery_name": "مخبز دكرنس",
+      "location": "شارع المركز، دكرنس، الدقهلية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 43039391234700
+    },
+    {
+      "id": 135,
+      "bakery_name": "مخبز دكرنس الجديد",
+      "location": "شارع الجامعة، دكرنس، الدقهلية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 43140401234701
+    },
+    {
+      "id": 136,
+      "bakery_name": "مخبز دكرنس المركزي",
+      "location": "شارع المسجد، دكرنس، الدقهلية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 43241411234702
+    },
+    {
+      "id": 137,
+      "bakery_name": "مخبز دكرنس الشرقي",
+      "location": "شارع الميناء، دكرنس، الدقهلية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 43342421234703
+    },
+    {
+      "id": 138,
+      "bakery_name": "مخبز دكرنس الغربي",
+      "location": "شارع الصناعات، دكرنس، الدقهلية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 43443431234704
+    },
+    {
+      "id": 139,
+      "bakery_name": "مخبز دكرنس الشمالي",
+      "location": "شارع الحدائق، دكرنس، الدقهلية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 43544441234705
+    },
+    {
+      "id": 140,
+      "bakery_name": "مخبز دكرنس الجنوبي",
+      "location": "شارع البحر، دكرنس، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 43645451234706
+    },
+
+    
+    {
+      "id": 141,
+      "bakery_name": "مخبز بلقاس",
+      "location": "شارع المدارس، بلقاس، الدقهلية",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 43746461234707
+    },
+    {
+      "id": 142,
+      "bakery_name": "مخبز بلقاس الجديد",
+      "location": "شارع الجامعة، بلقاس، الدقهلية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 43847471234708
+    },
+    {
+      "id": 143,
+      "bakery_name": "مخبز بلقاس المركزي",
+      "location": "شارع المسجد، بلقاس، الدقهلية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 43948481234709
+    },
+    {
+      "id": 144,
+      "bakery_name": "مخبز بلقاس الشرقي",
+      "location": "شارع الميناء، بلقاس، الدقهلية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 44049491234710
+    },
+    {
+      "id": 145,
+      "bakery_name": "مخبز بلقاس الغربي",
+      "location": "شارع الصناعات، بلقاس، الدقهلية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 44150501234711
+    },
+    {
+      "id": 146,
+      "bakery_name": "مخبز بلقاس الشمالي",
+      "location": "شارع الحدائق، بلقاس، الدقهلية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 44251511234712
+    },
+    {
+      "id": 147,
+      "bakery_name": "مخبز بلقاس الجنوبي",
+      "location": "شارع البحر، بلقاس، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 44352521234713
+    },
+
+  
+    {
+      "id": 148,
+      "bakery_name": "مخبز شربين",
+      "location": "شارع المحطة، شربين، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 44453531234714
+    },
+    {
+      "id": 149,
+      "bakery_name": "مخبز شربين الجديد",
+      "location": "شارع الجامعة، شربين، الدقهلية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 44554541234715
+    },
+    {
+      "id": 150,
+      "bakery_name": "مخبز شربين المركزي",
+      "location": "شارع المسجد، شربين، الدقهلية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 44655551234716
+    },
+    {
+      "id": 151,
+      "bakery_name": "مخبز شربين الشرقي",
+      "location": "شارع الميناء، شربين، الدقهلية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 44756561234717
+    },
+    {
+      "id": 152,
+      "bakery_name": "مخبز شربين الغربي",
+      "location": "شارع الصناعات، شربين، الدقهلية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 44857571234718
+    },
+    {
+      "id": 153,
+      "bakery_name": "مخبز شربين الشمالي",
+      "location": "شارع الحدائق، شربين، الدقهلية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 44958581234719
+    },
+    {
+      "id": 154,
+      "bakery_name": "مخبز شربين الجنوبي",
+      "location": "شارع البحر، شربين، الدقهلية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 45059591234720
+    },
+
+  
+    {
+      "id": 155,
+      "bakery_name": "مخبز دمنهور",
+      "location": "شارع الجمهورية، دمنهور، البحيرة",
+      "daily_quota": 830,
+      "remaining_quota": 450,
+      "production_rate": 68,
+      "rating": 4.2,
+      "owners_national_id": 45160601234721
+    },
+    {
+      "id": 156,
+      "bakery_name": "مخبز دمنهور الجديد",
+      "location": "شارع المصنع، دمنهور، البحيرة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 45261611234722
+    },
+    {
+      "id": 157,
+      "bakery_name": "مخبز دمنهور المركزي",
+      "location": "شارع البحر، دمنهور، البحيرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 45362621234723
+    },
+    {
+      "id": 158,
+      "bakery_name": "مخبز دمنهور الشرقي",
+      "location": "شارع الميناء، دمنهور، البحيرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 45463631234724
+    },
+    {
+      "id": 159,
+      "bakery_name": "مخبز دمنهور الغربي",
+      "location": "شارع الصناعات، دمنهور، البحيرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 45564641234725
+    },
+    {
+      "id": 160,
+      "bakery_name": "مخبز دمنهور الشمالي",
+      "location": "شارع الجامعة، دمنهور، البحيرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 45665651234726
+    },
+    {
+      "id": 161,
+      "bakery_name": "مخبز دمنهور الجنوبي",
+      "location": "شارع المسجد، دمنهور، البحيرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 45766661234727
+    },
+
+    
+    {
+      "id": 162,
+      "bakery_name": "مخبز كفر الدوار",
+      "location": "شارع المصنع، كفر الدوار، البحيرة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 45867671234728
+    },
+    {
+      "id": 163,
+      "bakery_name": "مخبز كفر الدوار الجديد",
+      "location": "شارع الجامعة، كفر الدوار، البحيرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 45968681234729
+    },
+    {
+      "id": 164,
+      "bakery_name": "مخبز كفر الدوار المركزي",
+      "location": "شارع المسجد، كفر الدوار، البحيرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 46069691234730
+    },
+    {
+      "id": 165,
+      "bakery_name": "مخبز كفر الدوار الشرقي",
+      "location": "شارع الميناء، كفر الدوار، البحيرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 46170701234731
+    },
+    {
+      "id": 166,
+      "bakery_name": "مخبز كفر الدوار الغربي",
+      "location": "شارع الصناعات، كفر الدوار، البحيرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 46271711234732
+    },
+    {
+      "id": 167,
+      "bakery_name": "مخبز كفر الدوار الشمالي",
+      "location": "شارع الحدائق، كفر الدوار، البحيرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 46372721234733
+    },
+    {
+      "id": 168,
+      "bakery_name": "مخبز كفر الدوار الجنوبي",
+      "location": "شارع البحر، كفر الدوار، البحيرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 46473731234734
+    },
+
+    {
+      "id": 169,
+      "bakery_name": "مخبز إيتاي البارود",
+      "location": "شارع المركز، إيتاي البارود، البحيرة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 46574741234735
+    },
+    {
+      "id": 170,
+      "bakery_name": "مخبز إيتاي البارود الجديد",
+      "location": "شارع الجامعة، إيتاي البارود، البحيرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 46675751234736
+    },
+    {
+      "id": 171,
+      "bakery_name": "مخبز إيتاي البارود المركزي",
+      "location": "شارع المسجد، إيتاي البارود، البحيرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 46776761234737
+    },
+    {
+      "id": 172,
+      "bakery_name": "مخبز إيتاي البارود الشرقي",
+      "location": "شارع الميناء، إيتاي البارود، البحيرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 46877771234738
+    },
+    {
+      "id": 173,
+      "bakery_name": "مخبز إيتاي البارود الغربي",
+      "location": "شارع الصناعات، إيتاي البارود، البحيرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 46978781234739
+    },
+    {
+      "id": 174,
+      "bakery_name": "مخبز إيتاي البارود الشمالي",
+      "location": "شارع الحدائق، إيتاي البارود، البحيرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 47079791234740
+    },
+    {
+      "id": 175,
+      "bakery_name": "مخبز إيتاي البارود الجنوبي",
+      "location": "شارع البحر، إيتاي البارود، البحيرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 47180801234741
+    },
+
+    {
+      "id": 176,
+      "bakery_name": "مخبز رشيد",
+      "location": "شارع الميناء، رشيد، البحيرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 47281811234742
+    },
+    {
+      "id": 177,
+      "bakery_name": "مخبز رشيد الجديد",
+      "location": "شارع الجامعة، رشيد، البحيرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 47382821234743
+    },
+    {
+      "id": 178,
+      "bakery_name": "مخبز رشيد المركزي",
+      "location": "شارع المسجد، رشيد، البحيرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 47483831234744
+    },
+    {
+      "id": 179,
+      "bakery_name": "مخبز رشيد الشرقي",
+      "location": "شارع الصناعات، رشيد، البحيرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 47584841234745
+    },
+    {
+      "id": 180,
+      "bakery_name": "مخبز رشيد الغربي",
+      "location": "شارع الحدائق، رشيد، البحيرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 47685851234746
+    },
+    {
+      "id": 181,
+      "bakery_name": "مخبز رشيد الشمالي",
+      "location": "شارع البحر، رشيد، البحيرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 47786861234747
+    },
+    {
+      "id": 182,
+      "bakery_name": "مخبز رشيد الجنوبي",
+      "location": "شارع السوق، رشيد، البحيرة",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 47887871234748
+    },
+
+    
+    {
+      "id": 183,
+      "bakery_name": "مخبز أبو حمص",
+      "location": "شارع المركز، أبو حمص، البحيرة",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 47988881234749
+    },
+    {
+      "id": 184,
+      "bakery_name": "مخبز أبو حمص الجديد",
+      "location": "شارع الجامعة، أبو حمص، البحيرة",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 48089891234750
+    },
+    {
+      "id": 185,
+      "bakery_name": "مخبز أبو حمص المركزي",
+      "location": "شارع المسجد، أبو حمص، البحيرة",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 48190901234751
+    },
+    {
+      "id": 186,
+      "bakery_name": "مخبز أبو حمص الشرقي",
+      "location": "شارع الميناء، أبو حمص، البحيرة",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 48291911234752
+    },
+    {
+      "id": 187,
+      "bakery_name": "مخبز أبو حمص الغربي",
+      "location": "شارع الصناعات، أبو حمص، البحيرة",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 48392921234753
+    },
+    {
+      "id": 188,
+      "bakery_name": "مخبز أبو حمص الشمالي",
+      "location": "شارع الحدائق، أبو حمص، البحيرة",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 48493931234754
+    },
+    {
+      "id": 189,
+      "bakery_name": "مخبز أبو حمص الجنوبي",
+      "location": "شارع البحر، أبو حمص، البحيرة",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 48594941234755
+    },
+
+    
+    {
+      "id": 190,
+      "bakery_name": "مخبز الزقازيق",
+      "location": "شارع الجلاء، الزقازيق، الشرقية",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 48695951234756
+    },
+    {
+      "id": 191,
+      "bakery_name": "مخبز الزقازيق الجديد",
+      "location": "شارع السوق، الزقازيق، الشرقية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 48796961234757
+    },
+    {
+      "id": 192,
+      "bakery_name": "مخبز الزقازيق المركزي",
+      "location": "شارع المركز، الزقازيق، الشرقية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 48897971234758
+    },
+    {
+      "id": 193,
+      "bakery_name": "مخبز الزقازيق الشرقي",
+      "location": "شارع المدارس، الزقازيق، الشرقية",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 48998981234759
+    },
+    {
+      "id": 194,
+      "bakery_name": "مخبز الزقازيق الغربي",
+      "location": "شارع المحطة، الزقازيق، الشرقية",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 49099991234760
+    },
+    {
+      "id": 195,
+      "bakery_name": "مخبز الزقازيق الشمالي",
+      "location": "شارع النيل، الزقازيق، الشرقية",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 49201001234761
+    },
+    {
+      "id": 196,
+      "bakery_name": "مخبز الزقازيق الجنوبي",
+      "location": "شارع الشركة، الزقازيق، الشرقية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 49302011234762
+    },
+
+    
+    {
+      "id": 197,
+      "bakery_name": "مخبز العاشر من رمضان",
+      "location": "شارع الصناعات، العاشر من رمضان، الشرقية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 49403021234763
+    },
+    {
+      "id": 198,
+      "bakery_name": "مخبز العاشر من رمضان الجديد",
+      "location": "شارع الجامعة، العاشر من رمضان، الشرقية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 49504031234764
+    },
+    {
+      "id": 199,
+      "bakery_name": "مخبز العاشر من رمضان المركزي",
+      "location": "شارع المسجد، العاشر من رمضان، الشرقية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 49605041234765
+    },
+    {
+      "id": 200,
+      "bakery_name": "مخبز العاشر من رمضان الشرقي",
+      "location": "شارع الميناء، العاشر من رمضان، الشرقية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 49706051234766
+    },
+    {
+      "id": 201,
+      "bakery_name": "مخبز العاشر من رمضان الغربي",
+      "location": "شارع الحدائق، العاشر من رمضان، الشرقية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 49807061234767
+    },
+    {
+      "id": 202,
+      "bakery_name": "مخبز العاشر من رمضان الشمالي",
+      "location": "شارع البحر، العاشر من رمضان، الشرقية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 49908071234768
+    },
+    {
+      "id": 203,
+      "bakery_name": "مخبز العاشر من رمضان الجنوبي",
+      "location": "شارع السوق، العاشر من رمضان، الشرقية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 50009081234769
+    },
+
+    
+    {
+      "id": 204,
+      "bakery_name": "مخبز بلبيس",
+      "location": "شارع المركز، بلبيس، الشرقية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 50110091234770
+    },
+    {
+      "id": 205,
+      "bakery_name": "مخبز بلبيس الجديد",
+      "location": "شارع الجامعة، بلبيس، الشرقية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 50211101234771
+    },
+    {
+      "id": 206,
+      "bakery_name": "مخبز بلبيس المركزي",
+      "location": "شارع المسجد، بلبيس، الشرقية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 50312111234772
+    },
+    {
+      "id": 207,
+      "bakery_name": "مخبز بلبيس الشرقي",
+      "location": "شارع الميناء، بلبيس، الشرقية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 50413121234773
+    },
+    {
+      "id": 208,
+      "bakery_name": "مخبز بلبيس الغربي",
+      "location": "شارع الصناعات، بلبيس، الشرقية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 50514131234774
+    },
+    {
+      "id": 209,
+      "bakery_name": "مخبز بلبيس الشمالي",
+      "location": "شارع الحدائق، بلبيس، الشرقية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 50615141234775
+    },
+    {
+      "id": 210,
+      "bakery_name": "مخبز بلبيس الجنوبي",
+      "location": "شارع البحر، بلبيس، الشرقية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 50716151234776
+    },
+
+   
+    {
+      "id": 211,
+      "bakery_name": "مخبز منيا القمح",
+      "location": "شارع المركز، منيا القمح، الشرقية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 50817161234777
+    },
+    {
+      "id": 212,
+      "bakery_name": "مخبز منيا القمح الجديد",
+      "location": "شارع الجامعة، منيا القمح، الشرقية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 50918171234778
+    },
+    {
+      "id": 213,
+      "bakery_name": "مخبز منيا القمح المركزي",
+      "location": "شارع المسجد، منيا القمح، الشرقية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 51019181234779
+    },
+    {
+      "id": 214,
+      "bakery_name": "مخبز منيا القمح الشرقي",
+      "location": "شارع الميناء، منيا القمح، الشرقية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 51120191234780
+    },
+    {
+      "id": 215,
+      "bakery_name": "مخبز منيا القمح الغربي",
+      "location": "شارع الصناعات، منيا القمح، الشرقية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 51221201234781
+    },
+    {
+      "id": 216,
+      "bakery_name": "مخبز منيا القمح الشمالي",
+      "location": "شارع الحدائق، منيا القمح، الشرقية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 51322211234782
+    },
+    {
+      "id": 217,
+      "bakery_name": "مخبز منيا القمح الجنوبي",
+      "location": "شارع البحر، منيا القمح، الشرقية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 51423221234783
+    },
+
+    
+    {
+      "id": 218,
+      "bakery_name": "مخبز أبو كبير",
+      "location": "شارع المركز، أبو كبير، الشرقية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 51524231234784
+    },
+    {
+      "id": 219,
+      "bakery_name": "مخبز أبو كبير الجديد",
+      "location": "شارع الجامعة، أبو كبير، الشرقية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 51625241234785
+    },
+    {
+      "id": 220,
+      "bakery_name": "مخبز أبو كبير المركزي",
+      "location": "شارع المسجد، أبو كبير، الشرقية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 51726251234786
+    },
+    {
+      "id": 221,
+      "bakery_name": "مخبز أبو كبير الشرقي",
+      "location": "شارع الميناء، أبو كبير، الشرقية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 51827261234787
+    },
+    {
+      "id": 222,
+      "bakery_name": "مخبز أبو كبير الغربي",
+      "location": "شارع الصناعات، أبو كبير، الشرقية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 51928271234788
+    },
+    {
+      "id": 223,
+      "bakery_name": "مخبز أبو كبير الشمالي",
+      "location": "شارع الحدائق، أبو كبير، الشرقية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 52029281234789
+    },
+    {
+      "id": 224,
+      "bakery_name": "مخبز أبو كبير الجنوبي",
+      "location": "شارع البحر، أبو كبير، الشرقية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 52130291234790
+    }, 
+    {
+      "id": 225,
+      "bakery_name": "مخبز طنطا",
+      "location": "شارع الجلاء، طنطا، الغربية",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 52231301234791
+    },
+    {
+      "id": 226,
+      "bakery_name": "مخبز طنطا الجديد",
+      "location": "شارع السوق، طنطا، الغربية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 52332311234792
+    },
+    {
+      "id": 227,
+      "bakery_name": "مخبز طنطا المركزي",
+      "location": "شارع المركز، طنطا، الغربية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 52433321234793
+    },
+    {
+      "id": 228,
+      "bakery_name": "مخبز طنطا الشرقي",
+      "location": "شارع المدارس، طنطا، الغربية",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 52534331234794
+    },
+    {
+      "id": 229,
+      "bakery_name": "مخبز طنطا الغربي",
+      "location": "شارع المحطة، طنطا، الغربية",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 52635341234795
+    },
+    {
+      "id": 230,
+      "bakery_name": "مخبز طنطا الشمالي",
+      "location": "شارع النيل، طنطا، الغربية",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 52736351234796
+    },
+    {
+      "id": 231,
+      "bakery_name": "مخبز طنطا الجنوبي",
+      "location": "شارع الشركة، طنطا، الغربية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 52837361234797
+    },
+
+    
+    {
+      "id": 232,
+      "bakery_name": "مخبز المحلة الكبرى",
+      "location": "شارع المركز، المحلة الكبرى، الغربية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 52938371234798
+    },
+    {
+      "id": 233,
+      "bakery_name": "مخبز المحلة الكبرى الجديد",
+      "location": "شارع الجامعة، المحلة الكبرى، الغربية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 53039381234799
+    },
+    {
+      "id": 234,
+      "bakery_name": "مخبز المحلة الكبرى المركزي",
+      "location": "شارع المسجد، المحلة الكبرى، الغربية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 53140391234800
+    },
+    {
+      "id": 235,
+      "bakery_name": "مخبز المحلة الكبرى الشرقي",
+      "location": "شارع الميناء، المحلة الكبرى، الغربية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 53241401234801
+    },
+    {
+      "id": 236,
+      "bakery_name": "مخبز المحلة الكبرى الغربي",
+      "location": "شارع الصناعات، المحلة الكبرى، الغربية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 53342411234802
+    },
+    {
+      "id": 237,
+      "bakery_name": "مخبز المحلة الكبرى الشمالي",
+      "location": "شارع الحدائق، المحلة الكبرى، الغربية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 53443421234803
+    },
+    {
+      "id": 238,
+      "bakery_name": "مخبز المحلة الكبرى الجنوبي",
+      "location": "شارع البحر، المحلة الكبرى، الغربية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 53544431234804
+    },
+
+    
+    {
+      "id": 239,
+      "bakery_name": "مخبز كفر الزيات",
+      "location": "شارع المركز، كفر الزيات، الغربية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 53645441234805
+    },
+    {
+      "id": 240,
+      "bakery_name": "مخبز كفر الزيات الجديد",
+      "location": "شارع الجامعة، كفر الزيات، الغربية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 53746451234806
+    },
+    {
+      "id": 241,
+      "bakery_name": "مخبز كفر الزيات المركزي",
+      "location": "شارع المسجد، كفر الزيات، الغربية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 53847461234807
+    },
+    {
+      "id": 242,
+      "bakery_name": "مخبز كفر الزيات الشرقي",
+      "location": "شارع الميناء، كفر الزيات، الغربية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 53948471234808
+    },
+    {
+      "id": 243,
+      "bakery_name": "مخبز كفر الزيات الغربي",
+      "location": "شارع الصناعات، كفر الزيات، الغربية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 54049481234809
+    },
+    {
+      "id": 244,
+      "bakery_name": "مخبز كفر الزيات الشمالي",
+      "location": "شارع الحدائق، كفر الزيات، الغربية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 54150491234810
+    },
+    {
+      "id": 245,
+      "bakery_name": "مخبز كفر الزيات الجنوبي",
+      "location": "شارع البحر، كفر الزيات، الغربية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 54251501234811
+    },
+
+    
+    {
+      "id": 246,
+      "bakery_name": "مخبز زفتى",
+      "location": "شارع المركز، زفتى، الغربية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 54352511234812
+    },
+    {
+      "id": 247,
+      "bakery_name": "مخبز زفتى الجديد",
+      "location": "شارع الجامعة، زفتى، الغربية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 54453521234813
+    },
+    {
+      "id": 248,
+      "bakery_name": "مخبز زفتى المركزي",
+      "location": "شارع المسجد، زفتى، الغربية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 54554531234814
+    },
+    {
+      "id": 249,
+      "bakery_name": "مخبز زفتى الشرقي",
+      "location": "شارع الميناء، زفتى، الغربية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 54655541234815
+    },
+    {
+      "id": 250,
+      "bakery_name": "مخبز زفتى الغربي",
+      "location": "شارع الصناعات، زفتى، الغربية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 54756551234816
+    },
+    {
+      "id": 251,
+      "bakery_name": "مخبز زفتى الشمالي",
+      "location": "شارع الحدائق، زفتى، الغربية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 54857561234817
+    },
+    {
+      "id": 252,
+      "bakery_name": "مخبز زفتى الجنوبي",
+      "location": "شارع البحر، زفتى، الغربية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 54958571234818
+    },
+
+   
+    {
+      "id": 253,
+      "bakery_name": "مخبز بسيون",
+      "location": "شارع المركز، بسيون، الغربية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 55059581234819
+    },
+    {
+      "id": 254,
+      "bakery_name": "مخبز بسيون الجديد",
+      "location": "شارع الجامعة، بسيون، الغربية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 55160591234820
+    },
+    {
+      "id": 255,
+      "bakery_name": "مخبز بسيون المركزي",
+      "location": "شارع المسجد، بسيون، الغربية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 55261601234821
+    },
+    {
+      "id": 256,
+      "bakery_name": "مخبز بسيون الشرقي",
+      "location": "شارع الميناء، بسيون، الغربية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 55362611234822
+    },
+    {
+      "id": 257,
+      "bakery_name": "مخبز بسيون الغربي",
+      "location": "شارع الصناعات، بسيون، الغربية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 55463621234823
+    },
+    {
+      "id": 258,
+      "bakery_name": "مخبز بسيون الشمالي",
+      "location": "شارع الحدائق، بسيون، الغربية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 55564631234824
+    },
+    {
+      "id": 259,
+      "bakery_name": "مخبز بسيون الجنوبي",
+      "location": "شارع البحر، بسيون، الغربية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 55665641234825
+    },
+
+    
+    {
+      "id": 260,
+      "bakery_name": "مخبز شبين الكوم",
+      "location": "شارع الجلاء، شبين الكوم، المنوفية",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 55766651234826
+    },
+    {
+      "id": 261,
+      "bakery_name": "مخبز شبين الكوم الجديد",
+      "location": "شارع السوق، شبين الكوم، المنوفية",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 55867661234827
+    },
+    {
+      "id": 262,
+      "bakery_name": "مخبز شبين الكوم المركزي",
+      "location": "شارع المركز، شبين الكوم، المنوفية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 55968671234828
+    },
+    {
+      "id": 263,
+      "bakery_name": "مخبز شبين الكوم الشرقي",
+      "location": "شارع المدارس، شبين الكوم، المنوفية",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 56069681234829
+    },
+    {
+      "id": 264,
+      "bakery_name": "مخبز شبين الكوم الغربي",
+      "location": "شارع المحطة، شبين الكوم، المنوفية",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 56170691234830
+    },
+    {
+      "id": 265,
+      "bakery_name": "مخبز شبين الكوم الشمالي",
+      "location": "شارع النيل، شبين الكوم، المنوفية",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 56271701234831
+    },
+    {
+      "id": 266,
+      "bakery_name": "مخبز شبين الكوم الجنوبي",
+      "location": "شارع الشركة، شبين الكوم، المنوفية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 56372711234832
+    },
+    {
+      "id": 267,
+      "bakery_name": "مخبز منوف",
+      "location": "شارع المركز، منوف، المنوفية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 56473721234833
+    },
+    {
+      "id": 268,
+      "bakery_name": "مخبز منوف الجديد",
+      "location": "شارع الجامعة، منوف، المنوفية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 56574731234834
+    },
+    {
+      "id": 269,
+      "bakery_name": "مخبز منوف المركزي",
+      "location": "شارع المسجد، منوف، المنوفية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 56675741234835
+    },
+    {
+      "id": 270,
+      "bakery_name": "مخبز منوف الشرقي",
+      "location": "شارع الميناء، منوف، المنوفية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 56776751234836
+    },
+    {
+      "id": 271,
+      "bakery_name": "مخبز منوف الغربي",
+      "location": "شارع الصناعات، منوف، المنوفية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 56877761234837
+    },
+    {
+      "id": 272,
+      "bakery_name": "مخبز منوف الشمالي",
+      "location": "شارع الحدائق، منوف، المنوفية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 56978771234838
+    },
+    {
+      "id": 273,
+      "bakery_name": "مخبز منوف الجنوبي",
+      "location": "شارع البحر، منوف، المنوفية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 57079781234839
+    },
+
+   
+    {
+      "id": 274,
+      "bakery_name": "مخبز السادات",
+      "location": "شارع المركز، السادات، المنوفية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 57180791234840
+    },
+    {
+      "id": 275,
+      "bakery_name": "مخبز السادات الجديد",
+      "location": "شارع الجامعة، السادات، المنوفية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 57281801234841
+    },
+    {
+      "id": 276,
+      "bakery_name": "مخبز السادات المركزي",
+      "location": "شارع المسجد، السادات، المنوفية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 57382811234842
+    },
+    {
+      "id": 277,
+      "bakery_name": "مخبز السادات الشرقي",
+      "location": "شارع الميناء، السادات، المنوفية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 57483821234843
+    },
+    {
+      "id": 278,
+      "bakery_name": "مخبز السادات الغربي",
+      "location": "شارع الصناعات، السادات، المنوفية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 57584831234844
+    },
+    {
+      "id": 279,
+      "bakery_name": "مخبز السادات الشمالي",
+      "location": "شارع الحدائق، السادات، المنوفية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 57685841234845
+    },
+    {
+      "id": 280,
+      "bakery_name": "مخبز السادات الجنوبي",
+      "location": "شارع البحر، السادات، المنوفية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 57786851234846
+    },
+
+    
+    {
+      "id": 281,
+      "bakery_name": "مخبز أشمون",
+      "location": "شارع المركز، أشمون، المنوفية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 57887861234847
+    },
+    {
+      "id": 282,
+      "bakery_name": "مخبز أشمون الجديد",
+      "location": "شارع الجامعة، أشمون، المنوفية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 57988871234848
+    },
+    {
+      "id": 283,
+      "bakery_name": "مخبز أشمون المركزي",
+      "location": "شارع المسجد، أشمون، المنوفية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 58089881234849
+    },
+    {
+      "id": 284,
+      "bakery_name": "مخبز أشمون الشرقي",
+      "location": "شارع الميناء، أشمون، المنوفية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 58190891234850
+    },
+    {
+      "id": 285,
+      "bakery_name": "مخبز أشمون الغربي",
+      "location": "شارع الصناعات، أشمون، المنوفية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 58291901234851
+    },
+    {
+      "id": 286,
+      "bakery_name": "مخبز أشمون الشمالي",
+      "location": "شارع الحدائق، أشمون، المنوفية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 58392911234852
+    },
+    {
+      "id": 287,
+      "bakery_name": "مخبز أشمون الجنوبي",
+      "location": "شارع البحر، أشمون، المنوفية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 58493921234853
+    },
+
+  
+    {
+      "id": 288,
+      "bakery_name": "مخبز الباجور",
+      "location": "شارع المركز، الباجور، المنوفية",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 58594931234854
+    },
+    {
+      "id": 289,
+      "bakery_name": "مخبز الباجور الجديد",
+      "location": "شارع الجامعة، الباجور، المنوفية",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 58695941234855
+    },
+    {
+      "id": 290,
+      "bakery_name": "مخبز الباجور المركزي",
+      "location": "شارع المسجد، الباجور، المنوفية",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 58796951234856
+    },
+    {
+      "id": 291,
+      "bakery_name": "مخبز الباجور الشرقي",
+      "location": "شارع الميناء، الباجور، المنوفية",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 58897961234857
+    },
+    {
+      "id": 292,
+      "bakery_name": "مخبز الباجور الغربي",
+      "location": "شارع الصناعات، الباجور، المنوفية",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 58998971234858
+    },
+    {
+      "id": 293,
+      "bakery_name": "مخبز الباجور الشمالي",
+      "location": "شارع الحدائق، الباجور، المنوفية",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 59099981234859
+    },
+    {
+      "id": 294,
+      "bakery_name": "مخبز الباجور الجنوبي",
+      "location": "شارع البحر، الباجور، المنوفية",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 59200991234860
+    },
+
+   
+    {
+      "id": 295,
+      "bakery_name": "مخبز كفر الشيخ",
+      "location": "شارع الجلاء، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 59301001234861
+    },
+    {
+      "id": 296,
+      "bakery_name": "مخبز كفر الشيخ الجديد",
+      "location": "شارع السوق، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 59402011234862
+    },
+    {
+      "id": 297,
+      "bakery_name": "مخبز كفر الشيخ المركزي",
+      "location": "شارع المركز، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 59503021234863
+    },
+    {
+      "id": 298,
+      "bakery_name": "مخبز كفر الشيخ الشرقي",
+      "location": "شارع المدارس، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 59604031234864
+    },
+    {
+      "id": 299,
+      "bakery_name": "مخبز كفر الشيخ الغربي",
+      "location": "شارع المحطة، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 59705041234865
+    },
+    {
+      "id": 300,
+      "bakery_name": "مخبز كفر الشيخ الشمالي",
+      "location": "شارع النيل، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 59806051234866
+    },
+    {
+      "id": 301,
+      "bakery_name": "مخبز كفر الشيخ الجنوبي",
+      "location": "شارع الشركة، كفر الشيخ، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 59907061234867
+    },
+
+    
+    {
+      "id": 302,
+      "bakery_name": "مخبز دسوق",
+      "location": "شارع المركز، دسوق، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 60008071234868
+    },
+    {
+      "id": 303,
+      "bakery_name": "مخبز دسوق الجديد",
+      "location": "شارع الجامعة، دسوق، كفر الشيخ",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 60109081234869
+    },
+    {
+      "id": 304,
+      "bakery_name": "مخبز دسوق المركزي",
+      "location": "شارع المسجد، دسوق، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 60210091234870
+    },
+    {
+      "id": 305,
+      "bakery_name": "مخبز دسوق الشرقي",
+      "location": "شارع الميناء، دسوق، كفر الشيخ",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 60311101234871
+    },
+    {
+      "id": 306,
+      "bakery_name": "مخبز دسوق الغربي",
+      "location": "شارع الصناعات، دسوق، كفر الشيخ",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 60412111234872
+    },
+    {
+      "id": 307,
+      "bakery_name": "مخبز دسوق الشمالي",
+      "location": "شارع الحدائق، دسوق، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 60513121234873
+    },
+    {
+      "id": 308,
+      "bakery_name": "مخبز دسوق الجنوبي",
+      "location": "شارع البحر، دسوق، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 60614131234874
+    },
+
+  
+    {
+      "id": 309,
+      "bakery_name": "مخبز بلطيم",
+      "location": "شارع المركز، بلطيم، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 60715141234875
+    },
+    {
+      "id": 310,
+      "bakery_name": "مخبز بلطيم الجديد",
+      "location": "شارع الجامعة، بلطيم، كفر الشيخ",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 60816151234876
+    },
+    {
+      "id": 311,
+      "bakery_name": "مخبز بلطيم المركزي",
+      "location": "شارع المسجد، بلطيم، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 60917161234877
+    },
+    {
+      "id": 312,
+      "bakery_name": "مخبز بلطيم الشرقي",
+      "location": "شارع الميناء، بلطيم، كفر الشيخ",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 61018171234878
+    },
+    {
+      "id": 313,
+      "bakery_name": "مخبز بلطيم الغربي",
+      "location": "شارع الصناعات، بلطيم، كفر الشيخ",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 61119181234879
+    },
+    {
+      "id": 314,
+      "bakery_name": "مخبز بلطيم الشمالي",
+      "location": "شارع الحدائق، بلطيم، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 61220191234880
+    },
+    {
+      "id": 315,
+      "bakery_name": "مخبز بلطيم الجنوبي",
+      "location": "شارع البحر، بلطيم، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 61321201234881
+    },
+
+  
+    {
+      "id": 316,
+      "bakery_name": "مخبز سيدي سالم",
+      "location": "شارع المركز، سيدي سالم، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 61422211234882
+    },
+    {
+      "id": 317,
+      "bakery_name": "مخبز سيدي سالم الجديد",
+      "location": "شارع الجامعة، سيدي سالم، كفر الشيخ",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 61523221234883
+    },
+    {
+      "id": 318,
+      "bakery_name": "مخبز سيدي سالم المركزي",
+      "location": "شارع المسجد، سيدي سالم، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 61624231234884
+    },
+    {
+      "id": 319,
+      "bakery_name": "مخبز سيدي سالم الشرقي",
+      "location": "شارع الميناء، سيدي سالم، كفر الشيخ",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 61725241234885
+    },
+    {
+      "id": 320,
+      "bakery_name": "مخبز سيدي سالم الغربي",
+      "location": "شارع الصناعات، سيدي سالم، كفر الشيخ",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 61826251234886
+    },
+    {
+      "id": 321,
+      "bakery_name": "مخبز سيدي سالم الشمالي",
+      "location": "شارع الحدائق، سيدي سالم، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 61927261234887
+    },
+    {
+      "id": 322,
+      "bakery_name": "مخبز سيدي سالم الجنوبي",
+      "location": "شارع البحر، سيدي سالم، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 62028271234888
+    },
+
+   
+    {
+      "id": 323,
+      "bakery_name": "مخبز الحامول",
+      "location": "شارع المركز، الحامول، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 62129281234889
+    },
+    {
+      "id": 324,
+      "bakery_name": "مخبز الحامول الجديد",
+      "location": "شارع الجامعة، الحامول، كفر الشيخ",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 62230291234890
+    },
+    {
+      "id": 325,
+      "bakery_name": "مخبز الحامول المركزي",
+      "location": "شارع المسجد، الحامول، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 62331301234891
+    },
+    {
+      "id": 326,
+      "bakery_name": "مخبز الحامول الشرقي",
+      "location": "شارع الميناء، الحامول، كفر الشيخ",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 62432311234892
+    },
+    {
+      "id": 327,
+      "bakery_name": "مخبز الحامول الغربي",
+      "location": "شارع الصناعات، الحامول، كفر الشيخ",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 62533321234893
+    },
+    {
+      "id": 328,
+      "bakery_name": "مخبز الحامول الشمالي",
+      "location": "شارع الحدائق، الحامول، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 62634331234894
+    },
+    {
+      "id": 329,
+      "bakery_name": "مخبز الحامول الجنوبي",
+      "location": "شارع البحر، الحامول، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 62735341234895
+    },
+
+   
+    {
+      "id": 330,
+      "bakery_name": "مخبز فوه",
+      "location": "شارع المركز، فوه، كفر الشيخ",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 62836351234896
+    },
+    {
+      "id": 331,
+      "bakery_name": "مخبز فوه الجديد",
+      "location": "شارع الجامعة، فوه، كفر الشيخ",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 62937361234897
+    },
+    {
+      "id": 332,
+      "bakery_name": "مخبز فوه المركزي",
+      "location": "شارع المسجد، فوه، كفر الشيخ",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 63038371234898
+    },
+    {
+      "id": 333,
+      "bakery_name": "مخبز فوه الشرقي",
+      "location": "شارع الميناء، فوه، كفر الشيخ",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 63139381234899
+    },
+    {
+      "id": 334,
+      "bakery_name": "مخبز فوه الغربي",
+      "location": "شارع الصناعات، فوه، كفر الشيخ",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 63240391234900
+    },
+    {
+      "id": 335,
+      "bakery_name": "مخبز فوه الشمالي",
+      "location": "شارع الحدائق، فوه، كفر الشيخ",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 63341401234901
+    },
+    {
+      "id": 336,
+      "bakery_name": "مخبز فوه الجنوبي",
+      "location": "شارع البحر، فوه، كفر الشيخ",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 63442411234902
+    },
+
+   
+    {
+      "id": 337,
+      "bakery_name": "مخبز دمياط",
+      "location": "شارع الجلاء، دمياط، دمياط",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 63543421234903
+    },
+    {
+      "id": 338,
+      "bakery_name": "مخبز دمياط الجديد",
+      "location": "شارع السوق، دمياط، دمياط",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 63644431234904
+    },
+    {
+      "id": 339,
+      "bakery_name": "مخبز دمياط المركزي",
+      "location": "شارع المركز، دمياط، دمياط",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 63745441234905
+    },
+    {
+      "id": 340,
+      "bakery_name": "مخبز دمياط الشرقي",
+      "location": "شارع المدارس، دمياط، دمياط",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 63846451234906
+    },
+    {
+      "id": 341,
+      "bakery_name": "مخبز دمياط الغربي",
+      "location": "شارع المحطة، دمياط، دمياط",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 63947461234907
+    },
+    {
+      "id": 342,
+      "bakery_name": "مخبز دمياط الشمالي",
+      "location": "شارع النيل، دمياط، دمياط",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 64048471234908
+    },
+    {
+      "id": 343,
+      "bakery_name": "مخبز دمياط الجنوبي",
+      "location": "شارع الشركة، دمياط، دمياط",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 64149481234909
+    },
+
+  
+    {
+      "id": 344,
+      "bakery_name": "مخبز رأس البر",
+      "location": "شارع المركز، رأس البر، دمياط",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 64250491234910
+    },
+    {
+      "id": 345,
+      "bakery_name": "مخبز رأس البر الجديد",
+      "location": "شارع الجامعة، رأس البر، دمياط",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 64351501234911
+    },
+    {
+      "id": 346,
+      "bakery_name": "مخبز رأس البر المركزي",
+      "location": "شارع المسجد، رأس البر، دمياط",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 64452511234912
+    },
+    {
+      "id": 347,
+      "bakery_name": "مخبز رأس البر الشرقي",
+      "location": "شارع الميناء، رأس البر، دمياط",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 64553521234913
+    },
+    {
+      "id": 348,
+      "bakery_name": "مخبز رأس البر الغربي",
+      "location": "شارع الصناعات، رأس البر، دمياط",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 64654531234914
+    },
+    {
+      "id": 349,
+      "bakery_name": "مخبز رأس البر الشمالي",
+      "location": "شارع الحدائق، رأس البر، دمياط",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 64755541234915
+    },
+    {
+      "id": 350,
+      "bakery_name": "مخبز رأس البر الجنوبي",
+      "location": "شارع البحر، رأس البر، دمياط",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 64856551234916
+    },
+
+    {
+      "id": 351,
+      "bakery_name": "مخبز الزرقا",
+      "location": "شارع المركز، الزرقا، دمياط",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 64957561234917
+    },
+    {
+      "id": 352,
+      "bakery_name": "مخبز الزرقا الجديد",
+      "location": "شارع الجامعة، الزرقا، دمياط",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 65058571234918
+    },
+    {
+      "id": 353,
+      "bakery_name": "مخبز الزرقا المركزي",
+      "location": "شارع المسجد، الزرقا، دمياط",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 65159581234919
+    },
+    {
+      "id": 354,
+      "bakery_name": "مخبز الزرقا الشرقي",
+      "location": "شارع الميناء، الزرقا، دمياط",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 65260591234920
+    },
+    {
+      "id": 355,
+      "bakery_name": "مخبز الزرقا الغربي",
+      "location": "شارع الصناعات، الزرقا، دمياط",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 65361601234921
+    },
+    {
+      "id": 356,
+      "bakery_name": "مخبز الزرقا الشمالي",
+      "location": "شارع الحدائق، الزرقا، دمياط",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 65462611234922
+    },
+    {
+      "id": 357,
+      "bakery_name": "مخبز الزرقا الجنوبي",
+      "location": "شارع البحر، الزرقا، دمياط",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 65563621234923
+    },
+
+   
+    {
+      "id": 358,
+      "bakery_name": "مخبز فارسكور",
+      "location": "شارع المركز، فارسكور، دمياط",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 65664631234924
+    },
+    {
+      "id": 359,
+      "bakery_name": "مخبز فارسكور الجديد",
+      "location": "شارع الجامعة، فارسكور، دمياط",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 65765641234925
+    },
+    {
+      "id": 360,
+      "bakery_name": "مخبز فارسكور المركزي",
+      "location": "شارع المسجد، فارسكور، دمياط",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 65866651234926
+    },
+    {
+      "id": 361,
+      "bakery_name": "مخبز فارسكور الشرقي",
+      "location": "شارع الميناء، فارسكور، دمياط",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 65967661234927
+    },
+    {
+      "id": 362,
+      "bakery_name": "مخبز فارسكور الغربي",
+      "location": "شارع الصناعات، فارسكور، دمياط",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 66068671234928
+    },
+    {
+      "id": 363,
+      "bakery_name": "مخبز فارسكور الشمالي",
+      "location": "شارع الحدائق، فارسكور، دمياط",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 66169681234929
+    },
+    {
+      "id": 364,
+      "bakery_name": "مخبز فارسكور الجنوبي",
+      "location": "شارع البحر، فارسكور، دمياط",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 66270691234930
+    },
+
+    
+    {
+      "id": 365,
+      "bakery_name": "مخبز كفر سعد",
+      "location": "شارع المركز، كفر سعد، دمياط",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 66371701234931
+    },
+    {
+      "id": 366,
+      "bakery_name": "مخبز كفر سعد الجديد",
+      "location": "شارع الجامعة، كفر سعد، دمياط",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 66472711234932
+    },
+    {
+      "id": 367,
+      "bakery_name": "مخبز كفر سعد المركزي",
+      "location": "شارع المسجد، كفر سعد، دمياط",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 66573721234933
+    },
+    {
+      "id": 368,
+      "bakery_name": "مخبز كفر سعد الشرقي",
+      "location": "شارع الميناء، كفر سعد، دمياط",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 66674731234934
+    },
+    {
+      "id": 369,
+      "bakery_name": "مخبز كفر سعد الغربي",
+      "location": "شارع الصناعات، كفر سعد، دمياط",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 66775741234935
+    },
+    {
+      "id": 370,
+      "bakery_name": "مخبز كفر سعد الشمالي",
+      "location": "شارع الحدائق، كفر سعد، دمياط",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 66876751234936
+    },
+    {
+      "id": 371,
+      "bakery_name": "مخبز كفر سعد الجنوبي",
+      "location": "شارع البحر، كفر سعد، دمياط",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 66977761234937
+    },
+
+    {
+      "id": 372,
+      "bakery_name": "مخبز حي الشرق",
+      "location": "شارع المركز، حي الشرق، بورسعيد",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 67078771234938
+    },
+    {
+      "id": 373,
+      "bakery_name": "مخبز حي الشرق الجديد",
+      "location": "شارع الجامعة، حي الشرق، بورسعيد",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 67179781234939
+    },
+    {
+      "id": 374,
+      "bakery_name": "مخبز حي الشرق المركزي",
+      "location": "شارع المسجد، حي الشرق، بورسعيد",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 67280791234940
+    },
+    {
+      "id": 375,
+      "bakery_name": "مخبز حي الشرق الشرقي",
+      "location": "شارع الميناء، حي الشرق، بورسعيد",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 67381801234941
+    },
+    {
+      "id": 376,
+      "bakery_name": "مخبز حي الشرق الغربي",
+      "location": "شارع الصناعات، حي الشرق، بورسعيد",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 67482811234942
+    },
+    {
+      "id": 377,
+      "bakery_name": "مخبز حي الشرق الشمالي",
+      "location": "شارع الحدائق، حي الشرق، بورسعيد",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 67583821234943
+    },
+    {
+      "id": 378,
+      "bakery_name": "مخبز حي الشرق الجنوبي",
+      "location": "شارع البحر، حي الشرق، بورسعيد",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 67684831234944
+    },
+
+  
+    {
+      "id": 379,
+      "bakery_name": "مخبز حي الضواحي",
+      "location": "شارع المركز، حي الضواحي، بورسعيد",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 67785841234945
+    },
+    {
+      "id": 380,
+      "bakery_name": "مخبز حي الضواحي الجديد",
+      "location": "شارع الجامعة، حي الضواحي، بورسعيد",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 67886851234946
+    },
+    {
+      "id": 381,
+      "bakery_name": "مخبز حي الضواحي المركزي",
+      "location": "شارع المسجد، حي الضواحي، بورسعيد",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 67987861234947
+    },
+    {
+      "id": 382,
+      "bakery_name": "مخبز حي الضواحي الشرقي",
+      "location": "شارع الميناء، حي الضواحي، بورسعيد",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 68088871234948
+    },
+    {
+      "id": 383,
+      "bakery_name": "مخبز حي الضواحي الغربي",
+      "location": "شارع الصناعات، حي الضواحي، بورسعيد",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 68189881234949
+    },
+    {
+      "id": 384,
+      "bakery_name": "مخبز حي الضواحي الشمالي",
+      "location": "شارع الحدائق، حي الضواحي، بورسعيد",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 68290891234950
+    },
+    {
+      "id": 385,
+      "bakery_name": "مخبز حي الضواحي الجنوبي",
+      "location": "شارع البحر، حي الضواحي، بورسعيد",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 68391901234951
+    },
+
+    {
+      "id": 386,
+      "bakery_name": "مخبز حي العرب",
+      "location": "شارع المركز، حي العرب، بورسعيد",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 68492911234952
+    },
+    {
+      "id": 387,
+      "bakery_name": "مخبز حي العرب الجديد",
+      "location": "شارع الجامعة، حي العرب، بورسعيد",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 68593921234953
+    },
+    {
+      "id": 388,
+      "bakery_name": "مخبز حي العرب المركزي",
+      "location": "شارع المسجد، حي العرب، بورسعيد",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 68694931234954
+    },
+    {
+      "id": 389,
+      "bakery_name": "مخبز حي العرب الشرقي",
+      "location": "شارع الميناء، حي العرب، بورسعيد",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 68795941234955
+    },
+    {
+      "id": 390,
+      "bakery_name": "مخبز حي العرب الغربي",
+      "location": "شارع الصناعات، حي العرب، بورسعيد",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 68896951234956
+    },
+    {
+      "id": 391,
+      "bakery_name": "مخبز حي العرب الشمالي",
+      "location": "شارع الحدائق، حي العرب، بورسعيد",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 68997961234957
+    },
+    {
+      "id": 392,
+      "bakery_name": "مخبز حي العرب الجنوبي",
+      "location": "شارع البحر، حي العرب، بورسعيد",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 69098971234958
+    },
+
+    {
+      "id": 393,
+      "bakery_name": "مخبز حي الزهور",
+      "location": "شارع المركز، حي الزهور، بورسعيد",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 69199981234959
+    },
+    {
+      "id": 394,
+      "bakery_name": "مخبز حي الزهور الجديد",
+      "location": "شارع الجامعة، حي الزهور، بورسعيد",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 69300991234960
+    },
+    {
+      "id": 395,
+      "bakery_name": "مخبز حي الزهور المركزي",
+      "location": "شارع المسجد، حي الزهور، بورسعيد",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 69401001234961
+    },
+    {
+      "id": 396,
+      "bakery_name": "مخبز حي الزهور الشرقي",
+      "location": "شارع الميناء، حي الزهور، بورسعيد",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 69502011234962
+    },
+    {
+      "id": 397,
+      "bakery_name": "مخبز حي الزهور الغربي",
+      "location": "شارع الصناعات، حي الزهور، بورسعيد",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 69603021234963
+    },
+    {
+      "id": 398,
+      "bakery_name": "مخبز حي الزهور الشمالي",
+      "location": "شارع الحدائق، حي الزهور، بورسعيد",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 69704031234964
+    },
+    {
+      "id": 399,
+      "bakery_name": "مخبز حي الزهور الجنوبي",
+      "location": "شارع البحر، حي الزهور، بورسعيد",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 69805041234965
+    },
+
+    {
+      "id": 400,
+      "bakery_name": "مخبز حي السويس",
+      "location": "شارع المركز، حي السويس، السويس",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 69906051234966
+    },
+    {
+      "id": 401,
+      "bakery_name": "مخبز حي السويس الجديد",
+      "location": "شارع الجامعة، حي السويس، السويس",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 70007061234967
+    },
+    {
+      "id": 402,
+      "bakery_name": "مخبز حي السويس المركزي",
+      "location": "شارع المسجد، حي السويس، السويس",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 70108071234968
+    },
+    {
+      "id": 403,
+      "bakery_name": "مخبز حي السويس الشرقي",
+      "location": "شارع الميناء، حي السويس، السويس",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 70209081234969
+    },
+    {
+      "id": 404,
+      "bakery_name": "مخبز حي السويس الغربي",
+      "location": "شارع الصناعات، حي السويس، السويس",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 70310091234970
+    },
+    {
+      "id": 405,
+      "bakery_name": "مخبز حي السويس الشمالي",
+      "location": "شارع الحدائق، حي السويس، السويس",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 70411101234971
+    },
+    {
+      "id": 406,
+      "bakery_name": "مخبز حي السويس الجنوبي",
+      "location": "شارع البحر، حي السويس، السويس",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 70512111234972
+    },
+
+ 
+    {
+      "id": 407,
+      "bakery_name": "مخبز عتاقة",
+      "location": "شارع المركز، عتاقة، السويس",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 70613121234973
+    },
+    {
+      "id": 408,
+      "bakery_name": "مخبز عتاقة الجديد",
+      "location": "شارع الجامعة، عتاقة، السويس",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 70714131234974
+    },
+    {
+      "id": 409,
+      "bakery_name": "مخبز عتاقة المركزي",
+      "location": "شارع المسجد، عتاقة، السويس",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 70815141234975
+    },
+    {
+      "id": 410,
+      "bakery_name": "مخبز عتاقة الشرقي",
+      "location": "شارع الميناء، عتاقة، السويس",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 70916151234976
+    },
+    {
+      "id": 411,
+      "bakery_name": "مخبز عتاقة الغربي",
+      "location": "شارع الصناعات، عتاقة، السويس",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 71017161234977
+    },
+    {
+      "id": 412,
+      "bakery_name": "مخبز عتاقة الشمالي",
+      "location": "شارع الحدائق، عتاقة، السويس",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 71118171234978
+    },
+    {
+      "id": 413,
+      "bakery_name": "مخبز عتاقة الجنوبي",
+      "location": "شارع البحر، عتاقة، السويس",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 71219181234979
+    },
+
+  
+    {
+      "id": 414,
+      "bakery_name": "مخبز الجناين",
+      "location": "شارع المركز، الجناين، السويس",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 71320191234980
+    },
+    {
+      "id": 415,
+      "bakery_name": "مخبز الجناين الجديد",
+      "location": "شارع الجامعة، الجناين، السويس",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 71421201234981
+    },
+    {
+      "id": 416,
+      "bakery_name": "مخبز الجناين المركزي",
+      "location": "شارع المسجد، الجناين، السويس",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 71522211234982
+    },
+    {
+      "id": 417,
+      "bakery_name": "مخبز الجناين الشرقي",
+      "location": "شارع الميناء، الجناين، السويس",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 71623221234983
+    },
+    {
+      "id": 418,
+      "bakery_name": "مخبز الجناين الغربي",
+      "location": "شارع الصناعات، الجناين، السويس",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 71724231234984
+    },
+    {
+      "id": 419,
+      "bakery_name": "مخبز الجناين الشمالي",
+      "location": "شارع الحدائق، الجناين، السويس",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 71825241234985
+    },
+    {
+      "id": 420,
+      "bakery_name": "مخبز الجناين الجنوبي",
+      "location": "شارع البحر، الجناين، السويس",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 71926251234986
+    },
+
+    {
+      "id": 421,
+      "bakery_name": "مخبز الأربعين",
+      "location": "شارع المركز، الأربعين، السويس",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 72027261234987
+    },
+    {
+      "id": 422,
+      "bakery_name": "مخبز الأربعين الجديد",
+      "location": "شارع الجامعة، الأربعين، السويس",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 72128271234988
+    },
+    {
+      "id": 423,
+      "bakery_name": "مخبز الأربعين المركزي",
+      "location": "شارع المسجد، الأربعين، السويس",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 72229281234989
+    },
+    {
+      "id": 424,
+      "bakery_name": "مخبز الأربعين الشرقي",
+      "location": "شارع الميناء، الأربعين، السويس",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 72330291234990
+    },
+    {
+      "id": 425,
+      "bakery_name": "مخبز الأربعين الغربي",
+      "location": "شارع الصناعات، الأربعين، السويس",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 72431301234991
+    },
+    {
+      "id": 426,
+      "bakery_name": "مخبز الأربعين الشمالي",
+      "location": "شارع الحدائق، الأربعين، السويس",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 72532311234992
+    },
+    {
+      "id": 427,
+      "bakery_name": "مخبز الأربعين الجنوبي",
+      "location": "شارع البحر، الأربعين، السويس",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 72633321234993
+    },
+
+    
+    {
+      "id": 428,
+      "bakery_name": "مخبز بني سويف",
+      "location": "شارع الجلاء، بني سويف، بني سويف",
+      "daily_quota": 840,
+      "remaining_quota": 460,
+      "production_rate": 70,
+      "rating": 4.2,
+      "owners_national_id": 72734331234994
+    },
+    {
+      "id": 429,
+      "bakery_name": "مخبز بني سويف الجديد",
+      "location": "شارع السوق، بني سويف، بني سويف",
+      "daily_quota": 770,
+      "remaining_quota": 350,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 72835341234995
+    },
+    {
+      "id": 430,
+      "bakery_name": "مخبز بني سويف المركزي",
+      "location": "شارع المركز، بني سويف، بني سويف",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 72936351234996
+    },
+    {
+      "id": 431,
+      "bakery_name": "مخبز بني سويف الشرقي",
+      "location": "شارع المدارس، بني سويف، بني سويف",
+      "daily_quota": 810,
+      "remaining_quota": 440,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 73037361234997
+    },
+    {
+      "id": 432,
+      "bakery_name": "مخبز بني سويف الغربي",
+      "location": "شارع المحطة، بني سويف، بني سويف",
+      "daily_quota": 760,
+      "remaining_quota": 380,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 73138371234998
+    },
+    {
+      "id": 433,
+      "bakery_name": "مخبز بني سويف الشمالي",
+      "location": "شارع النيل، بني سويف، بني سويف",
+      "daily_quota": 890,
+      "remaining_quota": 520,
+      "production_rate": 74,
+      "rating": 4.3,
+      "owners_national_id": 73239381234999
+    },
+    {
+      "id": 434,
+      "bakery_name": "مخبز بني سويف الجنوبي",
+      "location": "شارع الشركة، بني سويف، بني سويف",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 73340391235000
+    },
+
+    {
+      "id": 435,
+      "bakery_name": "مخبز الواسطى",
+      "location": "شارع المركز، الواسطى، بني سويف",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 73441401235001
+    },
+    {
+      "id": 436,
+      "bakery_name": "مخبز الواسطى الجديد",
+      "location": "شارع الجامعة، الواسطى، بني سويف",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 73542411235002
+    },
+    {
+      "id": 437,
+      "bakery_name": "مخبز الواسطى المركزي",
+      "location": "شارع المسجد، الواسطى، بني سويف",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 73643421235003
+    },
+    {
+      "id": 438,
+      "bakery_name": "مخبز الواسطى الشرقي",
+      "location": "شارع الميناء، الواسطى، بني سويف",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 73744431235004
+    },
+    {
+      "id": 439,
+      "bakery_name": "مخبز الواسطى الغربي",
+      "location": "شارع الصناعات، الواسطى، بني سويف",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 73845441235005
+    },
+    {
+      "id": 440,
+      "bakery_name": "مخبز الواسطى الشمالي",
+      "location": "شارع الحدائق، الواسطى، بني سويف",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 73946451235006
+    },
+    {
+      "id": 441,
+      "bakery_name": "مخبز الواسطى الجنوبي",
+      "location": "شارع البحر، الواسطى، بني سويف",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 74047461235007
+    },
+
+  
+    {
+      "id": 442,
+      "bakery_name": "مخبز ناصر",
+      "location": "شارع المركز، ناصر، بني سويف",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 74148471235008
+    },
+    {
+      "id": 443,
+      "bakery_name": "مخبز ناصر الجديد",
+      "location": "شارع الجامعة، ناصر، بني سويف",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 74249481235009
+    },
+    {
+      "id": 444,
+      "bakery_name": "مخبز ناصر المركزي",
+      "location": "شارع المسجد، ناصر، بني سويف",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 74350491235010
+    },
+    {
+      "id": 445,
+      "bakery_name": "مخبز ناصر الشرقي",
+      "location": "شارع الميناء، ناصر، بني سويف",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 74451501235011
+    },
+    {
+      "id": 446,
+      "bakery_name": "مخبز ناصر الغربي",
+      "location": "شارع الصناعات، ناصر، بني سويف",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 74552511235012
+    },
+    {
+      "id": 447,
+      "bakery_name": "مخبز ناصر الشمالي",
+      "location": "شارع الحدائق، ناصر، بني سويف",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 74653521235013
+    },
+    {
+      "id": 448,
+      "bakery_name": "مخبز ناصر الجنوبي",
+      "location": "شارع البحر، ناصر، بني سويف",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 74754531235014
+    },
+
+    
+    {
+      "id": 449,
+      "bakery_name": "مخبز إهناسيا",
+      "location": "شارع المركز، إهناسيا، بني سويف",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 74855541235015
+    },
+    {
+      "id": 450,
+      "bakery_name": "مخبز إهناسيا الجديد",
+      "location": "شارع الجامعة، إهناسيا، بني سويف",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 74956551235016
+    },
+    {
+      "id": 451,
+      "bakery_name": "مخبز إهناسيا المركزي",
+      "location": "شارع المسجد، إهناسيا، بني سويف",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 75057561235017
+    },
+    {
+      "id": 452,
+      "bakery_name": "مخبز إهناسيا الشرقي",
+      "location": "شارع الميناء، إهناسيا، بني سويف",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 75158571235018
+    },
+    {
+      "id": 453,
+      "bakery_name": "مخبز إهناسيا الغربي",
+      "location": "شارع الصناعات، إهناسيا، بني سويف",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 75259581235019
+    },
+    {
+      "id": 454,
+      "bakery_name": "مخبز إهناسيا الشمالي",
+      "location": "شارع الحدائق، إهناسيا، بني سويف",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 75360591235020
+    },
+    {
+      "id": 455,
+      "bakery_name": "مخبز إهناسيا الجنوبي",
+      "location": "شارع البحر، إهناسيا، بني سويف",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 75461601235021
+    },
+
+    {
+      "id": 456,
+      "bakery_name": "مخبز سمسطا",
+      "location": "شارع المركز، سمسطا، بني سويف",
+      "daily_quota": 720,
+      "remaining_quota": 290,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 75562611235022
+    },
+    {
+      "id": 457,
+      "bakery_name": "مخبز سمسطا الجديد",
+      "location": "شارع الجامعة، سمسطا، بني سويف",
+      "daily_quota": 750,
+      "remaining_quota": 390,
+      "production_rate": 60,
+      "rating": 4.0,
+      "owners_national_id": 75663621235023
+    },
+    {
+      "id": 458,
+      "bakery_name": "مخبز سمسطا المركزي",
+      "location": "شارع المسجد، سمسطا، بني سويف",
+      "daily_quota": 780,
+      "remaining_quota": 410,
+      "production_rate": 64,
+      "rating": 4.1,
+      "owners_national_id": 75764631235024
+    },
+    {
+      "id": 459,
+      "bakery_name": "مخبز سمسطا الشرقي",
+      "location": "شارع الميناء، سمسطا، بني سويف",
+      "daily_quota": 710,
+      "remaining_quota": 280,
+      "production_rate": 58,
+      "rating": 3.9,
+      "owners_national_id": 75865641235025
+    },
+    {
+      "id": 460,
+      "bakery_name": "مخبز سمسطا الغربي",
+      "location": "شارع الصناعات، سمسطا، بني سويف",
+      "daily_quota": 800,
+      "remaining_quota": 430,
+      "production_rate": 66,
+      "rating": 4.1,
+      "owners_national_id": 75966651235026
+    },
+    {
+      "id": 461,
+      "bakery_name": "مخبز سمسطا الشمالي",
+      "location": "شارع الحدائق، سمسطا، بني سويف",
+      "daily_quota": 880,
+      "remaining_quota": 520,
+      "production_rate": 72,
+      "rating": 4.3,
+      "owners_national_id": 76067661235027
+    },
+    {
+      "id": 462,
+      "bakery_name": "مخبز سمسطا الجنوبي",
+      "location": "شارع البحر، سمسطا، بني سويف",
+      "daily_quota": 760,
+      "remaining_quota": 320,
+      "production_rate": 62,
+      "rating": 4.0,
+      "owners_national_id": 76168671235028
+    }
+  ]
+}

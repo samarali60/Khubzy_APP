@@ -2,7 +2,7 @@ class BakeryModel {
   final int id;
   final String bakeryName;
   final String location;
-  final List<String> ownersNationalIds;
+  final String ownersNationalId;
   final int dailyQuota;
   final int remainingQuota;
   final int productionRate;
@@ -12,7 +12,7 @@ class BakeryModel {
     required this.id,
     required this.bakeryName,
     required this.location,
-    required this.ownersNationalIds,
+    required this.ownersNationalId,
     required this.dailyQuota,
     required this.remainingQuota,
     required this.productionRate,
@@ -24,7 +24,7 @@ class BakeryModel {
       id: int.parse(json['id'].toString()),
       bakeryName: json['bakery_name'],
       location: json['location'],
-      ownersNationalIds: List<String>.from(json['owners_national_ids']),
+      ownersNationalId: json['owners_national_id'],
       dailyQuota: json['daily_quota'],
       remainingQuota: json['remaining_quota'],
       productionRate: json['production_rate'],
@@ -36,7 +36,7 @@ class BakeryModel {
       'id': id,
       'bakery_name': bakeryName,
       'location': location,
-      'owners_national_ids': ownersNationalIds,
+      'owners_national_id': ownersNationalId,
     };
   }
 }
