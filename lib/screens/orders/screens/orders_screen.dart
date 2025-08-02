@@ -66,19 +66,24 @@ class _OrdersScreenState extends State<OrdersScreen> {
               }).toList();
 
               if (docs.isEmpty) {
-                return Center(child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20),
-                    Image.asset(
-                      'assets/images/no-data_ig65.png',
-                      height: 300,
-                      width: double.infinity,                
-                    ),
-                    const SizedBox(height: 20),
-                    const Text("لا توجد طلبات حالياً.", style: TextStyle(fontSize: 20),),
-                  ],
-                ));
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 20),
+                      Image.asset(
+                        'assets/images/no-data_ig65.png',
+                        height: 300,
+                        width: double.infinity,
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "لا توجد طلبات حالياً.",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                );
               }
 
               return ListView.builder(
@@ -90,7 +95,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   final time = doc['time'] ?? '';
                   final quantity = doc['quantity'] ?? 0;
                   final numberOfDays = doc['days'] ?? 0;
-                  final isConfirmed = doc['confirmed'] == true;
+                 // final isConfirmed = doc['confirmed'] == true;
+                  final isDelivered = doc['delivered'] == true;
 
                   return Card(
                     shape: RoundedRectangleBorder(
@@ -117,7 +123,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24,
                                     color: AppColors.darkText,
-                                    
                                   ),
                                 ),
                               ),
@@ -135,35 +140,36 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               Text("تاريخ الحجز: $date"),
                               const Spacer(),
                               Icon(
-                                Icons.access_time,
+                                Icons.bakery_dining,
                                 size: 18,
-                                color: Colors.blueGrey,
+                                color: Colors.orange,
                               ),
                               const SizedBox(width: 6),
-                              Text("الوقت: $time"),
+                              Text("لـ $numberOfDays يوم"),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
                               Icon(
-                                Icons.bakery_dining,
+                                Icons.access_time,
                                 size: 18,
-                                color: Colors.orange,
+                                color: Colors.blueGrey,
                               ),
                               const SizedBox(width: 6),
                               Text("الكمية: $quantity رغيف"),
+
                               const Spacer(),
                               Icon(Icons.today, size: 18, color: Colors.orange),
                               const SizedBox(width: 6),
-                              Text("لـ $numberOfDays يوم"),
+                              Text("الوقت: $time"),
                             ],
                           ),
                           const SizedBox(height: 12),
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: isConfirmed
+                              color: isDelivered
                                   ? Colors.green.shade100
                                   : Colors.orange.shade100,
                               borderRadius: BorderRadius.circular(8),
@@ -171,21 +177,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
                             child: Row(
                               children: [
                                 Icon(
-                                  isConfirmed
+                                  isDelivered
                                       ? Icons.check_circle
                                       : Icons.hourglass_empty,
-                                  color: isConfirmed
+                                  color: isDelivered
                                       ? Colors.green
                                       : Colors.orange,
                                 ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    isConfirmed
+                                    isDelivered
                                         ? " تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
                                         : " الطلب قيد المراجعة من المخبز.",
                                     style: TextStyle(
-                                      color: isConfirmed
+                                      color: isDelivered
                                           ? Colors.green.shade700
                                           : Colors.orange.shade800,
                                       fontWeight: FontWeight.w600,

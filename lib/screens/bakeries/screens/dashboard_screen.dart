@@ -76,7 +76,8 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
         citizenName: data['user'] ?? 'غير معروف',
         breadAmount: data['quantity'] ?? 0,
         numberOfDays: data['days'] ?? 0,
-        isDelivered: data['confirmed'] ?? false,
+        isConfirmed: data['confirmed'] ?? false,
+        isDelivered: data['delivered'] ?? false,
         reservationDateTime:
             DateTime.tryParse(data['date'] ?? '') ?? DateTime.now(),
         userNationalId: data['userNationalId'] ?? '',
@@ -84,7 +85,6 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
         cardId: data['cardId'] ?? '',
       );
     }).toList();
-
     todayReservations = allReservations.where((res) {
       final now = DateTime.now();
       return res.reservationDateTime.year == now.year &&
