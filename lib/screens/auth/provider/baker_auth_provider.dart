@@ -20,7 +20,7 @@ class BakeryAuthProvider with ChangeNotifier {
 
     final matching = bakeries.firstWhere(
       (b) =>
-          (b['owners_national_id'] as List)==nationalId&&
+          b['owners_national_id']==nationalId&&
           b['bakery_name'] == bakeryName &&
           b['location'] == location,
       orElse: () => null,

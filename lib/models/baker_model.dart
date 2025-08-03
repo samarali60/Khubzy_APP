@@ -32,4 +32,8 @@ class BakerModel {
       'bakery_name': bakeryName,
     };
   }
+    @override
+  String toString() {
+    return 'BakerModel(name: $name, nationalId: $nationalId, location: $location, bakeryName: $bakeryName)';
+  }
 }

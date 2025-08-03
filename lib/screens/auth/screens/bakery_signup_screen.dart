@@ -29,9 +29,16 @@ class _BakerySignupScreenState extends State<BakerySignupScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<BakeryProvider>(context, listen: false).loadBakeries();
-      Provider.of<BakerProvider>(context, listen: false).loadBakers();
+     final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+  final bakerProvider = Provider.of<BakerProvider>(context, listen: false);
+
+  bakeryProvider.loadBakeries();
+  bakerProvider.loadBakers();
+
+        print("كل المخابز: ${bakeryProvider.bakeries}");
+  print("كل المخبازيين: ${bakerProvider.bakers}");
     });
+    
   }
 
   @override
@@ -51,6 +58,8 @@ class _BakerySignupScreenState extends State<BakerySignupScreen> {
     final confirmPassword = _confirmPasswordController.text.trim();
     final phone = _phoneController.text.trim();
 
+print('الرقم القومي المُدخل: $nationalId');
+
     if (password != confirmPassword) {
       ErrorSnackBar.show(context, 'كلمة السر وتأكيدها غير متطابقين');
       return;
@@ -63,6 +72,9 @@ class _BakerySignupScreenState extends State<BakerySignupScreen> {
 
     final baker = bakerProvider.getBakerByNationalId(nationalId);
     final bakery = bakeryProvider.getBakeryByOwner(nationalId);
+
+print('baker: $baker');
+print('bakery: $bakery');
 
     if (baker != null && bakery != null) {
       final prefs = await SharedPreferences.getInstance();

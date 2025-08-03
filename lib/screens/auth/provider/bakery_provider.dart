@@ -19,6 +19,8 @@ Future<void> loadBakeries() async {
       final data = doc.data() as Map<String, dynamic>;
       return BakeryModel.fromJson(data);
     }).toList();
+    debugPrint('Owners IDs: ${_bakeries.map((b) => b.ownersNationalId).toList()}');
+
     debugPrint('✅ Loaded ${_bakeries.length} bakeries from Firestore');
     notifyListeners();
   } catch (e) {
@@ -32,6 +34,7 @@ Future<void> loadBakeries() async {
       return _bakeries.firstWhere(
         (b) => b.ownersNationalId == nationalId,
       );
+
     } catch (e) {
       return null;
     }
@@ -53,6 +56,7 @@ Future<void> loadBakeries() async {
       _currentBakery = bakery;
        final prefs =  await SharedPreferences.getInstance();
         final bakerId = prefs.setString('baker_id',nationalId);
+        print('bakerId: $bakerId');
       notifyListeners();
       return true;
       

@@ -94,7 +94,7 @@ Future<void> _confirmReservation() async {
     final userName = prefs.getString('user_name') ?? 'مستخدم';
     final userNationalId = prefs.getString('user_national_id') ?? '';
     final userPhone = prefs.getString('user_phone') ?? '';
-    final reservationDate = DateFormat('yyyy-MM-dd').format(_today);
+    final reservationDate = DateFormat('yyyy-MM-dd', 'en_US').format(_today);
     final time = _selectedTime ?? '';
     final bakery = widget.selectedBakery;
     final bakeryOwner = widget.selectedNationalId;

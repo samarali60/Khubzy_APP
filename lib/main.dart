@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:khubzy/app.dart';
 import 'package:khubzy/firebase/messaging_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -16,6 +17,7 @@ import 'firebase_options.dart'; // سيتم توليد هذا الملف تلق�
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+   Intl.defaultLocale = 'en_US';
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -30,7 +32,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => BottomNavProvider()),
         ChangeNotifierProvider(create: (_) => UserTypeProvider()),
-       ChangeNotifierProvider(create: (_) => CitizenProvider()..loadCitizens()),
+        ChangeNotifierProvider(create: (_) => CitizenProvider()..loadCitizens()),
         ChangeNotifierProvider(create: (_) => BakeryAuthProvider()),
         ChangeNotifierProvider(create: (_) => BakeryProvider()),
         ChangeNotifierProvider(create: (_) => BakerProvider()),

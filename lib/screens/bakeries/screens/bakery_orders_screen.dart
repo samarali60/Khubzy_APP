@@ -57,48 +57,81 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
         'available_bread': updatedBread < 0 ? 0 : updatedBread,
       });
     }
+    debugPrint('Updated bread for user: ${order.cardId}');
   }
 
   Future<void> _confirmOrder(order) async {
+   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('reservations')
         .where('user_national_id', isEqualTo: order.userNationalId)
         .limit(1)
         .get();
+
+    if (querySnapshot.docs.isEmpty) {
+      throw Exception("No matching reservation found");
+    }
+
     final doc = querySnapshot.docs.first;
     await doc.reference.update({'confirmed': true, 'delivered': true});
+    debugPrint('Order confirmed for user: ${order.cardId}');
+  } catch (e) {
+    _showErrorSnackbar(e);
+  }
   }
 
-  Future<void> _cancelOrder(order) async {
+Future<void> _cancelOrder(order) async {
+  try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('reservations')
         .where('user_national_id', isEqualTo: order.userNationalId)
+        .orderBy('created_at', descending: true)
         .limit(1)
         .get();
+
+    if (querySnapshot.docs.isEmpty) {
+      throw Exception("No matching reservation found");
+    }
+
     final doc = querySnapshot.docs.first;
     await doc.reference.update({'confirmed': true, 'delivered': false});
+    debugPrint('Order cancelled for user: ${order.cardId}');
+  } catch (e) {
+    _showErrorSnackbar(e);
   }
+}
 
-  Future<void> _updateBakeryQuota(order) async {
-    final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
-    final bakery = bakeryProvider.getBakeryByOwner(order.bekaryNationalId);
-    if (bakery != null) {
-      final updatedRemainingQuota = bakery.remainingQuota - order.breadAmount;
-      bakery.remainingQuota =
-          (updatedRemainingQuota > 0 ? updatedRemainingQuota : 0).toInt();
-      await FirebaseFirestore.instance
-          .collection('bakeries')
-          .doc(bakery.id.toString())
-          .update({'remaining_quota': bakery.remainingQuota});
-    } else {
-      print('Bakery not found for national ID ${order.bekaryNationalId}');
-    }
+Future<void> _updateBakeryQuota(order) async {
+  final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+  final bakery = bakeryProvider.getBakeryByOwner(order.bekaryNationalId
+);
+
+  if (bakery != null) {
+    print('Bakery found: ${bakery.bakeryName}');
+    final updatedRemainingQuota = bakery.remainingQuota - order.breadAmount;
+    print('Updated remaining quota: $updatedRemainingQuota');
+    bakery.remainingQuota = (updatedRemainingQuota > 0 ? updatedRemainingQuota : 0).toInt();
+
+    await FirebaseFirestore.instance
+        .collection('bakeries')
+        .doc(bakery.ownersNationalId)
+        .update({'remaining_quota': bakery.remainingQuota})
+        .then((_) {
+          print('Bakery quota updated successfully');
+        })
+        .catchError((error) {
+          print('Error updating bakery quota: $error');
+        });
+  } else {
+    print('Bakery not found for national ID ${order.bekaryNationalId}');
   }
+}
 
   Future<void> _refreshReservations() async {
     setState(() {
       _fetchReservations(_currentBakeryName!);
     });
+    debugPrint('Reservations refreshed for bakery: $_currentBakeryName');
   }
 
   void _showSuccessSnackbar(String text) {
@@ -156,8 +189,8 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
           numberOfDays: data['days'] ?? 0,
           bekaryNationalId: data['bakery_owner_national_id'] ?? '',
           reservationDateTime: DateTime.parse(data['date']),
-          isDelivered: data['delivered'] ?? false,
-          isConfirmed: data['confirmed'] ?? false,
+          isDelivered: data['delivered'] ?? true,
+          isConfirmed: data['confirmed'] ?? true,
           cardId: data['card_id'] ?? '',
         );
       }).toList();
@@ -385,7 +418,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
                               await _updateBakeryQuota(order);
                               await _refreshReservations();
                               _showSuccessSnackbar('تم قبول الطلب');
-                              await _sendSuccessNotificationToUser(order);
+                              //  await _sendSuccessNotificationToUser(order);
                             } catch (e) {
                               _showErrorSnackbar(e);
                             }
@@ -394,7 +427,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
                       },
                     ),
                   ),
-
+                  const SizedBox(width: 12),
                   // زر الرفض
                   Expanded(
                     child: ElevatedButton.icon(
@@ -415,11 +448,15 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
                           title: 'تأكيد الرفض',
                           content:
                               'هل أنت متأكد من أنك تريد رفض طلب ${order.citizenName}؟',
-                          onConfirm: () {
-                            _cancelOrder(order);
-                            _showSuccessSnackbar('تم رفض الطلب');
-                            _sendCancellationNotificationToUser(order);
-                            _refreshReservations();
+                          onConfirm: () async {
+                            try {
+                              await _cancelOrder(order);
+                              await _refreshReservations();
+                              _showSuccessSnackbar('تم رفض الطلب');
+                              // await _sendCancellationNotificationToUser(order);
+                            } catch (e) {
+                              _showErrorSnackbar(e);
+                            }
                           },
                         );
                       },
