@@ -10,7 +10,11 @@ import 'dart:convert';
 class ReservationScreen extends StatefulWidget {
   final String? selectedBakery;
   String? selectedNationalId;
-  ReservationScreen({super.key, this.selectedBakery, required this.selectedNationalId});
+  ReservationScreen({
+    super.key,
+    this.selectedBakery,
+    required this.selectedNationalId,
+  });
 
   @override
   State<ReservationScreen> createState() => _ReservationScreenState();
@@ -89,7 +93,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     }
   }
 
-Future<void> _confirmReservation() async {
+  Future<void> _confirmReservation() async {
     final prefs = await SharedPreferences.getInstance();
     final userName = prefs.getString('user_name') ?? 'مستخدم';
     final userNationalId = prefs.getString('user_national_id') ?? '';
@@ -125,6 +129,7 @@ Future<void> _confirmReservation() async {
       title: 'حجز جديد من $userName',
       body:
           'تم حجز $totalBread رغيفاً في $bakery بتاريخ $reservationDate الساعة $time',
+      isCitizen: false,
     );
 
     final phone = prefs.getString('user_phone');
@@ -147,7 +152,7 @@ Future<void> _confirmReservation() async {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
-      body: !_canReserve
+      body: !true
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -278,9 +283,9 @@ Future<void> _confirmReservation() async {
                                         final name =
                                             b['bakery_name'] ??
                                             'مخبز غير معروف';
-                                        final ownersId = b['owners_national_id'];
+                                        final ownersId =
+                                            b['owners_national_id'];
                                         uniqueBakeries[name] = ownersId;
-                                  
                                       }
 
                                       // تحويلهم لقائمة
@@ -305,8 +310,8 @@ Future<void> _confirmReservation() async {
                                         onChanged: (value) {
                                           setState(() {
                                             _selectedBakery = value;
-                                            widget.selectedNationalId = bakeryList
-                                                .firstWhere(
+                                            widget.selectedNationalId =
+                                                bakeryList.firstWhere(
                                                   (b) => b['name'] == value,
                                                   orElse: () => {'ownerId': ''},
                                                 )['ownerId'];

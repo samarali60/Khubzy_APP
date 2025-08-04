@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:khubzy/core/providers/locale_provider.dart';
+import 'package:khubzy/main.dart';
 import 'package:khubzy/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
@@ -19,6 +20,7 @@ class KhobzyApp extends StatelessWidget {
       child: Consumer<LocaleProvider>(
         builder: (context, localeProvider, child) {
           return MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             locale: localeProvider.locale,
             supportedLocales: const [Locale('ar'), Locale('en')],

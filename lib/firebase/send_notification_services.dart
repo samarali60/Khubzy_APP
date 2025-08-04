@@ -47,7 +47,7 @@ Future<void> saveUserToken(String nationalId) async {
 
 Future<String> getAccessToken() async {
   final jsonString = await rootBundle.loadString(
-    'assets/fcm/khubzy-51aa8-331936c3e5c6.json',
+    'assets/fcm/fcm.json',
   );
 
   final accountCredentials =
@@ -60,7 +60,7 @@ Future<String> getAccessToken() async {
 }
 
 Future<void> sendNotificationToUser(
-    {required String nationalId, required title, required body,Map<String, String>? data}) async {
+    {required String nationalId, required title,required body,required bool isCitizen}) async {
   final token = await getTokenByNationalId(nationalId);
   if (token == null) {
     print('❌ No token found for user with national ID: $nationalId');
@@ -71,7 +71,10 @@ Future<void> sendNotificationToUser(
     token: token,
     title: title,
     body: body,
-    data: data,
+    data: {
+      'type': isCitizen ? 'citizen' : 'bakery',
+      'nationalId': nationalId,
+    },
   );
 }
 
@@ -123,4 +126,3 @@ Future<void> sendNotificationToUser(
     print('Failed to send notification: ${response.body}');
   }
 }
-

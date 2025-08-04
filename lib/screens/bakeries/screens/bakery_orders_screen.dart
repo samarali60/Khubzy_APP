@@ -32,6 +32,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
       nationalId: order.userNationalId,
       title: 'تم قبول طلبك',
       body: 'لقد تم قبول طلبك ${order.citizenName} بنجاح',
+      isCitizen: true,
     );
   }
 
@@ -40,6 +41,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
       nationalId: order.userNationalId,
       title: 'تم لإلغاء طلبك',
       body: 'لقد تم إلغاء طلبك ${order.citizenName}',
+      isCitizen: true,
     );
   }
 
@@ -418,7 +420,7 @@ Future<void> _updateBakeryQuota(order) async {
                               await _updateBakeryQuota(order);
                               await _refreshReservations();
                               _showSuccessSnackbar('تم قبول الطلب');
-                              //  await _sendSuccessNotificationToUser(order);
+                              _sendSuccessNotificationToUser(order);
                             } catch (e) {
                               _showErrorSnackbar(e);
                             }
@@ -453,7 +455,7 @@ Future<void> _updateBakeryQuota(order) async {
                               await _cancelOrder(order);
                               await _refreshReservations();
                               _showSuccessSnackbar('تم رفض الطلب');
-                              // await _sendCancellationNotificationToUser(order);
+                              _sendCancellationNotificationToUser(order);
                             } catch (e) {
                               _showErrorSnackbar(e);
                             }

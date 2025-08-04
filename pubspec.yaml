@@ -43,11 +43,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/mock_users.json
-    - assets/mock_bakery_data.json
     - assets/images/Kubzy.png
     - assets/images/waiting.png
-    - assets/fcm/khubzy-51aa8-331936c3e5c6.json
+    - assets/fcm/fcm.json
     - assets/images/access-account_aydp.png
     - assets/images/forgot-password_nttj.png
     - assets/images/loading_3kqt.png

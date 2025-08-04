@@ -31,6 +31,8 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
   List<Map<String, dynamic>> centerOptions = [];
 
   bool _loading = false;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
@@ -78,46 +80,45 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
       matchedCitizen = null;
     }
 
-   if (matchedCitizen != null) {
-  final prefs = await SharedPreferences.getInstance();
+    if (matchedCitizen != null) {
+      final prefs = await SharedPreferences.getInstance();
 
-  // ✅ عشان البروفايل والرصيد يشتغلوا
-  citizenProvider.setCurrentCitizenByPhone(phone);
+      // ✅ عشان البروفايل والرصيد يشتغلوا
+      citizenProvider.setCurrentCitizenByPhone(phone);
 
-  final selectedCenterMap = centerOptions.firstWhere(
-    (center) => center['name'] == _selectedCenter,
-    orElse: () => {'lat': 30.0, 'lng': 31.0},
-  );
+      final selectedCenterMap = centerOptions.firstWhere(
+        (center) => center['name'] == _selectedCenter,
+        orElse: () => {'lat': 30.0, 'lng': 31.0},
+      );
 
-  final lat = selectedCenterMap['lat'] ?? 30.0;
-  final lng = selectedCenterMap['lng'] ?? 31.0;
+      final lat = selectedCenterMap['lat'] ?? 30.0;
+      final lng = selectedCenterMap['lng'] ?? 31.0;
 
-  await prefs.setBool('is_logged_in', true);
-  await prefs.setString('user_type', 'citizen');
-  await prefs.setString('user_phone', phone);
-  await prefs.setString('user_password', _passwordController.text.trim());
-  await prefs.setString('user_name', matchedCitizen.name);
-  await prefs.setString('user_national_id', matchedCitizen.nationalId);
-  await prefs.setString('user_id', matchedCitizen.id);
-  await prefs.setString('user_village', _villageController.text);
-  await prefs.setString('user_governorate', _selectedGovernorate!);
-  await prefs.setString('user_center', _selectedCenter!);
-  await prefs.setDouble('user_lat', lat);
-  await prefs.setDouble('user_lng', lng);
-  await prefs.setInt('family_members', matchedCitizen.familyMembers);
-  await prefs.setInt('available_bread_per_day', matchedCitizen.availableBreadPerDay);
-  await prefs.setInt('monthly_bread_quota', matchedCitizen.monthlyBreadQuota);
-  await prefs.setInt('available_bread', matchedCitizen.availableBread);
+      await prefs.setBool('is_logged_in', true);
+      await prefs.setString('user_type', 'citizen');
+      await prefs.setString('user_phone', phone);
+      await prefs.setString('user_password', _passwordController.text.trim());
+      await prefs.setString('user_name', matchedCitizen.name);
+      await prefs.setString('user_national_id', matchedCitizen.nationalId);
+      await prefs.setString('user_id', matchedCitizen.id);
+      await prefs.setString('user_village', _villageController.text);
+      await prefs.setString('user_governorate', _selectedGovernorate!);
+      await prefs.setString('user_center', _selectedCenter!);
+      await prefs.setDouble('user_lat', lat);
+      await prefs.setDouble('user_lng', lng);
+      await prefs.setInt('family_members', matchedCitizen.familyMembers);
+      await prefs.setInt('available_bread_per_day', matchedCitizen.availableBreadPerDay);
+      await prefs.setInt('monthly_bread_quota', matchedCitizen.monthlyBreadQuota);
+      await prefs.setInt('available_bread', matchedCitizen.availableBread);
 
-  WelcomeSnackbar.show(context, matchedCitizen.name);
+      WelcomeSnackbar.show(context, matchedCitizen.name);
 
-  Navigator.pushAndRemoveUntil(
-    context,
-    MaterialPageRoute(builder: (context) => const MainLayout()),
-    (route) => false,
-  );
-}
- else {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const MainLayout()),
+        (route) => false,
+      );
+    } else {
       ErrorSnackBar.show(context, "بيانات المواطن غير صحيحة أو غير موجودة");
     }
 
@@ -174,21 +175,31 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
                 },
               ),
               const SizedBox(height: 12),
-              _buildTextField(
+              _buildPasswordField(
                 controller: _passwordController,
                 label: 'كلمة السر',
-               // obscure: true,
+                obscureText: _obscurePassword,
+                onToggleVisibility: () {
+                  setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  });
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) return 'أدخل كلمة السر';
                   if (value.length < 8) return 'يجب أن تكون كلمة السر 8 أحرف على الأقل';
                   return null;
                 },
               ),
-                     const SizedBox(height: 12),
-               _buildTextField(
+              const SizedBox(height: 12),
+              _buildPasswordField(
                 controller: _confirmPasswordController,
                 label: 'تأكيد كلمة السر',
-               // obscure: true,
+                obscureText: _obscureConfirmPassword,
+                onToggleVisibility: () {
+                  setState(() {
+                    _obscureConfirmPassword = !_obscureConfirmPassword;
+                  });
+                },
                 validator: (val) {
                   if (val == null || val.isEmpty) return 'أدخل كلمة السر';
                   if (val.length < 8) {
@@ -293,17 +304,41 @@ class _CitizenSignUpScreenState extends State<CitizenSignUpScreen> {
     TextInputType keyboardType = TextInputType.text,
     String? Function(String?)? validator,
     int? maxLength,
-    bool obscure = false,
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       maxLength: maxLength,
-      obscureText: obscure,
       textDirection: TextDirection.rtl,
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      validator: validator,
+    );
+  }
+
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String label,
+    required bool obscureText,
+    required VoidCallback onToggleVisibility,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      textDirection: TextDirection.rtl,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscureText ? Icons.visibility_off : Icons.visibility,
+            color: Colors.grey,
+          ),
+          onPressed: onToggleVisibility,
+        ),
       ),
       validator: validator,
     );
