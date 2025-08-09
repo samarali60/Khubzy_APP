@@ -23,7 +23,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
    MessagingConfig.initFirebaseMessaging();
-  FirebaseMessaging.onBackgroundMessage(MessagingConfig.messageHandler);
+   FirebaseMessaging.onBackgroundMessage(MessagingConfig.messageHandler);
   //await uploadUsersToFirebase(); //  مرة واحدة فقط
   //await uploadBakeriesToFirebase(); // مرة واحدة فقط
   runApp(

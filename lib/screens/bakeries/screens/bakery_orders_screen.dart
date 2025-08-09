@@ -19,6 +19,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
   List<Reservation> _reservations = [];
   bool _isLoading = true;
   String? _currentBakeryName;
+  String? _currentBakeryNationalId;
 
   @override
   @override
@@ -26,6 +27,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
     super.initState();
     _loadBakeryNameAndReservations();
   }
+
 
   Future<void> _sendSuccessNotificationToUser(order) async {
     sendNotificationToUser(
@@ -45,44 +47,79 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
     );
   }
 
-  Future<void> _updateCitizenBread(order) async {
-    final citizenQuery = await FirebaseFirestore.instance
-        .collection('citizens')
-        .where('national_id', isEqualTo: order.userNationalId)
-        .limit(1)
-        .get();
-    if (citizenQuery.docs.isNotEmpty) {
-      final citizenDoc = citizenQuery.docs.first;
-      final currentBread = citizenDoc['available_bread'] ?? 0;
-      final updatedBread = currentBread - order.breadAmount;
-      await citizenDoc.reference.update({
-        'available_bread': updatedBread < 0 ? 0 : updatedBread,
+
+Future<bool> _checkRemainingQuota(Reservation order) async {
+    try {
+      final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+      final bakery = bakeryProvider.currentBakery;
+
+      if (bakery == null) {
+        _showErrorSnackbar('المخبز غير موجود');
+        return false;
+      }
+
+      if (bakery.remainingQuota < order.breadAmount) {
+        _showErrorSnackbar(
+          'الكمية المطلوبة (${order.breadAmount}) أكبر من الكمية المتاحة (${bakery.remainingQuota}) للمخبز \n'
+           'يرجى التحقق من الكمية المتاحة قبل قبول الطلب.\n'
+          // 'الكمية المتاحة: ${bakery.remainingQuota}\n'
+          // 'الكمية المطلوبة: ${order.breadAmount}'
+        );
+        return false;
+      }
+      return true;
+    } catch (e) {
+      print('Quota check error: $e');
+      _showErrorSnackbar('حدث خطأ في التحقق من الكمية المتاحة');
+      return false;
+    }
+  }
+
+  Future<void> _updateCitizenBread(Reservation order) async {
+    try {
+      final citizenQuery = await FirebaseFirestore.instance
+          .collection('citizens')
+          .where('national_id', isEqualTo: order.userNationalId)
+          .limit(1)
+          .get();
+          
+      if (citizenQuery.docs.isNotEmpty) {
+        final citizenDoc = citizenQuery.docs.first;
+        final currentBread = citizenDoc['available_bread'] ?? 0;
+        final updatedBread = currentBread - order.breadAmount;
+        await citizenDoc.reference.update({
+          'available_bread': updatedBread < 0 ? 0 : updatedBread,
+        });
+      }
+    } catch (e) {
+      print('Error updating citizen bread: $e');
+      throw 'حدث خطأ في تحديث رصيد الخبز للمواطن';
+    }
+  }
+
+  Future<void> _confirmOrder(Reservation order) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('reservations')
+          .where('user_national_id', isEqualTo: order.userNationalId)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        throw Exception("لم يتم العثور على الحجز");
+      }
+
+      await querySnapshot.docs.first.reference.update({
+        'confirmed': true,
+        'delivered': true
       });
+    } catch (e) {
+      print('Confirmation error: $e');
+      throw 'حدث خطأ أثناء تأكيد الطلب';
     }
-    debugPrint('Updated bread for user: ${order.cardId}');
   }
 
-  Future<void> _confirmOrder(order) async {
-   try {
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection('reservations')
-        .where('user_national_id', isEqualTo: order.userNationalId)
-        .limit(1)
-        .get();
-
-    if (querySnapshot.docs.isEmpty) {
-      throw Exception("No matching reservation found");
-    }
-
-    final doc = querySnapshot.docs.first;
-    await doc.reference.update({'confirmed': true, 'delivered': true});
-    debugPrint('Order confirmed for user: ${order.cardId}');
-  } catch (e) {
-    _showErrorSnackbar(e);
-  }
-  }
-
-Future<void> _cancelOrder(order) async {
+ Future<void> _cancelOrder(order) async {
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('reservations')
@@ -99,43 +136,37 @@ Future<void> _cancelOrder(order) async {
     await doc.reference.update({'confirmed': true, 'delivered': false});
     debugPrint('Order cancelled for user: ${order.cardId}');
   } catch (e) {
-    _showErrorSnackbar(e);
+    _showErrorSnackbar('حدث خطأ أثناء إلغاء الطلب: $e');
   }
 }
+  Future<void> _updateBakeryQuota(Reservation order) async {
+    try {
+      final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
+      final bakery = bakeryProvider.currentBakery;
 
-Future<void> _updateBakeryQuota(order) async {
-  final bakeryProvider = Provider.of<BakeryProvider>(context, listen: false);
-  final bakery = bakeryProvider.getBakeryByOwner(order.bekaryNationalId
-);
+      if (bakery == null) {
+        print('Current bakery not found');
+        throw 'المخبز غير موجود';
+      }
 
-  if (bakery != null) {
-    print('Bakery found: ${bakery.bakeryName}');
-    final updatedRemainingQuota = bakery.remainingQuota - order.breadAmount;
-    print('Updated remaining quota: $updatedRemainingQuota');
-    bakery.remainingQuota = (updatedRemainingQuota > 0 ? updatedRemainingQuota : 0).toInt();
+      final updatedRemainingQuota = bakery.remainingQuota - order.breadAmount;
+      bakery.remainingQuota = updatedRemainingQuota > 0 ? updatedRemainingQuota : 0;
 
-    await FirebaseFirestore.instance
-        .collection('bakeries')
-        .doc(bakery.ownersNationalId)
-        .update({'remaining_quota': bakery.remainingQuota})
-        .then((_) {
-          print('Bakery quota updated successfully');
-        })
-        .catchError((error) {
-          print('Error updating bakery quota: $error');
-        });
-  } else {
-    print('Bakery not found for national ID ${order.bekaryNationalId}');
+      await FirebaseFirestore.instance
+          .collection('bakeries')
+          .doc(bakery.ownersNationalId)
+          .update({'remaining_quota': bakery.remainingQuota});
+    } catch (error) {
+      print('Error updating bakery quota: $error');
+      throw 'حدث خطأ في تحديث الكمية المتاحة للمخبز';
+    }
   }
-}
 
   Future<void> _refreshReservations() async {
-    setState(() {
-      _fetchReservations(_currentBakeryName!);
-    });
-    debugPrint('Reservations refreshed for bakery: $_currentBakeryName');
+    if (_currentBakeryName != null) {
+      await _fetchReservations(_currentBakeryName!);
+    }
   }
-
   void _showSuccessSnackbar(String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -152,10 +183,13 @@ Future<void> _updateBakeryQuota(order) async {
     );
   }
 
-  void _showErrorSnackbar(dynamic e) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء تأكيد الطلب')));
+  void _showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      )
+    );
   }
 
   Future<void> _loadBakeryNameAndReservations() async {
@@ -163,7 +197,7 @@ Future<void> _updateBakeryQuota(order) async {
     final bakeryName = prefs.getString('bakery_name');
 
     if (bakeryName == null) {
-      print("اسم المخبز مش موجود في SharedPreferences");
+      print("اسم المخبز غير موجود في SharedPreferences");
       setState(() => _isLoading = false);
       return;
     }
@@ -196,21 +230,60 @@ Future<void> _updateBakeryQuota(order) async {
           cardId: data['card_id'] ?? '',
         );
       }).toList();
+      
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt('reservation_count', loadedReservations.length);
-      print('تم تحميل ${loadedReservations.length} طلبات للمخبز $bakeryName');
+      
       setState(() {
         _reservations = loadedReservations;
         _isLoading = false;
       });
     } catch (e) {
       print('Error loading reservations: $e');
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 
+  Future<void> _handleAcceptOrder(Reservation order) async {
+    try {
+      // 1. Check quota
+      final hasQuota = await _checkRemainingQuota(order);
+      if (!hasQuota) return;
+
+      // 2. Update bakery quota FIRST
+      await _updateBakeryQuota(order);
+      
+      // 3. Update reservation status
+      await _confirmOrder(order);
+      
+      // 4. Update citizen's bread balance
+      await _updateCitizenBread(order);
+      
+      // 5. Send notification
+      await _sendSuccessNotificationToUser(order);
+      
+      // 6. Refresh UI
+      await _refreshReservations();
+      
+      // 7. Show success message
+      _showSuccessSnackbar('تم قبول الطلب بنجاح');
+    } catch (e) {
+      print('Error accepting order: $e');
+      _showErrorSnackbar(e.toString());
+    }
+  }
+
+  Future<void> _handleRejectOrder(Reservation order) async {
+    try {
+      await _cancelOrder(order);
+      await _sendCancellationNotificationToUser(order);
+      await _refreshReservations();
+      _showSuccessSnackbar('تم رفض الطلب بنجاح');
+    } catch (e) {
+      print('Error rejecting order: $e');
+      _showErrorSnackbar(e.toString());
+    }
+  }
   void _showConfirmationDialog({
     required BuildContext context,
     required String title,
@@ -413,18 +486,7 @@ Future<void> _updateBakeryQuota(order) async {
                           title: 'تأكيد القبول',
                           content:
                               'هل أنت متأكد من أنك تريد قبول طلب ${order.citizenName}؟',
-                          onConfirm: () async {
-                            try {
-                              await _confirmOrder(order);
-                              await _updateCitizenBread(order);
-                              await _updateBakeryQuota(order);
-                              await _refreshReservations();
-                              _showSuccessSnackbar('تم قبول الطلب');
-                              _sendSuccessNotificationToUser(order);
-                            } catch (e) {
-                              _showErrorSnackbar(e);
-                            }
-                          },
+                         onConfirm: () => _handleAcceptOrder(order),
                         );
                       },
                     ),
@@ -450,16 +512,7 @@ Future<void> _updateBakeryQuota(order) async {
                           title: 'تأكيد الرفض',
                           content:
                               'هل أنت متأكد من أنك تريد رفض طلب ${order.citizenName}؟',
-                          onConfirm: () async {
-                            try {
-                              await _cancelOrder(order);
-                              await _refreshReservations();
-                              _showSuccessSnackbar('تم رفض الطلب');
-                              _sendCancellationNotificationToUser(order);
-                            } catch (e) {
-                              _showErrorSnackbar(e);
-                            }
-                          },
+                          onConfirm: () => _handleRejectOrder(order),
                         );
                       },
                     ),

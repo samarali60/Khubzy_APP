@@ -45,7 +45,7 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
       final baker = bakerProvider.getBakerByNationalId(bakerId);
 
       if (bakery != null) {
-        await _loadReservationsForBakery(bakery.bakeryName);
+        await _loadReservationsForBakery(bakery.ownersNationalId);
       }
 
       if (mounted) {
@@ -64,25 +64,24 @@ class _BakeryDashboardScreenState extends State<BakeryDashboardScreen> {
     }
   }
 
-  Future<void> _loadReservationsForBakery(String bakeryName) async {
+  Future<void> _loadReservationsForBakery(String nationalId) async {
     final snapshot = await FirebaseFirestore.instance
         .collection('reservations')
-        .where('bakery', isEqualTo: bakeryName)
+        .where('bakery_owner_national_id', isEqualTo: nationalId)
         .get();
 
     final List<Reservation> allReservations = snapshot.docs.map((doc) {
       final data = doc.data();
       return Reservation(
         citizenName: data['user'] ?? 'غير معروف',
+        userNationalId: data['user_national_id'] ?? '',
         breadAmount: data['quantity'] ?? 0,
         numberOfDays: data['days'] ?? 0,
-        isConfirmed: data['confirmed'] ?? false,
-        isDelivered: data['delivered'] ?? false,
-        reservationDateTime:
-            DateTime.tryParse(data['date'] ?? '') ?? DateTime.now(),
-        userNationalId: data['userNationalId'] ?? '',
-        bekaryNationalId: data['bakeryNationalId'] ?? '',
-        cardId: data['cardId'] ?? '',
+        bekaryNationalId: data['bakery_owner_national_id'] ?? '',
+        reservationDateTime: DateTime.parse(data['date']),
+        isDelivered: data['delivered'] ?? true,
+        isConfirmed: data['confirmed'] ?? true,
+        cardId: data['card_id'] ?? '',
       );
     }).toList();
     todayReservations = allReservations.where((res) {
