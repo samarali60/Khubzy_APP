@@ -59,6 +59,7 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   }
 
   Future<void> _fetchBakeriesFromFirestore(String center, String governorate) async {
+
     try {
       final snapshot = await FirebaseFirestore.instance.collection('bakeries').get();
       final all = snapshot.docs.map((doc) => doc.data()).toList();
