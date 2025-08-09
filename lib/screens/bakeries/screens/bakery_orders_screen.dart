@@ -121,7 +121,7 @@ class _BakeryOrdersScreenState extends State<BakeryOrdersScreen> {
     }
   }
 
-Future<void> _cancelOrder(order) async {
+ Future<void> _cancelOrder(order) async {
   try {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('reservations')
