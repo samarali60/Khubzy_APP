@@ -15,7 +15,7 @@ class BakerModel {
 
   factory BakerModel.fromJson(Map<String, dynamic> json) {
     return BakerModel(
-      id: json['id'] ,
+      id: int.parse(json['id'].toString()).toString(),
       name: json['name'],
       nationalId: json['national_id'],
       location: json['location'],
@@ -31,5 +31,9 @@ class BakerModel {
       'location': location,
       'bakery_name': bakeryName,
     };
+  }
+    @override
+  String toString() {
+    return 'BakerModel(name: $name, nationalId: $nationalId, location: $location, bakeryName: $bakeryName)';
   }
 }

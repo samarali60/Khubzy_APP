@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:khubzy/core/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -37,7 +38,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
           }
 
           if (_userPhone == null) {
-            return const Center(child: Text("لم يتم العثور على بيانات المستخدم."));
+            return const Center(
+              child: Text("لم يتم العثور على بيانات المستخدم."),
+            );
           }
 
           final currentMonth = DateTime.now().month;
@@ -52,18 +55,40 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final docs = snapshot.data!.docs.where((doc) {
-                final dateStr = doc['date'] ?? '';
-                try {
-                  final date = DateFormat('yyyy-MM-dd').parse(dateStr);
-                  return date.month == currentMonth;
-                } catch (e) {
-                  return false;
-                }
-              }).toList();
+              final docs =
+                  snapshot.data!.docs.where((doc) {
+                    final dateStr = doc['date'] ?? '';
+                    try {
+                      final date = DateFormat('yyyy-MM-dd').parse(dateStr);
+                      return date.month == currentMonth;
+                    } catch (e) {
+                      return false;
+                    }
+                  }).toList()..sort((a, b){
+                    final aTime = (a['created_at'] as Timestamp).toDate();
+                    final bTime = (b['created_at'] as Timestamp).toDate();
+                    return bTime.compareTo(aTime); // الأحدث أولًا
+                  });
 
               if (docs.isEmpty) {
-                return const Center(child: Text("لا توجد طلبات حالياً."));
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 20),
+                      Image.asset(
+                        'assets/images/no-data_ig65.png',
+                        height: 300,
+                        width: double.infinity,
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "لا توجد طلبات حالياً.",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                );
               }
 
               return ListView.builder(
@@ -74,26 +99,130 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   final date = doc['date'] ?? '';
                   final time = doc['time'] ?? '';
                   final quantity = doc['quantity'] ?? 0;
-                  final isConfirmed = doc['confirmed'] == true;
+                  final numberOfDays = doc['days'] ?? 0;
+                  final isConfirmed = doc['confirmed'];
+                  final isDelivered = doc['delivered'];
 
                   return Card(
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text("المخبز: $bakery"),
-                      subtitle: Column(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 3,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("التاريخ: $date"),
-                          Text("الوقت: $time"),
-                          Text("الكمية: $quantity رغيف"),
-                          Text(
-                            isConfirmed
-                                ? "✅ تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
-                                : "⌛️ الطلب قيد المراجعة من المخبز.",
-                            style: TextStyle(
-                              color: isConfirmed ? Colors.green : Colors.orange,
+                          Row(
+                            children: [
+                              Icon(Icons.store, color: AppColors.primary),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  "المخبز: $bakery",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: AppColors.darkText,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Divider(height: 20),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today,
+                                size: 18,
+                                color: Colors.blueGrey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("تاريخ الحجز: $date"),
+                              const Spacer(),
+                              Icon(
+                                Icons.bakery_dining,
+                                size: 18,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("لـ $numberOfDays يوم"),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.access_time,
+                                size: 18,
+                                color: Colors.blueGrey,
+                              ),
+                              const SizedBox(width: 6),
+                              Text("الكمية: $quantity رغيف"),
+
+                              const Spacer(),
+                              Icon(Icons.today, size: 18, color: Colors.orange),
+                              const SizedBox(width: 6),
+                              Text("الوقت: $time"),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: isDelivered == true && isConfirmed == true
+                                  ? Colors.green.shade100
+                                  : isDelivered == false && isConfirmed == true
+                                  ? Colors.red[100]
+                                  : Colors.orange.shade100,
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                          )
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isDelivered == true && isConfirmed == true
+                                      ? Icons.check_circle
+                                      : isDelivered == false &&
+                                            isConfirmed == true
+                                      ? Icons.cancel_outlined
+                                      : Icons.hourglass_empty,
+                                  color:
+                                      isDelivered == true && isConfirmed == true
+                                      ? Colors.green
+                                      : isDelivered == false &&
+                                            isConfirmed == true
+                                      ? Colors.red
+                                      : Colors.orange,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    isDelivered == true && isConfirmed == true
+                                        ? " تم تأكيد طلبك. يمكنك التوجه للمخبز لاستلام الخبز."
+                                        : isDelivered == false &&
+                                              isConfirmed == true
+                                        ? "تم إلغاء الطلب يمكنك التواصل مع المخبز."
+                                        : " الطلب قيد المراجعة من المخبز.",
+                                    style: TextStyle(
+                                      color:
+                                          isDelivered == true &&
+                                              isConfirmed == true
+                                          ? Colors.green.shade700
+                                          : isDelivered == false &&
+                                                isConfirmed == true
+                                          ? Colors.red.shade700
+                                          : Colors.orange.shade800,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -49,17 +49,15 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // تسجيل الخروج
-  Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('user_phone');
-    await prefs.remove('user_password');
-    await prefs.remove('user_type');
+Future<void> logout() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('is_logged_in', false); // فقط نغير حالة تسجيل الدخول
+_phone = null;
+_userType = null;
+  _isLoggedIn = false;
+  notifyListeners();
+}
 
-    _isLoggedIn = false;
-    _phone = null;
-    _userType = null;
-    notifyListeners();
-  }
 
   // تحميل بيانات المستخدم عند بدء التطبيق
   Future<void> loadUserFromPrefs() async {

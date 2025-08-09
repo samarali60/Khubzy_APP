@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:khubzy/firebase/send_notification_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import 'package:khubzy/screens/reservation/provider/screens/reservation_screen.dart';
 import 'package:khubzy/core/services/egypt_locations.dart';
@@ -15,10 +15,11 @@ class CitizenHomeScreen extends StatefulWidget {
 
 class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   String userName = '';
+  String nationalId = '';
   int remainingBread = 0;
   int maxBread = 0;
   int familyMembers = 0;
-  List<dynamic> nearbyBakeries = [];
+  List<Map<String, dynamic>> matchingBakeries = [];
 
   @override
   void initState() {
@@ -30,48 +31,60 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       userName = prefs.getString('user_name') ?? 'مستخدم';
+      nationalId = prefs.getString('user_national_id') ?? '';
       remainingBread = prefs.getInt('available_bread') ?? 0;
       maxBread = prefs.getInt('monthly_bread_quota') ?? 0;
       familyMembers = prefs.getInt('family_members') ?? 0;
     });
 
+    saveUserToken(nationalId);
     final userCenter = prefs.getString('user_center');
-    double? userLat;
-    double? userLng;
 
-    // استخراج lat/lng من center
     if (userCenter != null) {
-      for (var centerList in locations.values) {
-        for (var center in centerList) {
-          if (center['name'] == userCenter) {
-            userLat = center['lat'];
-            userLng = center['lng'];
-            break;
-          }
-        }
-        if (userLat != null && userLng != null) break;
+      final userGovernorate = _getGovernorateForCenter(userCenter);
+      if (userGovernorate.isNotEmpty) {
+        await _fetchBakeriesFromFirestore(userCenter, userGovernorate);
       }
-    }
-
-    if (userLat != null && userLng != null) {
-      await _fetchNearbyBakeries(userLat, userLng);
     }
   }
 
-  Future<void> _fetchNearbyBakeries(double lat, double lng) async {
-    
-   final url = Uri.parse(
-''   );
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          nearbyBakeries = data['results'] ?? [];
-        });
+  String _getGovernorateForCenter(String? center) {
+    if (center == null) return '';
+    for (var entry in locations.entries) {
+      for (var c in entry.value) {
+        if (c['name'] == center) return entry.key;
       }
+    }
+    return '';
+  }
+
+  Future<void> _fetchBakeriesFromFirestore(String center, String governorate) async {
+
+    try {
+      final snapshot = await FirebaseFirestore.instance.collection('bakeries').get();
+      final all = snapshot.docs.map((doc) => doc.data()).toList();
+
+      // فلترة حسب المحافظة
+      final inGovernorate = all
+          .where((b) =>
+              (b['location'] ?? '').toString().contains(governorate))
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
+
+      // ترتيب المخابز اللي في نفس المركز أولاً
+      inGovernorate.sort((a, b) {
+        final aInCenter = (a['location'] ?? '').toString().contains(center);
+        final bInCenter = (b['location'] ?? '').toString().contains(center);
+        if (aInCenter && !bInCenter) return -1;
+        if (!aInCenter && bInCenter) return 1;
+        return 0;
+      });
+
+      setState(() {
+        matchingBakeries = inGovernorate;
+      });
     } catch (e) {
-      debugPrint('Error fetching bakeries: $e');
+      debugPrint('Error fetching bakeries from Firestore: $e');
     }
   }
 
@@ -86,7 +99,7 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
           child: ListView(
             children: [
               Text(
-                '👋 أهلاً يا $userName، نتمنى لك تجربة سعيدة!\nيمكنك حجز خبز من أقرب مخبز لك.',
+                '👋 أهلاً يا $userName، نتمنى لك تجربة سعيدة!\nيمكنك حجز خبز من أقرب مخبز لك في محافظتك.',
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16),
@@ -101,28 +114,57 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
   }
 
   Widget buildReserveButton() {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ReservationScreen()),
+  return ElevatedButton(
+    onPressed: () async {
+      if (matchingBakeries.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("لا توجد مخابز متاحة حالياً")),
         );
-      },
-      child: const Text("احجز الخبز الآن"),
-    );
-  }
+        return;
+      }
+
+      final bakeryWithQuota = matchingBakeries.firstWhere(
+        (b) => (b['remaining_quota'] ?? 0) > 0,
+        orElse: () => {},
+      );
+
+      if (bakeryWithQuota.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("لا يوجد مخبز به حصة متاحة الآن")),
+        );
+        return;
+      }
+
+      final bakeryName = bakeryWithQuota['bakery_name'];
+            final bakeryOwnerId = bakeryWithQuota['owners_national_id'];
+
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ReservationScreen(selectedBakery: bakeryName,
+            selectedNationalId: bakeryOwnerId,
+          ),
+        ),
+      );
+    },
+    child: const Text("احجز الخبز الآن"),
+  );
+}
 
   Widget buildNearestBakeries() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("📍 أقرب المخابز إليك:"),
+        const Text("📍 أقرب المخابز إليك (حسب المركز والمحافظة):"),
         const SizedBox(height: 8),
-        if (nearbyBakeries.isEmpty)
-          const Text("لا توجد مخابز قريبة حالياً"),
-        ...nearbyBakeries.map((b) {
-          final name = b['name'] ?? 'مخبز';
-          final address = b['vicinity'] ?? '';
+        if (matchingBakeries.isEmpty)
+          const Text("لا توجد مخابز حالياً في هذه المنطقة"),
+        ...matchingBakeries.map((b) {
+          final name = b['bakery_name'] ?? 'مخبز';
+                      final bakeryOwnerId = b['owners_national_id'];
+
+          final address = b['location'] ?? '';
           return Card(
             child: ListTile(
               leading: const Icon(Icons.store),
@@ -134,7 +176,9 @@ class _CitizenHomeScreenState extends State<CitizenHomeScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          ReservationScreen(selectedBakery: name),
+                          ReservationScreen(selectedBakery: name,
+                            selectedNationalId: bakeryOwnerId
+                          ),
                     ),
                   );
                 },

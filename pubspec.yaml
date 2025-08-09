@@ -21,8 +21,19 @@ dependencies:
   http: ^0.13.6
   firebase_core: ^2.30.1
   cloud_firestore: ^4.17.3
+  firebase_auth: ^4.0.0
   cupertino_icons: ^1.0.8
   percent_indicator: ^4.2.3
+  flutter_launcher_icons: ^0.13.1
+  firebase_messaging: ^14.7.10
+  googleapis_auth: ^1.4.0
+  flutter_local_notifications: ^18.0.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/bread_icon.png"
+
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +43,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/mock_users.json
-    - assets/mock_bakery_data.json
     - assets/images/Kubzy.png
+    - assets/images/waiting.png
+    - assets/fcm/fcm.json
+    - assets/images/access-account_aydp.png
+    - assets/images/forgot-password_nttj.png
+    - assets/images/loading_3kqt.png
+    - assets/images/login_weas.png
+    - assets/images/no-data_ig65.png
+
+

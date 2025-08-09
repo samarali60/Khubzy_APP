@@ -23,9 +23,7 @@ class UserTypeSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
-      // appBar: AppBar(title: const Text("اختر نوع المستخدم"), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -37,13 +35,6 @@ class UserTypeSelectionScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            // Text(
-            //   "يرجى تحديد نوع المستخدم",
-            //   style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.brown),
-            //   textAlign: TextAlign.center,
-            // ),
-            // const SizedBox(height: 24),
-
             _buildUserCard(
               context,
               icon: Icons.person,
